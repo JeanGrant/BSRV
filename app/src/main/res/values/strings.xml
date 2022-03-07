@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">BSRV</string>
+    <string name="Login">Login to existing account</string>
+    <string name="Signup">Create a new account</string>
+    <string name="app_tagline">Community inspired learning</string>
+    <string name="back">return</string>
+    <string name="next">proceed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="createAccType">I am creating an account as a:</string>
+    <string name="createAccDetail">We\'d like to know you better:</string>
+    <string name="createAccType_Mentor">Mentor</string>
+    <string name="createAccType_Student">Student</string>
+    <string name="Proceed">Proceed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="createAccSubjects">What subjects are you interested in?</string>
+    <string name="AdobePs">Adobe Ps</string>
+    <string name="Animation">Animation</string>
+    <string name="AutoCAD">AutoCAD</string>
+    <string name="Programming">Programming</string>
+    <string name="Microsoft">Microsoft Office</string>
+    <string name="Mathematics">Mathematics</string>
+    <string name="Sciences">Sciences</string>
+    <string name="Languages">Languages</string>
+    <string name="Arts">Arts</string>
+    <string name="Engineering">Engineering</string>
+    <string name="Law">Law</string>
+    <string name="createAccFinalize">One last step and we\'re done</string>
+    <string name="CreateAccount">Create Account</string>
+    <string name="Enter">Login</string>
+    <string name="FullName">Fullname</string>
+    <string name="Mentor">Mentor</string>
+    <string name="CurrentlyAccepting">Currently Accepting</string>
+    <string name="email"><u>email</u></string>
+    <string name="bio">bioEssay</string>
+    <string name="FBNamePrompt">FB Username</string>
+    <string name="LinkedInPrompt">LinkedIn Username</string>
+    <string name="SubjectsPrompt">Subjects</string>
+    <string name="AuthLVLPrompt">Authentication Level</string>
+    <string name="Student">Student</string>
+    <string name="NoLongerAccepting">No Longer Accepting</string>
+    <string name="AuthLVL_0">Email Verification Required</string>
+    <string name="AuthLVL_1">Mentorship Application to be Approved</string>
+    <string name="AuthLVL_2">Verified</string>
+    <string name="logout">logout</string>
+    <string name="profile">profile</string>
+    <string name="home">home</string>
+    <string name="relationships">relationships</string>
+    <string name="LoginPrompt">Don\'t have an account? <b>Sign up.</b></string>
+    <string name="SignupPrompt">Already have an account? <b>Log in.</b></string>
+</resources>
