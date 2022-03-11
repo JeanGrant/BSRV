@@ -3,16 +3,9 @@
     <string name="Login">Login to existing account</string>
     <string name="Signup">Create a new account</string>
     <string name="app_tagline">Community inspired learning</string>
-    <string name="back">return</string>
-    <string name="next">proceed</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="createAccType">I am creating an account as a:</string>
     <string name="createAccDetail">We\'d like to know you better:</string>
-    <string name="createAccType_Mentor">Mentor</string>
-    <string name="createAccType_Student">Student</string>
     <string name="Proceed">Proceed</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="createAccSubjects">What subjects are you interested in?</string>
     <string name="AdobePs">Adobe Ps</string>
     <string name="Animation">Animation</string>
@@ -48,4 +41,8 @@
     <string name="relationships">relationships</string>
     <string name="LoginPrompt">Don\'t have an account? <b>Sign up.</b></string>
     <string name="SignupPrompt">Already have an account? <b>Log in.</b></string>
+    <string name="Request">Request</string>
+    <string name="Mentors">Mentors</string>
+    <string name="Requests">Requests</string>
+    <string name="back">back</string>
 </resources>

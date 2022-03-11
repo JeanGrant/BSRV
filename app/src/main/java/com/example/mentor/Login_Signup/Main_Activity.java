@@ -1,6 +1,5 @@
 package com.example.mentor.Login_Signup;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Main_Activity extends AppCompatActivity {
@@ -63,11 +63,12 @@ public class Main_Activity extends AppCompatActivity {
                 Account_Details.User_Details.setSubjects(Objects.requireNonNull(documentSnapshot.getLong("subjectsBinary")).intValue());
                 Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
                 Account_Details.User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
-                if(Account_Details.User_Details.getIsMentor()) {
-                    Account_Details.User_Details.setCurrSearch(false);
-                }else{
-                    Account_Details.User_Details.setCurrSearch(true);
+                Account_Details.User_Details.setCurrSearch(!Account_Details.User_Details.getIsMentor());
+                Account_Details.User_Details.setUID(fUser.getUid());
+                if(documentSnapshot.get("userRequests") != null){
+                    Account_Details.User_Details.setRequests((ArrayList<String>) documentSnapshot.get("userRequests"));
                 }
+                Account_Details.User_Details.setCurrConnection(false);
                 nextScreen(Homepage.class);
             });
         }

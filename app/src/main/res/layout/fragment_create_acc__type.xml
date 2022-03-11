@@ -11,9 +11,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="@dimen/_30sdp"
         android:text="@string/createAccType"
-        android:textSize="20sp"
+        android:textSize="@dimen/_15ssp"
         android:fontFamily="@font/podkova"/>
 
     <LinearLayout
@@ -24,26 +24,24 @@
 
         <ImageButton
             android:id="@+id/imgBTN_BearMentor"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
             android:adjustViewBounds="true"
             android:background="@drawable/roundedbutton_blue_outline"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingVertical="@dimen/_11sdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_bsrv_with_text_05"
             android:contentDescription="@string/Mentor"/>
 
         <ImageButton
             android:id="@+id/imgBTN_BearStudent"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
             android:adjustViewBounds="true"
             android:background="@drawable/roundedbutton_blue_outline"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingVertical="@dimen/_11sdp"
             android:scaleType="fitCenter"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/ic_bsrv_with_text_03"
             android:contentDescription="@string/Student"/>
     </LinearLayout>

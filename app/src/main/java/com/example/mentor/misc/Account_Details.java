@@ -6,13 +6,14 @@ import java.util.List;
 
 public enum Account_Details {
 
-    User_Details("", "", "", "", "", "", false, false, 0, 0, true);
+    User_Details("", "", "", "", "", "", false, false, 0, 0, true, "", new ArrayList<>(), false);
 
-    private String fullName, email, fbUser, lInUser, bioEssay, picString;
-    private Boolean isMentor, isAccepting, currSearch;
+    public ArrayList<String> requests;
+    private String fullName, email, fbUser, lInUser, bioEssay, picString, uID;
+    private Boolean isMentor, isAccepting, currSearch, currConnection;
     private Integer subjects, authLevel;
 
-    Account_Details(String fullName, String email, String fbUser, String lInUser, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer subjects, Integer authLevel, Boolean currSearch) {
+    Account_Details(String fullName, String email, String fbUser, String lInUser, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer subjects, Integer authLevel, Boolean currSearch, String uID, ArrayList<String> requests, Boolean currConnection) {
         this.fullName = fullName;
         this.email = email;
         this.fbUser = fbUser;
@@ -24,6 +25,9 @@ public enum Account_Details {
         this.subjects = subjects;
         this.authLevel = authLevel;
         this.currSearch = currSearch;
+        this.uID = uID;
+        this.requests = requests;
+        this.currConnection = currConnection;
     }
 
     public String getFullName() {
@@ -68,6 +72,18 @@ public enum Account_Details {
 
     public Boolean getCurrSearch(){return currSearch;}
 
+    public String getUID() {
+        return uID;
+    }
+
+    public ArrayList<String> getRequests() {
+        return requests;
+    }
+
+    public Boolean getCurrConnection(){
+        return currConnection;
+    }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -110,6 +126,16 @@ public enum Account_Details {
 
     public void setCurrSearch(Boolean currSearch) {
         this.currSearch = currSearch;
+    }
+
+    public void setUID(String uID) {
+        this.uID = uID;
+    }
+
+    public void setRequests(ArrayList<String> requests){ this.requests = requests;}
+
+    public void setCurrConnection (Boolean currConnection){
+        this.currConnection = currConnection;
     }
 
     public List<String> initLstSubj() {

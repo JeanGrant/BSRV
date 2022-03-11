@@ -8,16 +8,15 @@
 
     <ImageButton
         android:id="@+id/imgBTN_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/_39sdp"
+        android:layout_height="@dimen/_39sdp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
         android:adjustViewBounds="true"
         android:background="@drawable/roundedbutton_transparent"
-        android:contentDescription="@string/logout"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:contentDescription="@string/back"
+        android:paddingVertical="@dimen/_7sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
@@ -30,9 +29,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:text="@string/createAccSubjects"
-            android:textSize="20sp"
+            android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/mako"
             />
         <LinearLayout
@@ -40,7 +38,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="@dimen/_20sdp">
             <Button
                 android:id="@+id/btn_AdobePs"
                 android:layout_width="wrap_content"
@@ -48,25 +46,28 @@
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/AdobePs"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Animation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Animation"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_AutoCAD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/AutoCAD"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="@dimen/_8sdp">
             <Button
                 android:id="@+id/btn_Programming"
                 android:layout_width="wrap_content"
@@ -82,16 +83,18 @@
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Programming"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Microsoft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Microsoft"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +102,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="@dimen/_8sdp">
             <Button
                 android:id="@+id/btn_Mathematics"
                 android:layout_width="wrap_content"
@@ -107,25 +110,28 @@
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Mathematics"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Sciences"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Sciences"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Arts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Arts"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +139,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="@dimen/_8sdp">
             <Button
                 android:id="@+id/btn_Languages"
                 android:layout_width="wrap_content"
@@ -141,32 +147,35 @@
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Languages"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Engineering"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Engineering"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
             <Button
                 android:id="@+id/btn_Law"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/roundedbutton_blue_outline"
                 android:text="@string/Law"
                 android:textColor="@color/blue"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:textSize="@dimen/_10sdp"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/btnProceed"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="70dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_70sdp"
             android:background="@drawable/roundedbutton_blue_outline"
             android:text="@string/Proceed"
             android:textColor="@color/blue"/>

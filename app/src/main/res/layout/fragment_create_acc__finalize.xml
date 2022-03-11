@@ -8,18 +8,17 @@
 
     <ImageButton
         android:id="@+id/imgBTN_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/_39sdp"
+        android:layout_height="@dimen/_39sdp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
         android:adjustViewBounds="true"
         android:background="@drawable/roundedbutton_transparent"
-        android:contentDescription="@string/logout"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:contentDescription="@string/back"
+        android:paddingVertical="@dimen/_7sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_baseline_arrow_back_24"/>
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,24 +29,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             android:text="@string/createAccFinalize"
-            android:textSize="20sp"
+            android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/mako"
             />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_2sdp"
             app:boxBackgroundMode="outline"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/blue"
-            app:boxStrokeWidth="3dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+            app:boxCornerRadiusTopStart="@dimen/_5sdp"
             app:boxStrokeErrorColor="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -61,17 +59,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/_2sdp"
             app:boxBackgroundMode="outline"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/blue"
-            app:boxStrokeWidth="3dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+            app:boxCornerRadiusTopStart="@dimen/_5sdp"
             app:boxStrokeErrorColor="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -85,17 +83,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/_2sdp"
             app:boxBackgroundMode="outline"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/blue"
-            app:boxStrokeWidth="3dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+            app:boxCornerRadiusTopStart="@dimen/_5sdp"
             app:boxStrokeErrorColor="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -110,9 +108,9 @@
 
         <Button
             android:id="@+id/btnProceed"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="70dp"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:background="@drawable/roundedbutton_blue_outline"
             android:text="@string/CreateAccount"
             android:textColor="@color/blue"/>

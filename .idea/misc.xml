@@ -27,6 +27,23 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/item_container_user.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/mipmap-anydpi-v26/ic_logoBSRV.xml" value="0.2065" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/mipmap-anydpi-v26/ic_logo_round.xml" value="0.124" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/drawable/border_top.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/drawable/ic_baseline_person_add_24_disabled.xml" value="0.1165" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/drawable/ic_bsrv_02.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/drawable/roundedbutton_blue_outline.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/activity_homepage.xml" value="0.1796875" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/activity_signup.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_connections.xml" value="0.1796875" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_create_acc__finalize.xml" value="0.22" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_create_acc__interview.xml" value="0.22" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_create_acc__type.xml" value="0.1796875" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_create_acc_subjects.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_search__users.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/fragment_user_profile.xml" value="0.1796875" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/layout_item_container_user.xml" value="0.1" />
+        <entry key="..\:/Users/dell02/AndroidStudioProjects/BSRV/app/src/main/res/layout/layout_user_preview.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -2,7 +2,7 @@ package com.example.mentor.Homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -13,40 +13,48 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mentor.Login_Signup.Main_Activity;
 import com.example.mentor.R;
+import com.example.mentor.databinding.ActivityHomepageBinding;
+import com.example.mentor.misc.Account_Details;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Objects;
 
 public class Homepage extends AppCompatActivity {
 
-    ImageButton btnLogout, btnSearchUsers, btnUserProfile, btnRelationships;
+    ActivityHomepageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setContentView(R.layout.activity_homepage);
+        binding = ActivityHomepageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        Log.i("Homepage onCreate getUID", Account_Details.User_Details.getUID());
 
         replaceFragment(new User_Profile());
 
-        btnSearchUsers = findViewById(R.id.imgBTN_home);
-        btnLogout = findViewById(R.id.imgBTN_back);
-        btnUserProfile = findViewById(R.id.imgBTN_profile);
-        btnRelationships = findViewById(R.id.imgBTN_relationships);
-
-        btnSearchUsers.setOnClickListener(view -> {
+        binding.imgBTNHome.setOnClickListener(view -> {
             replaceFragment(new Search_Users());
-            btnSearchUsers.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
-            btnUserProfile.setBackgroundResource(R.drawable.roundedbutton_transparent);
+            Log.i("Switch to Search getUID", Account_Details.User_Details.getUID());
+            binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
+            binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
+            binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_transparent);
         });
 
-        btnUserProfile.setOnClickListener(view -> {
+        binding.imgBTNConnections.setOnClickListener(view -> {
+            replaceFragment(new Connections());
+            binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
+            binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
+            binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_transparent);
+        });
+
+        binding.imgBTNProfile.setOnClickListener(view -> {
             replaceFragment(new User_Profile());
-            btnSearchUsers.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
-            btnUserProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+            binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
+            binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
+            binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
         });
 
-        btnLogout.setOnClickListener(view -> {
+        binding.imgBTNLogout.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), Main_Activity.class));
             finish();
