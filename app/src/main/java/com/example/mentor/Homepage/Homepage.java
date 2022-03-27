@@ -31,6 +31,7 @@ public class Homepage extends AppCompatActivity {
         Log.i("Homepage onCreate getUID", Account_Details.User_Details.getUID());
 
         replaceFragment(new User_Profile());
+        binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
 
         binding.imgBTNHome.setOnClickListener(view -> {
             replaceFragment(new Search_Users());
@@ -68,4 +69,9 @@ public class Homepage extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        replaceFragment(new User_Profile());
+//    }
 }

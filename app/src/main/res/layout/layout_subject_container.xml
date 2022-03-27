@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_subject"
+    android:layout_width="@dimen/subjects_layout_width"
+    android:layout_height="wrap_content"
+    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+    android:gravity="center"
+    android:paddingVertical="@dimen/_10sdp">
+    <ImageView
+        android:id="@+id/img_Subject"
+        android:layout_width="@dimen/subjects_imgView_widthheight"
+        android:layout_height="@dimen/subjects_imgView_widthheight"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_subjects_adobe_ps"
+        app:tint="@color/white"
+        android:contentDescription="@string/AdobePs"/>
+
+    <TextView
+        android:id="@+id/txt_Subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_Subject"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+        android:text="@string/AdobePs"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txt_SubjectRates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_Subject"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+        android:text="@string/defSubjRate"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp" />
+</RelativeLayout>

@@ -11,7 +11,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mentor"
-        android:hardwareAccelerated="true">
+        android:hardwareAccelerated="true"
+        android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".Login_Signup.Login"
             android:exported="false"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="subjects_layout_width">@dimen/_70sdp</dimen>
+    <dimen name="subjects_layout_height">@dimen/_90sdp</dimen>
+    <dimen name="subjects_layout_padding">@dimen/_2sdp</dimen>
+    <dimen name="subjects_imgView_widthheight">@dimen/_30sdp</dimen>
+    <dimen name="subjects_imgView_marginTop">@dimen/_20sdp</dimen>
+    <dimen name="subjects_txtView_verticalMargin">@dimen/_5sdp</dimen>
+    <integer name="subjectVisibility">2</integer>
+    <integer name="userProfile_temp_visibility">2</integer>
+    <integer name="searchUser_preview_visibility">2</integer>
+    <integer name="searchUser_proposal_visibility">2</integer>
+</resources>

@@ -36,27 +36,27 @@ public class Connections extends Fragment implements UserListener {
         view = binding.getRoot();
 
         if(Account_Details.User_Details.getCurrConnection()){
-            binding.switchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.blue));
-            binding.switchAccepted.setTextColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchAccepted.setTextColor(this.requireContext().getColor(R.color.white));
         }else {
-            binding.switchRequests.setBackgroundColor(this.requireContext().getColor(R.color.blue));
-            binding.switchRequests.setTextColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchRequests.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchRequests.setTextColor(this.requireContext().getColor(R.color.white));
             getRequests();
         }
 
-        binding.switchAccepted.setOnClickListener(view -> {
+        binding.btnSwitchAccepted.setOnClickListener(view -> {
             Account_Details.User_Details.setCurrConnection(true);
-            binding.switchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.blue));
-            binding.switchAccepted.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.switchRequests.setBackgroundColor(this.requireContext().getColor(R.color.white));
-            binding.switchRequests.setTextColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchAccepted.setTextColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchRequests.setBackgroundColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchRequests.setTextColor(this.requireContext().getColor(R.color.blue));
         });
-        binding.switchRequests.setOnClickListener(view -> {
+        binding.btnSwitchRequests.setOnClickListener(view -> {
             Account_Details.User_Details.setCurrConnection(true);
-            binding.switchRequests.setBackgroundColor(this.requireContext().getColor(R.color.blue));
-            binding.switchRequests.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.switchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.white));
-            binding.switchAccepted.setTextColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchRequests.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSwitchRequests.setTextColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchAccepted.setBackgroundColor(this.requireContext().getColor(R.color.white));
+            binding.btnSwitchAccepted.setTextColor(this.requireContext().getColor(R.color.blue));
         });
 
         return view;

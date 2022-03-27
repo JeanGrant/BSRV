@@ -6,11 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 
 import com.example.mentor.R;
@@ -37,43 +36,43 @@ public class CreateAcc_Subjects extends Fragment implements View.OnClickListener
             if((subjects & (1 << i)) > 0) {
                 switch (i) {
                     case (0):
-                        uiSetUnset(binding.btnAdobePs, true);break;
+                        uiSetUnset(binding.chkAdobePs, true);break;
                     case (1):
-                        uiSetUnset(binding.btnAnimation, true);break;
+                        uiSetUnset(binding.chkAnimation, true);break;
                     case (2):
-                        uiSetUnset(binding.btnArts, true);break;
+                        uiSetUnset(binding.chkArts, true);break;
                     case (3):
-                        uiSetUnset(binding.btnAutoCAD, true);break;
+                        uiSetUnset(binding.chkAutoCAD, true);break;
                     case (4):
-                        uiSetUnset(binding.btnProgramming, true);break;
+                        uiSetUnset(binding.chkProgramming, true);break;
                     case (5):
-                        uiSetUnset(binding.btnMicrosoft, true);break;
+                        uiSetUnset(binding.chkMSOffice, true);break;
                     case (6):
-                        uiSetUnset(binding.btnMathematics, true);break;
+                        uiSetUnset(binding.chkMathematics, true);break;
                     case (7):
-                        uiSetUnset(binding.btnSciences, true);break;
+                        uiSetUnset(binding.chkSciences, true);break;
                     case (8):
-                        uiSetUnset(binding.btnLanguages, true);break;
+                        uiSetUnset(binding.chkLanguages, true);break;
                     case (9):
-                        uiSetUnset(binding.btnLaw, true);break;
+                        uiSetUnset(binding.chkLaw, true);break;
                     case (10):
-                        uiSetUnset(binding.btnEngineering, true);break;
+                        uiSetUnset(binding.chkEngineering, true);break;
                     default: break; } } }
 
         binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Interview()).commit());
 
         //region setOnClickListener
-        binding.btnAdobePs.setOnClickListener(this);
-        binding.btnAnimation.setOnClickListener(this);
-        binding.btnArts.setOnClickListener(this);
-        binding.btnAutoCAD.setOnClickListener(this);
-        binding.btnProgramming.setOnClickListener(this);
-        binding.btnMicrosoft.setOnClickListener(this);
-        binding.btnMathematics.setOnClickListener(this);
-        binding.btnSciences.setOnClickListener(this);
-        binding.btnLanguages.setOnClickListener(this);
-        binding.btnLaw.setOnClickListener(this);
-        binding.btnEngineering.setOnClickListener(this);
+        binding.layoutAdobePs.setOnClickListener(this);
+        binding.layoutAnimation.setOnClickListener(this);
+        binding.layoutArts.setOnClickListener(this);
+        binding.layoutAutoCAD.setOnClickListener(this);
+        binding.layoutProgramming.setOnClickListener(this);
+        binding.layoutMSOffice.setOnClickListener(this);
+        binding.layoutMathematics.setOnClickListener(this);
+        binding.layoutSciences.setOnClickListener(this);
+        binding.layoutLanguages.setOnClickListener(this);
+        binding.layoutLaw.setOnClickListener(this);
+        binding.layoutEngineering.setOnClickListener(this);
         binding.btnProceed.setOnClickListener(this);
         //endregion
 
@@ -83,43 +82,47 @@ public class CreateAcc_Subjects extends Fragment implements View.OnClickListener
     @SuppressLint("NonConstantResourceId")
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.btn_AdobePs:
-                isKthSet(0, binding.btnAdobePs);
+            case R.id.layout_AdobePs:
+                isKthSet(0, binding.chkAdobePs);
                 break;
-            case R.id.btn_Animation:
-                isKthSet(1, binding.btnAnimation);
+            case R.id.layout_Animation:
+                isKthSet(1, binding.chkAnimation);
                 break;
-            case R.id.btn_Arts:
-                isKthSet(2, binding.btnArts);
+            case R.id.layout_Arts:
+                isKthSet(2, binding.chkArts);
                 break;
-            case R.id.btn_AutoCAD:
-                isKthSet(3, binding.btnAutoCAD);
+            case R.id.layout_AutoCAD:
+                isKthSet(3, binding.chkAutoCAD);
                 break;
-            case R.id.btn_Programming:
-                isKthSet(4, binding.btnProgramming);
+            case R.id.layout_Programming:
+                isKthSet(4, binding.chkProgramming);
                 break;
-            case R.id.btn_Microsoft:
-                isKthSet(5, binding.btnMicrosoft);
+            case R.id.layout_MSOffice:
+                isKthSet(5, binding.chkMSOffice);
                 break;
-            case R.id.btn_Mathematics:
-                isKthSet(6, binding.btnMathematics);
+            case R.id.layout_Mathematics:
+                isKthSet(6, binding.chkMathematics);
                 break;
-            case R.id.btn_Sciences:
-                isKthSet(7, binding.btnSciences);
+            case R.id.layout_Sciences:
+                isKthSet(7, binding.chkSciences);
                 break;
-            case R.id.btn_Languages:
-                isKthSet(8, binding.btnLanguages);
+            case R.id.layout_Languages:
+                isKthSet(8, binding.chkLanguages);
                 break;
-            case R.id.btn_Law:
-                isKthSet(9, binding.btnLaw);
+            case R.id.layout_Law:
+                isKthSet(9, binding.chkLaw);
                 break;
-            case R.id.btn_Engineering:
-                isKthSet(10, binding.btnEngineering);
+            case R.id.layout_Engineering:
+                isKthSet(10, binding.chkEngineering);
                 break;
             case R.id.btnProceed:
                 if (subjects > 0){
                     Account_Details.User_Details.setSubjects(subjects);
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Finalize()).commit();
+                    if(Account_Details.User_Details.getIsMentor()) {
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Rates()).commit();
+                    }else{
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Finalize()).commit();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Kindly specify a subject.", Toast.LENGTH_SHORT).show();
                 }
@@ -129,22 +132,14 @@ public class CreateAcc_Subjects extends Fragment implements View.OnClickListener
         }
     }
 
-    public void isKthSet(Integer k, Button clickedBTN){
-        uiSetUnset(clickedBTN, (subjects & (1 << k)) == 0);
+    public void isKthSet(Integer k, CheckBox setCHK){
+        uiSetUnset(setCHK, (subjects & (1 << k)) == 0);
         subjects = subjects ^ (1 << k);
         Log.i("Subject Binary", subjects.toString());
     }
 
-    public void uiSetUnset(Button targetBTN, Boolean shouldSet){
-        if (shouldSet){
-            targetBTN.setBackground(AppCompatResources.getDrawable(this.requireContext(), R.drawable.roundedbutton_blue));
-            targetBTN.setTextColor(this.requireContext().getColor(R.color.white));
-            Log.i(targetBTN.getText().toString(), "Enabled");
-        }else{
-            targetBTN.setBackground(AppCompatResources.getDrawable(this.requireContext(), R.drawable.roundedbutton_blue_outline));
-            targetBTN.setTextColor(this.requireContext().getColor(R.color.blue));
-            Log.i(targetBTN.getText().toString(), "Unabled");
-        }
+    public void uiSetUnset(CheckBox setCHK, Boolean shouldSet){
+        setCHK.setChecked(shouldSet);
     }
 
 }

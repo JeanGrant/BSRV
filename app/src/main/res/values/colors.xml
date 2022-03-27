@@ -9,6 +9,17 @@
     <color name="blue">#456972</color>
     <color name="brown">#995649</color>
     <color name="red">#E91E63</color>
-    <color name="green">#8EA47A</color>
+    <color name="green">#54E705</color>
     <color name="frostedblue">#00E1FF</color>
+    <color name="AdobePsblue">#255daa</color>
+    <color name="AdobeAeViolet">#34224c</color>
+    <color name="AutoCADRed">#7f120b</color>
+    <color name="ProgrammingCyan">#2BA0BD</color>
+    <color name="MSOfficeOrange">#B82916</color>
+    <color name="MathYellow">#BD8F06</color>
+    <color name="ScienceGreen">#188637</color>
+    <color name="ArtsPurple">#7F26AF</color>
+    <color name="LanguageGreen">#6B8622</color>
+    <color name="EngineeringOrange">#AD4F32</color>
+    <color name="LawBlue">#033E58</color>
 </resources>

@@ -34,7 +34,7 @@ public class CreateAcc_Interview extends Fragment {
             binding.inpTXTFBUser.setText(Account_Details.User_Details.getFbUser());
         }
         if(!Account_Details.User_Details.getlInUser().trim().isEmpty()){
-            binding.inpTXTLinkedInUser.setText(Account_Details.User_Details.getlInUser());
+            binding.inpTXTLInUser.setText(Account_Details.User_Details.getlInUser());
         }
         if(!Account_Details.User_Details.getBioEssay().trim().isEmpty()){
             binding.inpTXTBio.setText(Account_Details.User_Details.getBioEssay());
@@ -45,7 +45,7 @@ public class CreateAcc_Interview extends Fragment {
         binding.btnProceed.setOnClickListener(view -> {
             fullName = Objects.requireNonNull(binding.inpTXTFullname.getText()).toString().trim();
             fbUser = Objects.requireNonNull(binding.inpTXTFBUser.getText()).toString().trim();
-            linkedInUser = Objects.requireNonNull(binding.inpTXTLinkedInUser.getText()).toString().trim();
+            linkedInUser = Objects.requireNonNull(binding.inpTXTLInUser.getText()).toString().trim();
             bioEssay = Objects.requireNonNull(binding.inpTXTBio.getText()).toString().trim();
 
             if (fullName.isEmpty()) {

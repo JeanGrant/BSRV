@@ -1,5 +1,6 @@
 package com.example.mentor.adapters;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             binding.txtFullName.setText(user.fullName);
             binding.txtFullName.setEllipsize(TextUtils.TruncateAt.END);
             binding.txtFullName.setPadding(0,0,20,0);
-            binding.email.setText(user.email);
-            binding.email.setEllipsize(TextUtils.TruncateAt.END);
-            binding.email.setPadding(0,0,20,0);
+            binding.txtEmail.setText(user.email);
+            binding.txtEmail.setEllipsize(TextUtils.TruncateAt.END);
+            binding.txtEmail.setPadding(0,0,20,0);
             if(user.pictureStr.trim().isEmpty()){
                 binding.imgUserPic.setImageResource(R.drawable.ic_baseline_person_24);
+                binding.imgUserPic.setColorFilter(Color.argb(255, 100, 100, 100));
             }
             if(Account_Details.User_Details.getIsMentor() && Account_Details.User_Details.getIsAccepting()){
                 if(!user.isMentor && user.isAccepting){

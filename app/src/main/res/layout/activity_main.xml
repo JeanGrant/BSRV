@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo_tamma"
+            android:fontFamily="@font/baloo"
             android:text="@string/app_name"
             android:textColor="@color/brown"
             android:textSize="@dimen/_45ssp" />
@@ -49,14 +49,14 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btn_Login"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="@dimen/_40sdp"
             android:background="@drawable/roundedbutton_blue"
             android:text="@string/Login" />
 
         <Button
-            android:id="@+id/btnSignup"
+            android:id="@+id/btn_Signup"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_8sdp"

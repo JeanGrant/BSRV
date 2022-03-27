@@ -11,7 +11,7 @@
     <string name="Animation">Animation</string>
     <string name="AutoCAD">AutoCAD</string>
     <string name="Programming">Programming</string>
-    <string name="Microsoft">Microsoft Office</string>
+    <string name="Microsoft">MS Office</string>
     <string name="Mathematics">Mathematics</string>
     <string name="Sciences">Sciences</string>
     <string name="Languages">Languages</string>
@@ -45,4 +45,22 @@
     <string name="Mentors">Mentors</string>
     <string name="Requests">Requests</string>
     <string name="back">back</string>
+    <string name="defSubjRate">9999/hr</string>
+    <string name="ConstRates">My rate per hour does not vary.</string>
+    <string name="AltRates">I charge depending on the subject.</string>
+    <string name="RatePrompt">How do you determine your rate per hour?</string>
+    <string name="setConstRate">Set a constant rate per hour</string>
+    <string name="SendProposal">On-the-Look</string>
+    <string name="Proposals">Proposals</string>
+    <string name="SendMessage">Send</string>
+    <string name="SUN">SUN</string>
+    <string name="MON">MON</string>
+    <string name="TUE">TUE</string>
+    <string name="WED">WED</string>
+    <string name="THU">THU</string>
+    <string name="FRI">FRI</string>
+    <string name="SAT">SAT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profileImage">Profile Image</string>
 </resources>

@@ -10,9 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_header"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/_55sdp"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="@dimen/_10sdp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,40 +24,43 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/img_Logo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:contentDescription="@string/app_name"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingVertical="@dimen/_3sdp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_bsrv_02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/baloo_tamma"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/baloo"
                 android:text="@string/app_name"
                 android:textColor="@color/brown"
-                android:textSize="25sp" />
+                android:textSize="@dimen/_20ssp" />
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/imgBTN_logout"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/imgBTN_Logout"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:adjustViewBounds="true"
             android:background="@drawable/roundedbutton_transparent"
             android:contentDescription="@string/logout"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:paddingVertical="@dimen/_3sdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_exit_to_app_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#30000000"
+        android:layout_below="@id/container_header"
+        android:layout_centerHorizontal="true"/>
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -68,61 +71,59 @@
 
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#30000000"
+        android:layout_above="@id/container_footer"
+        android:layout_centerHorizontal="true"/>
+    <LinearLayout
         android:id="@+id/container_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="10dp">
-
-        <ImageButton
-            android:id="@+id/imgBTN_profile"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
-            android:contentDescription="@string/profile"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_bsrv_05"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"/>
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/imgBTN_home"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"
             android:adjustViewBounds="true"
             android:background="@drawable/roundedbutton_transparent"
             android:contentDescription="@string/home"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_drawables_home_outline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="@dimen/_5sdp"/>
 
         <ImageButton
-            android:id="@+id/imgBTN_connections"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="10dp"
+            android:id="@+id/imgBTN_Connections"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:adjustViewBounds="true"
             android:background="@drawable/roundedbutton_transparent"
             android:contentDescription="@string/relationships"
-            android:padding="5dp"
+            android:padding="@dimen/_1sdp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_drawables_contacts_outline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgBTN_profile"
-            app:layout_constraintStart_toEndOf="@+id/imgBTN_home"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_drawables_contacts_outline" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/imgBTN_profile"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/roundedbutton_transparent"
+            android:contentDescription="@string/profile"
+            android:padding="@dimen/_3sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_bsrv_05"
+            android:layout_marginBottom="@dimen/_5sdp"/>
+
+    </LinearLayout>
 </RelativeLayout>

@@ -18,20 +18,20 @@
         android:layout_alignParentTop="true">
 
         <Button
-            android:id="@+id/switchStudent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Student"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/switchMentor"
+            android:id="@+id/btn_SendProposal"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Mentor" />
+            android:text="@string/SendProposal" />
+        <Button
+            android:id="@+id/btn_Proposals"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Proposals"
+            style="?android:attr/buttonBarButtonStyle" />
+
     </LinearLayout>
 
 
@@ -43,7 +43,7 @@
         android:layout_centerInParent="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_Users"
+        android:id="@+id/recyclerUsers"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/linear_divider"
@@ -57,7 +57,7 @@
         android:id="@+id/card_UserPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="@integer/searchUser_preview_visibility"
         app:cardBackgroundColor="#40000000">
 
         <androidx.cardview.widget.CardView
@@ -68,16 +68,14 @@
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="20dp"
             app:cardUseCompatPadding="true">
-
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbarStyle="outsideInset">
+                android:layout_height="match_parent">
 
                 <RelativeLayout
+                    android:id="@+id/layout_PreviewHeader"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <ImageButton
                         android:id="@+id/imgBTN_back"
@@ -110,201 +108,834 @@
                         android:paddingBottom="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_baseline_person_add_24" />
+                </RelativeLayout>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbarStyle="outsideInset"
+                    android:layout_below="@+id/layout_PreviewHeader">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/imgBTN_back"
-                        android:layout_marginHorizontal="15dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:id="@+id/linearLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="130dp"
-                                app:cardBackgroundColor="@color/blue"
-                                app:cardCornerRadius="250dp"
-                                app:cardElevation="2dp">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="120dp"
-                                    android:layout_height="120dp"
-                                    android:layout_gravity="center"
-                                    app:cardCornerRadius="250dp">
-
-                                    <ImageView
-                                        android:id="@+id/img_UserPic"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:padding="20dp"
-                                        android:scaleType="centerCrop"
-                                        android:src="@drawable/ic_bsrv_05" />
-
-                                </androidx.cardview.widget.CardView>
-
-                            </androidx.cardview.widget.CardView>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="150dp"
-                                android:layout_marginStart="20dp"
-                                android:gravity="start"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txt_fullName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="0dp"
-                                    android:fontFamily="@font/baloo_tamma"
-                                    android:text="@string/FullName"
-                                    android:textColor="@color/blue"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:id="@+id/txt_Email"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="0dp"
-                                    android:fontFamily="@font/podkova"
-                                    android:text="@string/email"
-                                    android:textColor="@color/blue"
-                                    android:textSize="15sp" />
-
-                                <TextView
-                                    android:id="@+id/txt_AccType"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="15dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/Mentor"
-                                    android:textSize="20sp" />
-
-                                <TextView
-                                    android:id="@+id/txt_Status"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/CurrentlyAccepting"
-                                    android:textColor="@color/green"
-                                    android:textSize="16sp"
-                                    android:textStyle="italic" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_bioEssay"
-                            android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/bio"
-                            android:textSize="18sp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/linearLayout2"
-                            android:layout_width="350dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            app:cardCornerRadius="10dp">
+                            android:layout_marginHorizontal="15dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                android:padding="20dp">
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/txt_AuthLVLPrompt"
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/podkova"
-                                    android:text="@string/AuthLVLPrompt"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                    app:cardCornerRadius="@dimen/_40sdp"
+                                    app:cardElevation="@dimen/_2sdp"
+                                    app:cardUseCompatPadding="true">
 
-                                <TextView
-                                    android:id="@+id/txt_AuthLVL"
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/_3sdp"
+                                        android:padding="@dimen/_55sdp"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_40sdp">
+
+                                        <ImageView
+                                            android:id="@+id/img_UserPic"
+                                            android:layout_width="@dimen/_80sdp"
+                                            android:layout_height="@dimen/_80sdp"
+                                            android:adjustViewBounds="true"
+                                            android:background="@color/black"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/ic_baseline_person_24" />
+                                    </androidx.cardview.widget.CardView>
+                                </androidx.cardview.widget.CardView>
+
+                                <RelativeLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="7dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/AuthLVLPrompt"
-                                    android:textColor="@color/blue"
-                                    android:textSize="18sp" />
+                                    android:gravity="center_horizontal">
 
-                                <TextView
-                                    android:id="@+id/txt_FBUserPrompt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="30dp"
-                                    android:fontFamily="@font/podkova"
-                                    android:text="@string/FBNamePrompt"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                    <TextView
+                                        android:id="@+id/txt_fullName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:fontFamily="@font/baloo"
+                                        android:text="@string/FullName"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/_17ssp" />
 
-                                <TextView
-                                    android:id="@+id/txt_FBUsername"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="7dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/FBNamePrompt"
-                                    android:textColor="@color/blue"
-                                    android:textSize="18sp" />
+                                    <TextView
+                                        android:id="@+id/txt_Email"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/txt_fullName"
+                                        android:layout_centerHorizontal="true"
+                                        android:fontFamily="@font/podkova"
+                                        android:text="@string/email"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/blue"
+                                        android:textSize="@dimen/_14ssp" />
 
-                                <TextView
-                                    android:id="@+id/txt_LInPrompt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="30dp"
-                                    android:fontFamily="@font/podkova"
-                                    android:text="@string/LinkedInPrompt"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/txt_LInUsername"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="7dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/LinkedInPrompt"
-                                    android:textColor="@color/blue"
-                                    android:textSize="18sp" />
-
-                                <TextView
-                                    android:id="@+id/txt_SubjectsPrompt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="30dp"
-                                    android:fontFamily="@font/podkova"
-                                    android:text="@string/SubjectsPrompt"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/txt_SubjectsList"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="7dp"
-                                    android:fontFamily="@font/mako"
-                                    android:text="@string/SubjectsPrompt"
-                                    android:textColor="@color/blue"
-                                    android:textSize="18sp" />
+                                    <TextView
+                                        android:id="@+id/txt_Status"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/txt_Email"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:fontFamily="@font/mako"
+                                        android:text="@string/CurrentlyAccepting"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp" />
+                                </RelativeLayout>
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txt_Bio"
+                                android:layout_width="@dimen/_230sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:text="@string/bio"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/_11ssp"
+                                android:textStyle="italic" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="350dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                app:cardCornerRadius="10dp"
+                                app:cardElevation="2dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical"
+                                    android:padding="20dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/podkova"
+                                        android:text="@string/AuthLVLPrompt"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/txt_AuthLVL"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/mako"
+                                        android:text="@string/AuthLVLPrompt"
+                                        android:textColor="@color/blue"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/podkova"
+                                        android:text="@string/FBNamePrompt"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:visibility="@integer/userProfile_temp_visibility" />
+
+                                    <TextView
+                                        android:id="@+id/txt_FBUser"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/mako"
+                                        android:text="@string/FBNamePrompt"
+                                        android:textColor="@color/blue"
+                                        android:textSize="18sp"
+                                        android:visibility="@integer/userProfile_temp_visibility" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/podkova"
+                                        android:text="@string/LinkedInPrompt"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:visibility="@integer/userProfile_temp_visibility" />
+
+                                    <TextView
+                                        android:id="@+id/txt_LInUser"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="7dp"
+                                        android:fontFamily="@font/mako"
+                                        android:text="@string/LinkedInPrompt"
+                                        android:textColor="@color/blue"
+                                        android:textSize="18sp"
+                                        android:visibility="@integer/userProfile_temp_visibility" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/podkova"
+                                        android:text="@string/SubjectsPrompt"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_20sdp"
+                                        android:layout_marginBottom="@dimen/_10sdp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp">
+
+                                        <androidx.constraintlayout.helper.widget.Flow
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            app:constraint_referenced_ids="layout_AdobePs,layout_Animation,layout_AutoCAD, layout_Programming, layout_MSOffice, layout_Mathematics, layout_Sciences, layout_Arts, layout_Languages, layout_Engineering, layout_Law"
+                                            app:flow_horizontalBias="0"
+                                            app:flow_horizontalGap="@dimen/_5sdp"
+                                            app:flow_verticalBias="0"
+                                            app:flow_verticalGap="@dimen/_5sdp"
+                                            app:flow_verticalStyle="spread"
+                                            app:flow_wrapMode="aligned"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_AdobePs"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility">
+
+                                            <ImageView
+                                                android:id="@+id/img_AdobePs"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_adobe_ps"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_AdobePs"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_AdobePs"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/AdobePs"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesAdobePs"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_AdobePs"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Animation"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/AdobeAeViolet"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility">
+
+                                            <ImageView
+                                                android:id="@+id/img_Animation"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_animation"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Animation"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Animation"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Animation"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesAnimation"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Animation"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_AutoCAD"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/AutoCADRed"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility">
+
+                                            <ImageView
+                                                android:id="@+id/img_AutoCAD"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_autocad"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_AutoCAD"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_AutoCAD"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/AutoCAD"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesAutoCAD"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_AutoCAD"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Programming"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/ProgrammingCyan"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Programming"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_programming"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Programming"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Programming"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Programming"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesProgramming"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Programming"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_MSOffice"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/MSOfficeOrange"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_MSOffice"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_ms_office"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_MSOffice"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_MSOffice"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Microsoft"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesMSOffice"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_MSOffice"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Mathematics"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/MathYellow"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Mathematics"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_mathematics"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Mathematics"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Mathematics"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Mathematics"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesMathematics"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Mathematics"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Sciences"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/ScienceGreen"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Sciences"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_science"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Sciences"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Sciences"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Sciences"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesSciences"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Sciences"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Arts"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/ArtsPurple"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Arts"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_arts"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Arts"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Arts"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Arts"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesArts"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Arts"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Languages"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/LanguageGreen"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Languages"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_languages"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Languages"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Languages"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Languages"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesLanguages"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Languages"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Engineering"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/EngineeringOrange"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Engineering"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_engineering"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Engineering"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Engineering"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Engineering"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesEngineering"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Engineering"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Law"
+                                            android:layout_width="@dimen/subjects_layout_width"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                                            android:backgroundTint="@color/LawBlue"
+                                            android:gravity="center"
+                                            android:paddingVertical="@dimen/_10sdp"
+                                            android:visibility="@integer/subjectVisibility"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent">
+
+                                            <ImageView
+                                                android:id="@+id/img_Law"
+                                                android:layout_width="@dimen/subjects_imgView_widthheight"
+                                                android:layout_height="@dimen/subjects_imgView_widthheight"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/ic_subjects_law"
+                                                app:tint="@color/white" />
+
+                                            <TextView
+                                                android:id="@+id/txt_Law"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_Law"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/Law"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+
+                                            <TextView
+                                                android:id="@+id/txt_RatesLaw"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/txt_Law"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                                                android:text="@string/defSubjRate"
+                                                android:textColor="@color/white"
+                                                android:textSize="@dimen/_10sdp" />
+                                        </RelativeLayout>
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_SendProposal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@integer/searchUser_proposal_visibility"
+        app:cardBackgroundColor="#40000000">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="3dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp">
+                    <ImageButton
+                        android:id="@+id/imgBTN_cancelMSG"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/roundedbutton_transparent"
+                        android:contentDescription="@string/logout"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_baseline_arrow_back_24" />
+
+                    <Spinner
+                        android:id="@+id/drp_Subject"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgBTN_cancelMSG"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:popupBackground="@drawable/drp_solidwhite"
+                        android:spinnerMode="dropdown" />
+                    <ImageView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#30000000"
+                        android:layout_below="@id/drp_Subject"
+                        android:layout_centerHorizontal="true"/>
+
+                    <Button
+                        android:id="@+id/btn_DatePicker"
+                        style="?android:spinnerStyle"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/drp_Subject"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/mako"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+                    <ImageView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#30000000"
+                        android:layout_below="@id/btn_DatePicker"
+                        android:layout_centerHorizontal="true"/>
+
+                    <Button
+                        android:id="@+id/btn_TimeStartPicker"
+                        style="?android:spinnerStyle"
+                        android:layout_width="@dimen/_85sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btn_DatePicker"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_35sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="12:59 PM"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/mako"/>
+                    <Button
+                        android:id="@+id/btn_TimeEndPicker"
+                        style="?android:spinnerStyle"
+                        android:layout_width="@dimen/_85sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btn_DatePicker"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_35sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="12:59 PM"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/mako"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inpTXT_Elaboration"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btn_TimeEndPicker"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/mako"
+                        android:hint="Elaborate your situation"
+                        android:inputType="textMultiLine"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <Button
+                        android:id="@+id/btnProceed"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:minHeight="@dimen/_35sdp"
+                        android:layout_below="@+id/inpTXT_Elaboration"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:background="@drawable/roundedbutton_blue_outline"
+                        android:text="@string/SendMessage"
+                        android:textColor="@color/blue"/>
                 </RelativeLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>

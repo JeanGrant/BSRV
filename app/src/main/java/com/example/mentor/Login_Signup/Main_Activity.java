@@ -63,10 +63,13 @@ public class Main_Activity extends AppCompatActivity {
                 Account_Details.User_Details.setSubjects(Objects.requireNonNull(documentSnapshot.getLong("subjectsBinary")).intValue());
                 Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
                 Account_Details.User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
-                Account_Details.User_Details.setCurrSearch(!Account_Details.User_Details.getIsMentor());
+                Account_Details.User_Details.setCurrSearch(true);
                 Account_Details.User_Details.setUID(fUser.getUid());
                 if(documentSnapshot.get("userRequests") != null){
                     Account_Details.User_Details.setRequests((ArrayList<String>) documentSnapshot.get("userRequests"));
+                }
+                if(documentSnapshot.get("SubjectRates") != null){
+                    Account_Details.User_Details.setRates((ArrayList<Long>) documentSnapshot.get("SubjectRates"));
                 }
                 Account_Details.User_Details.setCurrConnection(false);
                 nextScreen(Homepage.class);

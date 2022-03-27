@@ -8,7 +8,6 @@
     tools:context=".CreateAccount.CreateAcc_Type">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_30sdp"
@@ -23,7 +22,7 @@
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/imgBTN_BearMentor"
+            android:id="@+id/imgBTN_Mentor"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
             android:adjustViewBounds="true"
@@ -34,7 +33,7 @@
             android:contentDescription="@string/Mentor"/>
 
         <ImageButton
-            android:id="@+id/imgBTN_BearStudent"
+            android:id="@+id/imgBTN_Student"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
             android:adjustViewBounds="true"

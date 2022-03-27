@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true">
 
             <Button
-                android:id="@+id/switchAccepted"
+                android:id="@+id/btn_switchAccepted"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -31,7 +31,7 @@
                 style="?android:attr/buttonBarButtonStyle" />
 
             <Button
-                android:id="@+id/switchRequests"
+                android:id="@+id/btn_switchRequests"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_Users"
+            android:id="@+id/recyclerUsers"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/linear_divider"

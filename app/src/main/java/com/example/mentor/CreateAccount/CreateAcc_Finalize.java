@@ -71,6 +71,7 @@ public class CreateAcc_Finalize extends Fragment {
                         userInfo.put("isAccepting", Account_Details.User_Details.getIsAccepting());
                         userInfo.put("AuthLevel", Account_Details.User_Details.getAuthLevel());
                         userInfo.put("Email", Account_Details.User_Details.getEmail());
+                        if(Account_Details.User_Details.getIsMentor()) {userInfo.put("SubjectRates", Account_Details.User_Details.rates);}
                         userInfo.put("Picture", "");
 
                         df.set(userInfo);

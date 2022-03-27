@@ -32,7 +32,6 @@
                 android:src="@drawable/ic_baseline_person_add_24" />
 
             <LinearLayout
-                android:id="@+id/linear_itemTexts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -58,7 +57,7 @@
                     android:textSize="@dimen/_13ssp"/>
 
                 <TextView
-                    android:id="@+id/email"
+                    android:id="@+id/txt_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"

@@ -24,12 +24,12 @@ public class CreateAcc_Type extends Fragment {
         binding = FragmentCreateAccTypeBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
-        binding.imgBTNBearMentor.setOnClickListener(view -> {
+        binding.imgBTNMentor.setOnClickListener(view -> {
             Account_Details.User_Details.setIsMentor(true);
             requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Interview()).commit();
         });
 
-        binding.imgBTNBearStudent.setOnClickListener(view -> {
+        binding.imgBTNStudent.setOnClickListener(view -> {
             Account_Details.User_Details.setIsMentor(false);
             requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Interview()).commit();
         });

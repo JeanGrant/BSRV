@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,164 +21,479 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
-    <LinearLayout
-        android:layout_below="@+id/imgBTN_back"
+    <TextView
+        android:id="@+id/txt_SubjectsPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgBTN_back"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/mako"
+        android:text="@string/createAccSubjects"
+        android:textSize="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_30sdp"/>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/createAccSubjects"
-            android:textSize="@dimen/_15ssp"
-            android:fontFamily="@font/mako"
-            />
-        <LinearLayout
+        android:layout_below="@+id/txt_SubjectsPrompt"
+        android:layout_above="@+id/btnProceed">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_20sdp">
-            <Button
-                android:id="@+id/btn_AdobePs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/AdobePs"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Animation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Animation"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_AutoCAD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/AutoCAD"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_8sdp">
-            <Button
-                android:id="@+id/btn_Programming"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Programming"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Microsoft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Microsoft"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-        </LinearLayout>
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_8sdp">
-            <Button
-                android:id="@+id/btn_Mathematics"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.helper.widget.Flow
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Mathematics"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Sciences"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Sciences"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Arts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Arts"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-        </LinearLayout>
+                app:constraint_referenced_ids="layout_AdobePs,layout_Animation,layout_AutoCAD, layout_Programming, layout_MSOffice, layout_Mathematics, layout_Sciences, layout_Arts, layout_Languages, layout_Engineering, layout_Law"
+                app:flow_horizontalBias="0"
+                app:flow_verticalBias="0"
+                app:flow_verticalGap="@dimen/_5sdp"
+                app:flow_verticalStyle="spread"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_8sdp">
-            <Button
-                android:id="@+id/btn_Languages"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Languages"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Engineering"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Engineering"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-            <Button
-                android:id="@+id/btn_Law"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="@drawable/roundedbutton_blue_outline"
-                android:text="@string/Law"
-                android:textColor="@color/blue"
-                tools:ignore="ButtonStyle"
-                android:textSize="@dimen/_10sdp"/>
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/layout_AdobePs"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:padding="@dimen/subjects_layout_padding">
 
-        <Button
-            android:id="@+id/btnProceed"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_70sdp"
-            android:background="@drawable/roundedbutton_blue_outline"
-            android:text="@string/Proceed"
-            android:textColor="@color/blue"/>
-    </LinearLayout>
+                <CheckBox
+                    android:id="@+id/chk_AdobePs"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_AdobePs"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_AdobePs"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_adobe_ps"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_AdobePs"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/AdobePs"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Animation"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/AdobeAeViolet"
+                android:padding="@dimen/subjects_layout_padding">
+
+                <CheckBox
+                    android:id="@+id/chk_Animation"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Animation"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Animation"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_animation"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Animation"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Animation"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_AutoCAD"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/AutoCADRed"
+                android:padding="@dimen/subjects_layout_padding">
+
+                <CheckBox
+                    android:id="@+id/chk_AutoCAD"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_AutoCAD"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_AutoCAD"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_autocad"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_AutoCAD"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/AutoCAD"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Programming"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/ProgrammingCyan"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Programming"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Programming"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Programming"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_programming"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Programming"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Programming"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_MSOffice"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/MSOfficeOrange"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_MSOffice"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_MSOffice"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_MSOffice"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_ms_office"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_MSOffice"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Microsoft"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Mathematics"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/MathYellow"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Mathematics"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Mathematics"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Mathematics"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_mathematics"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Mathematics"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Mathematics"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Sciences"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/ScienceGreen"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Sciences"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Sciences"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Sciences"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_science"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Sciences"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Sciences"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Arts"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/ArtsPurple"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Arts"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Arts"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Arts"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_arts"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Arts"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Arts"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Languages"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/LanguageGreen"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Languages"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Languages"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Languages"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_languages"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Languages"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Languages"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Engineering"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/EngineeringOrange"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Engineering"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Engineering"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Engineering"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_engineering"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Engineering"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Engineering"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_Law"
+                android:layout_width="@dimen/subjects_layout_width"
+                android:layout_height="@dimen/subjects_layout_height"
+                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
+                android:backgroundTint="@color/LawBlue"
+                android:padding="@dimen/subjects_layout_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/chk_Law"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:buttonTint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/img_Law"
+                    android:layout_width="@dimen/subjects_imgView_widthheight"
+                    android:layout_height="@dimen/subjects_imgView_widthheight"
+                    android:layout_alignTop="@+id/chk_Law"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
+                    android:src="@drawable/ic_subjects_law"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_Law"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
+                    android:text="@string/Law"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnProceed"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="@drawable/roundedbutton_blue_outline"
+        android:text="@string/Proceed"
+        android:textColor="@color/blue" />
 </RelativeLayout>
