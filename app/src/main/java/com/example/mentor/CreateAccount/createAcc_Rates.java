@@ -42,87 +42,65 @@ public class createAcc_Rates extends Fragment {
         binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Subjects()).commit());
         binding.btnProceed.setOnClickListener(view -> {
 
-            Integer subjects = Account_Details.User_Details.getSubjects();
-            for (int i = 0; i < 11; i++) {
-                if(isConstRates){if(binding.inpTXTConstRates.getText().toString().isEmpty()){isRateEmpty=true;break;}else{isRateEmpty=false;}}
+            ArrayList<String> subjects = Account_Details.User_Details.getSubjects();
+            for (int i = 0; i < subjects.size(); i++) {
+                if(isConstRates){if(String.valueOf(binding.inpTXTConstRates.getText()).isEmpty()){isRateEmpty=true;break;}else{isRateEmpty=false;}}
 
-                switch (i) {
-                    case 0:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTAdobePs.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAdobePs.getText().toString()));}}}
-                        else {rates.add(0L);}
+                switch (subjects.get(i)) {
+                    case "Adobe Ps":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTAdobePs.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTAdobePs.getText())));}}
                         break;
-                    case 1:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTAnimation.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAnimation.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Animation":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTAnimation.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTAnimation.getText())));}}
                         break;
-                    case 2:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTArts.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTArts.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Arts":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTArts.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTArts.getText())));}}
                         break;
-                    case 3:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTAutoCAD.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAutoCAD.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "AutoCAD":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTAutoCAD.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTAutoCAD.getText())));}}
                         break;
-                    case 4:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTProgramming.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTProgramming.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Engineering":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTEngineering.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTEngineering.getText())));}}
                         break;
-                    case 5:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTMSOffice.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTMSOffice.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Languages":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTLanguages.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTLanguages.getText())));}}
                         break;
-                    case 6:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTMathematics.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTMathematics.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Law":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTLaw.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTLaw.getText())));}}
                         break;
-                    case 7:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTSciences.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTSciences.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "MS Office":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTMSOffice.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTMSOffice.getText())));}}
                         break;
-                    case 8:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTLanguages.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTLanguages.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Mathematics":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTMathematics.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTMathematics.getText())));}}
                         break;
-                    case 9:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTLaw.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTLaw.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Programming":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTProgramming.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTProgramming.getText())));}}
                         break;
-                    case 10:
-                        if ((subjects & (1 << i)) > 0) {
-                            if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTEngineering.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTEngineering.getText().toString()));}}}
-                        else {rates.add(0L);}
+                    case "Sciences":
+                        if(isConstRates){rates.add(Long.parseLong(String.valueOf(binding.inpTXTConstRates.getText())));}
+                        else{if(String.valueOf(binding.inpTXTSciences.getText()).isEmpty()){isRateEmpty=true;}
+                        else{isRateEmpty=false;rates.add(Long.parseLong(String.valueOf(binding.inpTXTSciences.getText())));}}
                         break;
                     default:
                         break;
@@ -142,57 +120,55 @@ public class createAcc_Rates extends Fragment {
     }
 
     public void initLstSubj() {
-        Integer subjects = Account_Details.User_Details.getSubjects();
-        for (int i = 0; i < 11; i++) {
-            if ((subjects & (1 << i)) > 0) {
-                switch (i) {
-                    case 0:
-                        binding.layoutAdobePs.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTAdobePs.setVisibility(View.GONE);}else{binding.inpTXTAdobePs.setVisibility(View.VISIBLE);}
-                        break;
-                    case 1:
-                        binding.layoutAnimation.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTAnimation.setVisibility(View.GONE);}else{binding.inpTXTAnimation.setVisibility(View.VISIBLE);}
-                        break;
-                    case 2:
-                        binding.layoutArts.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTArts.setVisibility(View.GONE);}else{binding.inpTXTArts.setVisibility(View.VISIBLE);}
-                        break;
-                    case 3:
-                        binding.layoutAutoCAD.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTAutoCAD.setVisibility(View.GONE);}else{binding.inpTXTAutoCAD.setVisibility(View.VISIBLE);}
-                        break;
-                    case 4:
-                        binding.layoutProgramming.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTProgramming.setVisibility(View.GONE);}else{binding.inpTXTProgramming.setVisibility(View.VISIBLE);}
-                        break;
-                    case 5:
-                        binding.layoutMSOffice.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTMSOffice.setVisibility(View.GONE);}else{binding.inpTXTMSOffice.setVisibility(View.VISIBLE);}
-                        break;
-                    case 6:
-                        binding.layoutMathematics.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTMathematics.setVisibility(View.GONE);}else{binding.inpTXTMathematics.setVisibility(View.VISIBLE);}
-                        break;
-                    case 7:
-                        binding.layoutSciences.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTSciences.setVisibility(View.GONE);}else{binding.inpTXTSciences.setVisibility(View.VISIBLE);}
-                        break;
-                    case 8:
-                        binding.layoutLanguages.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTLanguages.setVisibility(View.GONE);}else{binding.inpTXTLanguages.setVisibility(View.VISIBLE);}
-                        break;
-                    case 9:
-                        binding.layoutLaw.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTLaw.setVisibility(View.GONE);}else{binding.inpTXTLaw.setVisibility(View.VISIBLE);}
-                        break;
-                    case 10:
-                        binding.layoutEngineering.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTEngineering.setVisibility(View.GONE);}else{binding.inpTXTEngineering.setVisibility(View.VISIBLE);}
-                        break;
-                    default:
-                        break;
-                }
+        ArrayList<String> subjects = Account_Details.User_Details.subjects;
+        for (int i = 0; i < subjects.size(); i++) {
+            switch (subjects.get(i)) {
+                case "Adobe Ps":
+                    binding.layoutAdobePs.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTAdobePs.setVisibility(View.GONE);}else{binding.inpTXTAdobePs.setVisibility(View.VISIBLE);}
+                    break;
+                case "Animation":
+                    binding.layoutAnimation.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTAnimation.setVisibility(View.GONE);}else{binding.inpTXTAnimation.setVisibility(View.VISIBLE);}
+                    break;
+                case "Arts":
+                    binding.layoutArts.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTArts.setVisibility(View.GONE);}else{binding.inpTXTArts.setVisibility(View.VISIBLE);}
+                    break;
+                case "AutoCAD":
+                    binding.layoutAutoCAD.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTAutoCAD.setVisibility(View.GONE);}else{binding.inpTXTAutoCAD.setVisibility(View.VISIBLE);}
+                    break;
+                case "Engineering":
+                    binding.layoutEngineering.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTEngineering.setVisibility(View.GONE);}else{binding.inpTXTEngineering.setVisibility(View.VISIBLE);}
+                    break;
+                case "Languages":
+                    binding.layoutLanguages.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTLanguages.setVisibility(View.GONE);}else{binding.inpTXTLanguages.setVisibility(View.VISIBLE);}
+                    break;
+                case "Law":
+                    binding.layoutLaw.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTLaw.setVisibility(View.GONE);}else{binding.inpTXTLaw.setVisibility(View.VISIBLE);}
+                    break;
+                case "MS Office":
+                    binding.layoutMSOffice.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTMSOffice.setVisibility(View.GONE);}else{binding.inpTXTMSOffice.setVisibility(View.VISIBLE);}
+                    break;
+                case "Mathematics":
+                    binding.layoutMathematics.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTMathematics.setVisibility(View.GONE);}else{binding.inpTXTMathematics.setVisibility(View.VISIBLE);}
+                    break;
+                case "Programming":
+                    binding.layoutProgramming.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTProgramming.setVisibility(View.GONE);}else{binding.inpTXTProgramming.setVisibility(View.VISIBLE);}
+                    break;
+                case "Sciences":
+                    binding.layoutSciences.setVisibility(View.VISIBLE);
+                    if(isConstRates){binding.inpTXTSciences.setVisibility(View.GONE);}else{binding.inpTXTSciences.setVisibility(View.VISIBLE);}
+                    break;
+                default:
+                    break;
             }
         }
     }

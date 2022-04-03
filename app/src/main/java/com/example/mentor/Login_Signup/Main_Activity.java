@@ -1,7 +1,6 @@
 package com.example.mentor.Login_Signup;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,15 +28,7 @@ public class Main_Activity extends AppCompatActivity {
 
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         if(fAuth.getCurrentUser() != null) {
-            new Handler().postDelayed(() -> {
-                Account_Details.User_Details.initUser();
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
-            }, 3000);
+            SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
         }else {
             binding.imgDivider.setVisibility(View.VISIBLE);
             binding.switchSign.setVisibility(View.VISIBLE);

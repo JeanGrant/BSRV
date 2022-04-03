@@ -56,8 +56,6 @@ public class createAcc_Type extends Fragment {
                     binding.inpTXTBio.setError("Required Field");
                 }else {
                     Account_Details.User_Details.setFullName(fullName);
-                    Account_Details.User_Details.setFBUser(fbUser);
-                    Account_Details.User_Details.setLInUser(linkedInUser);
                     Account_Details.User_Details.setBioEssay(bioEssay);
                     SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Subjects(), "createAcc_Subjects");
                 }}
@@ -78,12 +76,6 @@ public class createAcc_Type extends Fragment {
         }
         if(!Account_Details.User_Details.getFullName().trim().isEmpty()){
             binding.inpTXTFullname.setText(Account_Details.User_Details.getFullName());
-        }
-        if(!Account_Details.User_Details.getFbUser().trim().isEmpty()){
-            binding.inpTXTFBUser.setText(Account_Details.User_Details.getFbUser());
-        }
-        if(!Account_Details.User_Details.getlInUser().trim().isEmpty()){
-            binding.inpTXTLInUser.setText(Account_Details.User_Details.getlInUser());
         }
         if(!Account_Details.User_Details.getBioEssay().trim().isEmpty()){
             binding.inpTXTBio.setText(Account_Details.User_Details.getBioEssay());

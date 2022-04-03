@@ -3,7 +3,6 @@ package com.example.mentor.CreateAccount;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,56 +11,54 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mentor.R;
 import com.example.mentor.databinding.FragmentCreateAccSubjectsBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.utilities.SwitchLayout;
 import com.google.android.material.card.MaterialCardView;
 
 public class createAcc_Subjects extends Fragment implements View.OnClickListener{
 
-    private Integer subjects = 0;
     private FragmentCreateAccSubjectsBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        subjects = Account_Details.User_Details.getSubjects();
-        Log.i("Subject Binary", subjects.toString());
 
         // Inflate the layout for this fragment
         binding = FragmentCreateAccSubjectsBinding.inflate(inflater, container, false);
         View viewLayout = binding.getRoot();
 
-        for (int i = 0; i<11; i++){
-            if((subjects & (1 << i)) > 0) {
-                switch (i) {
-                    case (0):
-                        uiSetUnset(binding.layoutAdobePs, binding.imgAdobePs, binding.txtAdobePs);break;
-                    case (1):
-                        uiSetUnset(binding.layoutAnimation, binding.imgAnimation, binding.txtAnimation);break;
-                    case (2):
-                        uiSetUnset(binding.layoutArts, binding.imgArts, binding.txtArts);break;
-                    case (3):
-                        uiSetUnset(binding.layoutAutoCAD, binding.imgAutoCAD, binding.txtAutoCAD);break;
-                    case (4):
-                        uiSetUnset(binding.layoutProgramming, binding.imgProgramming, binding.txtProgramming);break;
-                    case (5):
-                        uiSetUnset(binding.layoutMSOffice, binding.imgMSOffice, binding.txtMSOffice);break;
-                    case (6):
-                        uiSetUnset(binding.layoutMathematics, binding.imgMathematics, binding.txtMathematics);break;
-                    case (7):
-                        uiSetUnset(binding.layoutSciences, binding.imgSciences, binding.txtSciences);break;
-                    case (8):
-                        uiSetUnset(binding.layoutLanguages, binding.imgLanguages, binding.txtLanguages);break;
-                    case (9):
-                        uiSetUnset(binding.layoutLaw, binding.imgLaw, binding.txtLaw);break;
-                    case (10):
-                        uiSetUnset(binding.layoutEngineering, binding.imgEngineering, binding.txtEngineering);break;
-                    default: break; } } }
+        for (int i = 0; i< Account_Details.User_Details.subjects.size(); i++){
+            switch (Account_Details.User_Details.subjects.get(i)) {
+                case ("Adobe Ps"):
+                    uiSetUnset(binding.layoutAdobePs, binding.imgAdobePs, binding.txtAdobePs);break;
+                case ("Animation"):
+                    uiSetUnset(binding.layoutAnimation, binding.imgAnimation, binding.txtAnimation);break;
+                case ("Arts"):
+                    uiSetUnset(binding.layoutArts, binding.imgArts, binding.txtArts);break;
+                case ("AutoCAD"):
+                    uiSetUnset(binding.layoutAutoCAD, binding.imgAutoCAD, binding.txtAutoCAD);break;
+                case ("Engineering"):
+                    uiSetUnset(binding.layoutEngineering, binding.imgEngineering, binding.txtEngineering);break;
+                case ("Languages"):
+                    uiSetUnset(binding.layoutLanguages, binding.imgLanguages, binding.txtLanguages);break;
+                case ("Law"):
+                    uiSetUnset(binding.layoutLaw, binding.imgLaw, binding.txtLaw);break;
+                case ("MS Office"):
+                    uiSetUnset(binding.layoutMSOffice, binding.imgMSOffice, binding.txtMSOffice);break;
+                case ("Mathematics"):
+                    uiSetUnset(binding.layoutMathematics, binding.imgMathematics, binding.txtMathematics);break;
+                case ("Programming"):
+                    uiSetUnset(binding.layoutProgramming, binding.imgProgramming, binding.txtProgramming);break;
+                case ("Sciences"):
+                    uiSetUnset(binding.layoutSciences, binding.imgSciences, binding.txtSciences);break;
+                default: break; } }
 
-        binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Type()).commit());
+        binding.imgBTNBack.setOnClickListener(view -> SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Type(), "createAcc_Type"));
 
         //region setOnClickListener
         binding.layoutAdobePs.setOnClickListener(this);
@@ -85,34 +82,44 @@ public class createAcc_Subjects extends Fragment implements View.OnClickListener
     public void onClick(View v){
         switch (v.getId()){
             case R.id.layout_AdobePs:
-                isKthSet(0, binding.layoutAdobePs, binding.imgAdobePs, binding.txtAdobePs);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.AdobePs));
+                uiSetUnset(binding.layoutAdobePs, binding.imgAdobePs, binding.txtAdobePs);break;
             case R.id.layout_Animation:
-                isKthSet(1, binding.layoutAnimation, binding.imgAnimation, binding.txtAnimation);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Animation));
+                uiSetUnset(binding.layoutAnimation, binding.imgAnimation, binding.txtAnimation);break;
             case R.id.layout_Arts:
-                isKthSet(2, binding.layoutArts, binding.imgArts, binding.txtArts);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Arts));
+                uiSetUnset(binding.layoutArts, binding.imgArts, binding.txtArts);break;
             case R.id.layout_AutoCAD:
-                isKthSet(3, binding.layoutAutoCAD, binding.imgAutoCAD, binding.txtAutoCAD);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.AutoCAD));
+                uiSetUnset(binding.layoutAutoCAD, binding.imgAutoCAD, binding.txtAutoCAD);break;
             case R.id.layout_Programming:
-                isKthSet(4, binding.layoutProgramming, binding.imgProgramming, binding.txtProgramming);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Programming));
+                uiSetUnset(binding.layoutProgramming, binding.imgProgramming, binding.txtProgramming);break;
             case R.id.layout_MSOffice:
-                isKthSet(5, binding.layoutMSOffice, binding.imgMSOffice, binding.txtMSOffice);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.MSOffice));
+                uiSetUnset(binding.layoutMSOffice, binding.imgMSOffice, binding.txtMSOffice);break;
             case R.id.layout_Mathematics:
-                isKthSet(6, binding.layoutMathematics, binding.imgMathematics, binding.txtMathematics);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Mathematics));
+                uiSetUnset(binding.layoutMathematics, binding.imgMathematics, binding.txtMathematics);break;
             case R.id.layout_Sciences:
-                isKthSet(7, binding.layoutSciences, binding.imgSciences, binding.txtSciences);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Sciences));
+                uiSetUnset(binding.layoutSciences, binding.imgSciences, binding.txtSciences);break;
             case R.id.layout_Languages:
-                isKthSet(8, binding.layoutLanguages, binding.imgLanguages, binding.txtLanguages);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Languages));
+                uiSetUnset(binding.layoutLanguages, binding.imgLanguages, binding.txtLanguages);break;
             case R.id.layout_Law:
-                isKthSet(9, binding.layoutLaw, binding.imgLaw, binding.txtLaw);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Law));
+                uiSetUnset(binding.layoutLaw, binding.imgLaw, binding.txtLaw);break;
             case R.id.layout_Engineering:
-                isKthSet(10, binding.layoutEngineering, binding.imgEngineering, binding.txtEngineering);break;
+                Account_Details.User_Details.toggleSubject(getResources().getString(R.string.Engineering));
+                uiSetUnset(binding.layoutEngineering, binding.imgEngineering, binding.txtEngineering);break;
             case R.id.btnProceed:
-                if (subjects > 0){
-                    Account_Details.User_Details.setSubjects(subjects);
+                if (!Account_Details.User_Details.subjects.isEmpty()){
                     if(Account_Details.User_Details.getIsMentor()) {
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Rates()).commit();
+                        SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Rates(), "createAcc_Rates");
                     }else{
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Finalize()).commit();
+                        SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Finalize(), "createAcc_Finalize");
                     }
                 } else {
                     Toast.makeText(getContext(), "Kindly add a subject.", Toast.LENGTH_SHORT).show();
@@ -123,12 +130,6 @@ public class createAcc_Subjects extends Fragment implements View.OnClickListener
         }
     }
 
-    public void isKthSet(Integer k, MaterialCardView card, ImageView imgSubj, TextView txtSubj){
-        uiSetUnset(card, imgSubj, txtSubj);
-        subjects = subjects ^ (1 << k);
-        Log.i("Subject Binary", subjects.toString());
-    }
-
     public void uiSetUnset(MaterialCardView card, ImageView imgSubj, TextView txtSubj){
         ColorStateList newBG, newTint;
         newBG = imgSubj.getImageTintList();
@@ -136,6 +137,64 @@ public class createAcc_Subjects extends Fragment implements View.OnClickListener
         card.setCardBackgroundColor(newBG);
         imgSubj.setImageTintList(newTint);
         txtSubj.setTextColor(newTint);
+        switch (txtSubj.getText().toString()){
+            case "Adobe Ps":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.ic_subjects_adobe_ps,null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_adobe_ps, null));}
+                break;
+            case "Animation":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_animation, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_animation, null));}
+                break;
+            case "Arts":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_arts, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_arts, null));}
+                break;
+            case "AutoCAD":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_autocad, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_autocad, null));}
+                break;
+            case "Engineering":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_engineering, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_engineering, null));}
+                break;
+            case "Languages":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_languages, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_languages, null));}
+                break;
+            case "Law":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_law, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_law, null));}
+                break;
+            case "MS Office":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_ms_office, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_ms_office, null));}
+                break;
+            case "Mathematics":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_mathematics, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_mathematics, null));}
+                break;
+            case "Programming":
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_programming, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_programming, null));}
+                break;
+            case ("Sciences"):
+                if(Account_Details.User_Details.subjects.contains(txtSubj.getText().toString()))
+                {imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_science, null));}
+                else{imgSubj.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_filled_science, null));}
+                break;
+            default: break;
+        }
     }
 
 }

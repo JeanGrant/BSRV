@@ -1,7 +1,6 @@
 package com.example.mentor.Login_Signup;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mentor.Homepage.Homepage;
 import com.example.mentor.databinding.FragmentLoginBinding;
-import com.example.mentor.misc.Account_Details;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -49,15 +47,7 @@ public class login extends Fragment {
                 fAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
                     binding.layoutContents.setVisibility(View.GONE);
                     binding.progressBar.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(() -> {
-                        Account_Details.User_Details.initUser();
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        SwitchLayout.activityStarter(getContext(), Homepage.class);
-                    }, 3000);
+                    SwitchLayout.activityStarter(getContext(), Homepage.class);
                 }).addOnFailureListener(e -> {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     binding.layoutContents.setVisibility(View.VISIBLE);

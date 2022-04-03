@@ -1,7 +1,6 @@
 package com.example.mentor.CreateAccount;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,28 +66,18 @@ public class createAcc_Finalize extends Fragment {
                         DocumentReference df = fStore.collection("Users").document(fUser.getUid());
                         Map<String,Object> userInfo = new HashMap<>();
                         userInfo.put("isMentor", Account_Details.User_Details.getIsMentor());
-                        userInfo.put("FullName", Account_Details.User_Details.getFullName());
-                        userInfo.put("FB_Username", Account_Details.User_Details.getFbUser());
-                        userInfo.put("LinkedIn_Username", Account_Details.User_Details.getlInUser());
+                        userInfo.put("fullName", Account_Details.User_Details.getFullName());
                         userInfo.put("bioEssay", Account_Details.User_Details.getBioEssay());
-                        userInfo.put("subjectsBinary", Account_Details.User_Details.getSubjects());
+                        userInfo.put("subjects", Account_Details.User_Details.subjects);
                         userInfo.put("isAccepting", Account_Details.User_Details.getIsAccepting());
-                        userInfo.put("AuthLevel", Account_Details.User_Details.getAuthLevel());
-                        userInfo.put("Email", Account_Details.User_Details.getEmail());
-                        if(Account_Details.User_Details.getIsMentor()) {userInfo.put("SubjectRates", Account_Details.User_Details.rates);}
-                        userInfo.put("Picture", "");
+                        userInfo.put("authLevel", Account_Details.User_Details.getAuthLevel());
+                        userInfo.put("email", Account_Details.User_Details.getEmail());
+                        if(Account_Details.User_Details.getIsMentor()) {userInfo.put("subjectRates", Account_Details.User_Details.rates);}
+                        userInfo.put("picture", "");
 
                         df.set(userInfo);
 
-                        new Handler().postDelayed(() -> {
-                            Account_Details.User_Details.initUser();
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            SwitchLayout.activityStarter(getContext(), Homepage.class);
-                        }, 3000);
+                        SwitchLayout.activityStarter(getContext(), Homepage.class);
                     }).addOnFailureListener(e -> {
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         binding.layoutContents.setVisibility(View.VISIBLE);

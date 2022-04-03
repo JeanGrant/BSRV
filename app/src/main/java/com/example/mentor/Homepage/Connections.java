@@ -82,7 +82,7 @@ public class Connections extends Fragment implements UserListener {
                     user.lInUsername = queryDocumentSnapshot.getString("LinkedIn_Username");
                     user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
                     user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
-                    user.subjectsBinary = Objects.requireNonNull(queryDocumentSnapshot.getLong("subjectsBinary")).intValue();
+                    user.subjects = (ArrayList<String>) queryDocumentSnapshot.get("subjects");
                     user.uid = queryDocumentSnapshot.getId();
                     list_users.add(user);
                 }

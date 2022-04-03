@@ -5,18 +5,27 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Homepage.User_Profile">
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/layout_mainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
         <LinearLayout
+            android:id="@+id/layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true">
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/baloo"
-                    android:text="@string/FullName"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_17ssp" />
@@ -63,7 +72,7 @@
                     android:layout_below="@id/txt_fullName"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/podkova"
-                    android:text="@string/email"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_14ssp" />
@@ -94,21 +103,28 @@
 
         <TextView
             android:id="@+id/txt_Bio"
+            android:visibility="invisible"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
-            android:text="@string/bio"
-            android:textSize="@dimen/_11ssp"
+            android:layout_below="@id/layout_header"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
+            android:text=""
             android:textAlignment="center"
-            android:textStyle="italic"/>
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="italic" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_Secondary"
+            android:visibility="invisible"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/txt_Bio"
+            android:layout_centerHorizontal="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -127,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
-                    android:text="@string/AuthLVLPrompt"
+                    android:text=""
                     android:fontFamily="@font/mako"
                     android:textSize="18sp"
                     android:textColor="@color/blue"/>
@@ -286,5 +302,5 @@
                     android:visibility="gone"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

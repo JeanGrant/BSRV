@@ -73,16 +73,15 @@ public class Search_Users extends Fragment implements UserListener {
                     }
                     User user = new User();
                     user.uid = queryDocumentSnapshot.getId();
-                    user.fullName = queryDocumentSnapshot.getString("FullName");
-                    user.pictureStr= queryDocumentSnapshot.getString("Picture");
-                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("AuthLevel")).intValue();
-                    user.email = queryDocumentSnapshot.getString("Email");
+                    user.fullName = queryDocumentSnapshot.getString("fullName");
+                    user.pictureStr= queryDocumentSnapshot.getString("picture");
+                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
+                    user.email = queryDocumentSnapshot.getString("email");
                     user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
                     user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
                     user.bioEssay = queryDocumentSnapshot.getString("bioEssay");
-                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("AuthLevel")).intValue();
-                    user.subjectsBinary = Objects.requireNonNull(queryDocumentSnapshot.getLong("subjectsBinary")).intValue();
-                    Account_Details.User_Clicked.rates = (ArrayList<Long>) queryDocumentSnapshot.get("SubjectRates");
+                    user.subjects = (ArrayList<String>) queryDocumentSnapshot.get("subjects");
+                    user.rates = (ArrayList<Long>) queryDocumentSnapshot.get("subjectRates");
                     list_users.add(user);
                 }
                 if(list_users.size()>0){
@@ -149,7 +148,7 @@ public class Search_Users extends Fragment implements UserListener {
         Account_Details.User_Clicked.setIsAccepting(user.isAccepting);
         Account_Details.User_Clicked.setBioEssay(user.bioEssay);
         Account_Details.User_Clicked.setAuthLevel(user.authLvl);
-        Account_Details.User_Clicked.setSubjects(user.subjectsBinary);
+        Account_Details.User_Clicked.subjects = user.subjects;
         Account_Details.User_Clicked.rates = user.rates;
         SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new user_preview(), "user_Preview");
     }

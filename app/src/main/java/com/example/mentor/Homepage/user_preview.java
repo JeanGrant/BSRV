@@ -101,105 +101,101 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
         binding.txtFullName.setText(Account_Details.User_Clicked.getFullName());
         binding.txtEmail.setText(Account_Details.User_Clicked.getEmail());
         binding.txtBio.setText(Account_Details.User_Clicked.getBioEssay());
-        binding.txtFBUser.setText(Account_Details.User_Clicked.getFbUser());
-        binding.txtLInUser.setText(Account_Details.User_Clicked.getlInUser());
     }
 
     private void initLstSubj() {
         Boolean isMentor = Account_Details.User_Clicked.getIsMentor();
         ArrayList<Long> rates = Account_Details.User_Clicked.rates;
-        Integer subjects = Account_Details.User_Clicked.getSubjects();
+        ArrayList<String> subjects = Account_Details.User_Clicked.subjects;
         List<SubjectRates> list_subjrate = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < subjects.size(); i++) {
             SubjectRates subjRates = new SubjectRates();
-            if ((subjects & (1 << i)) > 0) {
-                if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
-                switch (i) {
-                    case 0:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_adobe_ps, null);
-                        subjRates.name = getResources().getString(R.string.AdobePs);
-                        subjRates.red = 37;
-                        subjRates.green = 93;
-                        subjRates.blue = 170;
-                        Log.i("subjRates wawa", i+subjRates.name);
-                        break;
-                    case 1:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_animation, null);
-                        subjRates.name = getResources().getString(R.string.Animation);
-                        subjRates.red = 52;
-                        subjRates.green = 34;
-                        subjRates.blue = 76;
-                        Log.i("subjRates wawa", i+subjRates.name);
-                        break;
-                    case 2:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_arts, null);
-                        subjRates.name = getResources().getString(R.string.Arts);
-                        subjRates.red = 127;
-                        subjRates.green = 38;
-                        subjRates.blue = 175;
-                        break;
-                    case 3:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_autocad, null);
-                        subjRates.name = getResources().getString(R.string.AutoCAD);
-                        subjRates.red = 127;
-                        subjRates.green = 18;
-                        subjRates.blue = 11;
-                        break;
-                    case 4:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_programming, null);
-                        subjRates.name = getResources().getString(R.string.Programming);
-                        subjRates.red = 43;
-                        subjRates.green = 160;
-                        subjRates.blue = 189;
-                        break;
-                    case 5:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_ms_office, null);
-                        subjRates.name = getResources().getString(R.string.MSOffice);
-                        subjRates.red = 184;
-                        subjRates.green = 41;
-                        subjRates.blue = 22;
-                        break;
-                    case 6:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_mathematics, null);
-                        subjRates.name = getResources().getString(R.string.Mathematics);
-                        subjRates.red = 189;
-                        subjRates.green = 143;
-                        subjRates.blue = 6;
-                        break;
-                    case 7:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_science, null);
-                        subjRates.name = getResources().getString(R.string.Sciences);
-                        subjRates.red = 24;
-                        subjRates.green = 134;
-                        subjRates.blue = 55;
-                        break;
-                    case 8:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_languages, null);
-                        subjRates.name = getResources().getString(R.string.Languages);
-                        subjRates.red = 107;
-                        subjRates.green = 134;
-                        subjRates.blue = 34;
-                        break;
-                    case 9:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_law, null);
-                        subjRates.name = getResources().getString(R.string.Law);
-                        subjRates.red = 3;
-                        subjRates.green = 62;
-                        subjRates.blue = 88;
-                        break;
-                    case 10:
-                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_engineering, null);
-                        subjRates.name = getResources().getString(R.string.Engineering);
-                        subjRates.red = 173;
-                        subjRates.green = 79;
-                        subjRates.blue = 50;
-                        break;
-                    default:
-                        break;
-                }
-                list_subjrate.add(subjRates);
-                Log.i("subjRates wawa", list_subjrate.toString());
+            if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
+            switch (subjects.get(i)) {
+                case "Adobe Ps":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_adobe_ps, null);
+                    subjRates.name = getResources().getString(R.string.AdobePs);
+                    subjRates.red = 37;
+                    subjRates.green = 93;
+                    subjRates.blue = 170;
+                    Log.i("subjRates wawa", i+subjRates.name);
+                    break;
+                case "Animation":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_animation, null);
+                    subjRates.name = getResources().getString(R.string.Animation);
+                    subjRates.red = 52;
+                    subjRates.green = 34;
+                    subjRates.blue = 76;
+                    Log.i("subjRates wawa", i+subjRates.name);
+                    break;
+                case "Arts":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_arts, null);
+                    subjRates.name = getResources().getString(R.string.Arts);
+                    subjRates.red = 127;
+                    subjRates.green = 38;
+                    subjRates.blue = 175;
+                    break;
+                case "AutoCAD":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_autocad, null);
+                    subjRates.name = getResources().getString(R.string.AutoCAD);
+                    subjRates.red = 127;
+                    subjRates.green = 18;
+                    subjRates.blue = 11;
+                    break;
+                case "Engineering":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_engineering, null);
+                    subjRates.name = getResources().getString(R.string.Engineering);
+                    subjRates.red = 173;
+                    subjRates.green = 79;
+                    subjRates.blue = 50;
+                    break;
+                case "Languages":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_languages, null);
+                    subjRates.name = getResources().getString(R.string.Languages);
+                    subjRates.red = 107;
+                    subjRates.green = 134;
+                    subjRates.blue = 34;
+                    break;
+                case "Law":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_law, null);
+                    subjRates.name = getResources().getString(R.string.Law);
+                    subjRates.red = 3;
+                    subjRates.green = 62;
+                    subjRates.blue = 88;
+                    break;
+                case "MS Office":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_ms_office, null);
+                    subjRates.name = getResources().getString(R.string.MSOffice);
+                    subjRates.red = 184;
+                    subjRates.green = 41;
+                    subjRates.blue = 22;
+                    break;
+                case "Mathematics":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_mathematics, null);
+                    subjRates.name = getResources().getString(R.string.Mathematics);
+                    subjRates.red = 189;
+                    subjRates.green = 143;
+                    subjRates.blue = 6;
+                    break;
+                case "Programming":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_programming, null);
+                    subjRates.name = getResources().getString(R.string.Programming);
+                    subjRates.red = 43;
+                    subjRates.green = 160;
+                    subjRates.blue = 189;
+                    break;
+                case "Sciences":
+                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_science, null);
+                    subjRates.name = getResources().getString(R.string.Sciences);
+                    subjRates.red = 24;
+                    subjRates.green = 134;
+                    subjRates.blue = 55;
+                    break;
+                default:
+                    break;
             }
+            list_subjrate.add(subjRates);
+            Log.i("subjRates wawa", list_subjrate.toString());
         }
         if(list_subjrate.size()>0){
 //            binding.progressBar.setVisibility(View.GONE);

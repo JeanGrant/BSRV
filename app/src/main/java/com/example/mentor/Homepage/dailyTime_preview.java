@@ -115,7 +115,7 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         // Spinner click listener
         binding.drpSubject.setOnItemSelectedListener(this);
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<>(Account_Details.User_Details.initLstSubj());
+        List<String> categories = new ArrayList<>(Account_Details.User_Details.subjects);
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, categories);
         // Drop down layout style - list view with radio button
