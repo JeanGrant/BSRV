@@ -1,29 +1,24 @@
 package com.example.mentor.Login_Signup;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.mentor.CreateAccount.createAcc_Type;
 import com.example.mentor.Homepage.Homepage;
+import com.example.mentor.R;
 import com.example.mentor.databinding.ActivityMainBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class Main_Activity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
-    FirebaseUser fUser;
+    private ActivityMainBinding binding;
+    private Boolean switchMode = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,48 +27,36 @@ public class Main_Activity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Account_Details.User_Details.reset();
-
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-
-        binding.btnSignup.setOnClickListener(view -> nextScreen(Signup.class));
-        binding.btnLogin.setOnClickListener(view -> nextScreen(Login.class));
-
-    }
-
-    private void nextScreen(Class<?> replacement){
-        startActivity(new Intent(Main_Activity.this, replacement));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(fAuth.getCurrentUser() != null){
-            fUser = fAuth.getCurrentUser();
-            DocumentReference df = fStore.collection("Users").document(fUser.getUid());
-            df.get().addOnSuccessListener(documentSnapshot -> {
-                Log.d("TAG", "onSuccess" + documentSnapshot.getData());
-                Account_Details.User_Details.setFullName(documentSnapshot.getString("FullName"));
-                Account_Details.User_Details.setEmail(documentSnapshot.getString("Email"));
-                Account_Details.User_Details.setFBUser(documentSnapshot.getString("FB_Username"));
-                Account_Details.User_Details.setLInUser(documentSnapshot.getString("LinkedIn_Username"));
-                Account_Details.User_Details.setBioEssay(documentSnapshot.getString("bioEssay"));
-                Account_Details.User_Details.setAuthLevel(Objects.requireNonNull(documentSnapshot.getLong("AuthLevel")).intValue());
-                Account_Details.User_Details.setSubjects(Objects.requireNonNull(documentSnapshot.getLong("subjectsBinary")).intValue());
-                Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
-                Account_Details.User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
-                Account_Details.User_Details.setCurrSearch(true);
-                Account_Details.User_Details.setUID(fUser.getUid());
-                if(documentSnapshot.get("userRequests") != null){
-                    Account_Details.User_Details.setRequests((ArrayList<String>) documentSnapshot.get("userRequests"));
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        if(fAuth.getCurrentUser() != null) {
+            new Handler().postDelayed(() -> {
+                Account_Details.User_Details.initUser();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                if(documentSnapshot.get("SubjectRates") != null){
-                    Account_Details.User_Details.setRates((ArrayList<Long>) documentSnapshot.get("SubjectRates"));
-                }
-                Account_Details.User_Details.setCurrConnection(false);
-                nextScreen(Homepage.class);
-            });
+                SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
+            }, 3000);
+        }else {
+            binding.imgDivider.setVisibility(View.VISIBLE);
+            binding.switchSign.setVisibility(View.VISIBLE);
+            binding.frameLayout.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.GONE);
+            Account_Details.User_Details.reset();
+            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new login(), "login");
         }
+        binding.switchSign.setOnClickListener(view -> {
+            if(switchMode){
+                switchMode = false;
+                SwitchLayout.fragmentStarter(getSupportFragmentManager(), new createAcc_Type(), "createAcc_Type");
+                binding.switchSign.setText(getResources().getText(R.string.SignupPrompt));
+            }else{
+                switchMode = true;
+                SwitchLayout.fragmentStarter(getSupportFragmentManager(), new login(), "login");
+                binding.switchSign.setText(getResources().getText(R.string.LoginPrompt));
+            }
+        });
+
     }
 }

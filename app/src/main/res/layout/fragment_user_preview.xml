@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".user_preview"
-    android:id="@+id/card_UserPreview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardBackgroundColor="#40000000">
-
-    <androidx.cardview.widget.CardView
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Homepage.user_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -34,28 +28,12 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/roundedbutton_transparent"
+                    android:background="@android:color/transparent"
                     android:contentDescription="@string/logout"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_baseline_arrow_back_24" />
-
-                <ImageButton
-                    android:id="@+id/imgBTN_Request"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/roundedbutton_transparent"
-                    android:contentDescription="@string/Request"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_person_add_24" />
             </RelativeLayout>
             <ScrollView
                 android:layout_width="match_parent"
@@ -243,18 +221,111 @@
                                 android:textStyle="bold" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recylcerSubjects"
+                                android:id="@+id/recyclerSubjects"
                                 android:layout_width="match_parent"
-                                android:layout_height="fill_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:orientation="vertical"
                                 android:overScrollMode="never"
                                 android:padding="20dp"
-                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:fontFamily="@font/podkova"
+                                android:text="@string/SchedulePrompt"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <Button
+                                    android:id="@+id/btn_minusMonth"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="-"/>
+                                <TextView
+                                    android:id="@+id/txt_MonthView"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text="Mar 2022"
+                                    android:textAlignment="center"/>
+                                <Button
+                                    android:id="@+id/btn_plusMonth"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="+"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/SUN"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/MON"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/TUE"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/WED"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/THU"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/FRI"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/SAT"
+                                    android:textAlignment="center"
+                                    android:textSize="@dimen/_12ssp"/>
+                            </LinearLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerCalendar"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_275sdp"
+                                android:visibility="gone"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-</androidx.cardview.widget.CardView>

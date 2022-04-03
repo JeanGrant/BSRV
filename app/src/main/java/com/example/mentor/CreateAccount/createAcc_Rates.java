@@ -17,7 +17,7 @@ import com.example.mentor.misc.Account_Details;
 
 import java.util.ArrayList;
 
-public class CreateAcc_Rates extends Fragment {
+public class createAcc_Rates extends Fragment {
 
     View view;
     FragmentCreateAccRatesBinding binding;
@@ -39,7 +39,7 @@ public class CreateAcc_Rates extends Fragment {
 
         binding.rdbConstRates.setOnClickListener(view -> {isConstRates = true; initLstSubj(); binding.inpTXTLayoutConstRates.setVisibility(View.VISIBLE); params.addRule(RelativeLayout.BELOW, R.id.inpTXTLayout_ConstRates); binding.btnProceed.setLayoutParams(params);});
         binding.rdbAltRates.setOnClickListener(view -> {isConstRates = false; initLstSubj(); binding.inpTXTLayoutConstRates.setVisibility(View.GONE); params.addRule(RelativeLayout.BELOW, R.id.layout_SubjRates); binding.btnProceed.setLayoutParams(params);});
-        binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Subjects()).commit());
+        binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Subjects()).commit());
         binding.btnProceed.setOnClickListener(view -> {
 
             Integer subjects = Account_Details.User_Details.getSubjects();
@@ -50,15 +50,15 @@ public class CreateAcc_Rates extends Fragment {
                     case 0:
                         if ((subjects & (1 << i)) > 0) {
                             if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTAdobePsRate.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAdobePsRate.getText().toString()));}}}
+                            else{if(binding.inpTXTAdobePs.getText().toString().isEmpty()){isRateEmpty=true;}
+                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAdobePs.getText().toString()));}}}
                         else {rates.add(0L);}
                         break;
                     case 1:
                         if ((subjects & (1 << i)) > 0) {
                             if(isConstRates){rates.add(Long.parseLong(binding.inpTXTConstRates.getText().toString()));}
-                            else{if(binding.inpTXTAnimationRate.getText().toString().isEmpty()){isRateEmpty=true;}
-                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAnimationRate.getText().toString()));}}}
+                            else{if(binding.inpTXTAnimation.getText().toString().isEmpty()){isRateEmpty=true;}
+                            else{isRateEmpty=false;rates.add(Long.parseLong(binding.inpTXTAnimation.getText().toString()));}}}
                         else {rates.add(0L);}
                         break;
                     case 2:
@@ -132,7 +132,7 @@ public class CreateAcc_Rates extends Fragment {
             if(!isRateEmpty){
                 Log.i("CreateAcc_Rates:", rates.toString());
                 Account_Details.User_Details.setRates(rates);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Finalize()).commit();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Finalize()).commit();
             }else{
                 Toast.makeText(getContext(), "Kindly specify your hourly rate", Toast.LENGTH_SHORT).show();
             }
@@ -148,11 +148,11 @@ public class CreateAcc_Rates extends Fragment {
                 switch (i) {
                     case 0:
                         binding.layoutAdobePs.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTAdobePsRate.setVisibility(View.GONE);}else{binding.inpTXTAdobePsRate.setVisibility(View.VISIBLE);}
+                        if(isConstRates){binding.inpTXTAdobePs.setVisibility(View.GONE);}else{binding.inpTXTAdobePs.setVisibility(View.VISIBLE);}
                         break;
                     case 1:
                         binding.layoutAnimation.setVisibility(View.VISIBLE);
-                        if(isConstRates){binding.inpTXTAnimationRate.setVisibility(View.GONE);}else{binding.inpTXTAnimationRate.setVisibility(View.VISIBLE);}
+                        if(isConstRates){binding.inpTXTAnimation.setVisibility(View.GONE);}else{binding.inpTXTAnimation.setVisibility(View.VISIBLE);}
                         break;
                     case 2:
                         binding.layoutArts.setVisibility(View.VISIBLE);

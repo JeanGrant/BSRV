@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="title_txtsize">@dimen/_45ssp</dimen>
+    <font name="title_font">@font/baloo</font>
+    <color name="title_txtcolor">#995649</color>
+
+    <dimen name="subtitle_txtsize">@dimen/_13ssp</dimen>
+    <font name="subtitle_font">@font/mako</font>
+    <color name="subtitle_txtcolor">#909090</color>
+
+    <dimen name="longBTN_width">@dimen/_210sdp</dimen>
+    <dimen name="longBTN_height">@dimen/_37sdp</dimen>
+    <dimen name="longBTN_txtsize">@dimen/_10ssp</dimen>
+    <color name="longBTN_txtcolor_v1">#DDDDDD</color>
+    <color name="longBTN_txtcolor_v2">#456972</color>
+    <font name="longBTN_font">@font/mako</font>
+    <drawable name="longBTN_style_v1">@drawable/roundedbutton_blue</drawable>
+    <drawable name="longBTN_style_v2">@drawable/roundedbutton_blue_outline</drawable>
+
+    <dimen name="longINP_width">@dimen/_210sdp</dimen>
+    <dimen name="longINP_txtsize">@dimen/_10ssp</dimen>
+    <color name="longINP_txtcolor">#909090</color>
+    <font name="longINP_font">@font/mako</font>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#DDDDDD</color>
+    <dimen name="longINP_boxStrokeWidth">@dimen/_1sdp</dimen>
+    <color name="longINP_boxBackgroundColor">#F2F2F2</color>
+    <color name="longINP_textColorHint">#909090</color>
+    <color name="longINP_hintTextColor">#909090</color>
+    <dimen name="longINP_boxCornerRadius">@dimen/_10sdp</dimen>
+
+    <dimen name="smallSQBTN_size">@dimen/_39sdp</dimen>
+    <dimen name="smallSQBTN_margin">@dimen/_13sdp</dimen>
+    <dimen name="smallSQBTN_padding">@dimen/_7sdp</dimen>
+
+    <dimen name="SQBTN_size">@dimen/_100sdp</dimen>
+    <dimen name="SQBTN_elevation">@dimen/_2sdp</dimen>
+    <dimen name="SQBTN_roundness">@dimen/_10sdp</dimen>
+    <dimen name="SQBTN_imgsize_v1">@dimen/_30sdp</dimen>
+    <dimen name="SQBTN_imgsize_v2">@dimen/_40sdp</dimen>
+    <dimen name="SQBTN_txtsize">@dimen/_12sdp</dimen>
+    <font name="SQBTN_txtfont">@font/mako</font>
+    <color name="SQBTN_txtcolor">#909090</color>
+
     <dimen name="subjects_layout_width">@dimen/_70sdp</dimen>
-    <dimen name="subjects_layout_height">@dimen/_90sdp</dimen>
+    <dimen name="subjects_layout_height">@dimen/_70sdp</dimen>
     <dimen name="subjects_layout_padding">@dimen/_2sdp</dimen>
     <dimen name="subjects_imgView_widthheight">@dimen/_30sdp</dimen>
     <dimen name="subjects_imgView_marginTop">@dimen/_20sdp</dimen>
     <dimen name="subjects_txtView_verticalMargin">@dimen/_5sdp</dimen>
+    <dimen name="subjects_INP_width">@dimen/_60sdp</dimen>
+    <dimen name="subjects_INP_padding">@dimen/_7sdp</dimen>
+    <drawable name="subjects_INP_background">@drawable/roundedbutton_blue</drawable>
+    <color name="subjects_INP_tint">#30FFFFFF</color>
+    <color name="subjects_INP_txtColor">#DDDDDD</color>
+    <dimen name="subjects_INP_txtSize">@dimen/_10sdp</dimen>
+    <font name="subjects_INP_txtfont">@font/mako</font>
     <integer name="subjectVisibility">2</integer>
     <integer name="userProfile_temp_visibility">2</integer>
     <integer name="searchUser_preview_visibility">2</integer>

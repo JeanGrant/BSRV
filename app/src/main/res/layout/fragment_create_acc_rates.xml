@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccount.CreateAcc_Rates"
+    tools:context=".CreateAccount.createAcc_Rates"
     android:animateLayoutChanges="true">
 
     <RelativeLayout
@@ -13,15 +13,15 @@
 
         <ImageButton
             android:id="@+id/imgBTN_back"
-            android:layout_width="@dimen/_39sdp"
-            android:layout_height="@dimen/_39sdp"
+            android:layout_width="@dimen/smallSQBTN_size"
+            android:layout_height="@dimen/smallSQBTN_size"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginStart="@dimen/smallSQBTN_margin"
+            android:layout_marginTop="@dimen/smallSQBTN_margin"
             android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/back"
-            android:paddingVertical="@dimen/_7sdp"
+            android:padding="@dimen/smallSQBTN_padding"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
@@ -100,7 +100,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_adobe_ps"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null" />
                 <TextView
                     android:id="@+id/txt_AdobePs"
                     android:layout_width="wrap_content"
@@ -113,23 +114,24 @@
                     android:textSize="@dimen/_10sdp" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inpTXT_AdobePsRate"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/inpTXT_AdobePs"
+                    android:layout_width="@dimen/subjects_INP_width"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_AdobePs"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
+                    android:fontFamily="@font/subjects_INP_txtfont"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize" />
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Animation"
@@ -147,7 +149,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_animation"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null" />
                 <TextView
                     android:id="@+id/txt_Animation"
                     android:layout_width="wrap_content"
@@ -160,23 +163,24 @@
                     android:textSize="@dimen/_10sdp"/>
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inpTXT_AnimationRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/inpTXT_Animation"
                     android:layout_below="@id/txt_Animation"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_AutoCAD"
@@ -194,7 +198,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_autocad"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_AutoCAD"
                     android:layout_width="wrap_content"
@@ -208,22 +213,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_AutoCAD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_AutoCAD"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Programming"
@@ -243,7 +249,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_programming"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Programming"
                     android:layout_width="wrap_content"
@@ -257,22 +264,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Programming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Programming"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_MSOffice"
@@ -292,7 +300,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_ms_office"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_MSOffice"
                     android:layout_width="wrap_content"
@@ -300,28 +309,29 @@
                     android:layout_below="@id/img_MSOffice"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Microsoft"
+                    android:text="@string/MSOffice"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_MSOffice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_MSOffice"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Mathematics"
@@ -341,7 +351,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_mathematics"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Mathematics"
                     android:layout_width="wrap_content"
@@ -355,22 +366,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Mathematics"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Mathematics"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Sciences"
@@ -390,7 +402,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_science"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Sciences"
                     android:layout_width="wrap_content"
@@ -404,22 +417,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Sciences"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Sciences"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Arts"
@@ -439,7 +453,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_arts"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Arts"
                     android:layout_width="wrap_content"
@@ -453,22 +468,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Arts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Arts"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Languages"
@@ -488,7 +504,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_languages"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Languages"
                     android:layout_width="wrap_content"
@@ -502,22 +519,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Languages"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Languages"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Engineering"
@@ -537,7 +555,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_engineering"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Engineering"
                     android:layout_width="wrap_content"
@@ -551,22 +570,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Engineering"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Engineering"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_Law"
@@ -586,7 +606,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_subjects_law"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="@null"/>
                 <TextView
                     android:id="@+id/txt_Law"
                     android:layout_width="wrap_content"
@@ -600,22 +621,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inpTXT_Law"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Law"
+                    android:layout_width="@dimen/subjects_INP_width"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/subjects_INP_background"
+                    android:backgroundTint="@color/subjects_INP_tint"
                     android:hint="@string/defSubjRate"
                     android:inputType="numberDecimal"
-                    android:padding="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:textAlignment="center"/>
+                    android:maxLines="1"
+                    android:padding="@dimen/subjects_INP_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/subjects_INP_txtColor"
+                    android:textColorHint="@color/subjects_INP_txtColor"
+                    android:textSize="@dimen/subjects_INP_txtSize"
+                    android:fontFamily="@font/subjects_INP_txtfont"/>
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -653,15 +675,17 @@
 
         <Button
             android:id="@+id/btnProceed"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/longBTN_width"
+            android:layout_height="@dimen/longBTN_height"
             android:layout_below="@id/inpTXTLayout_ConstRates"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_45sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/roundedbutton_blue_outline"
+            android:background="@drawable/longBTN_style_v2"
             android:text="@string/Proceed"
-            android:textColor="@color/blue" />
+            android:textColor="@color/longBTN_txtcolor_v2"
+            android:textSize="@dimen/longBTN_txtsize"
+            android:fontFamily="@font/longBTN_font"/>
 
     </RelativeLayout>
 

@@ -5,8 +5,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.R;
@@ -16,6 +18,7 @@ import com.example.mentor.misc.User;
 import com.example.mentor.misc.UserListener;
 
 import java.util.List;
+import java.util.Random;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
 
@@ -68,13 +71,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                 binding.imgUserPic.setImageResource(R.drawable.ic_baseline_person_24);
                 binding.imgUserPic.setColorFilter(Color.argb(255, 100, 100, 100));
             }
-            if(Account_Details.User_Details.getIsMentor() && Account_Details.User_Details.getIsAccepting()){
-                if(!user.isMentor && user.isAccepting){
-                    if(!user.requests.contains(Account_Details.User_Details.getUID())) {
-                        binding.imgBTNRequest.setVisibility(View.VISIBLE);
-                    }else { binding.imgBTNRequest.setVisibility(View.GONE); }
-                }else { binding.imgBTNRequest.setVisibility(View.GONE);}
-            }else { binding.imgBTNRequest.setVisibility(View.GONE); }
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));
         }
     }

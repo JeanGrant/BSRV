@@ -46,7 +46,7 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/logout"
             android:paddingVertical="@dimen/_3sdp"
             android:scaleType="fitCenter"
@@ -77,53 +77,79 @@
         android:background="#30000000"
         android:layout_above="@id/container_footer"
         android:layout_centerHorizontal="true"/>
+
     <LinearLayout
         android:id="@+id/container_footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:paddingTop="@dimen/_5sdp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imgBTN_home"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/_3sdp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
-            android:contentDescription="@string/home"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_drawables_home_outline"
-            android:layout_marginBottom="@dimen/_5sdp"/>
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/imgBTN_home"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/home"
+                    android:padding="@dimen/_3sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_drawables_home_outline" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <ImageButton
-            android:id="@+id/imgBTN_Connections"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_weight="1"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
-            android:contentDescription="@string/relationships"
-            android:padding="@dimen/_1sdp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_drawables_contacts_outline" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/imgBTN_Connections"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/home"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_drawables_contacts_outline" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        <ImageButton
-            android:id="@+id/imgBTN_profile"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/roundedbutton_transparent"
-            android:contentDescription="@string/profile"
-            android:padding="@dimen/_3sdp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_bsrv_05"
-            android:layout_marginBottom="@dimen/_5sdp"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/imgBTN_profile"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/home"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_bsrv_05" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </RelativeLayout>

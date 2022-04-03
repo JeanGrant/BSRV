@@ -11,7 +11,7 @@
     <string name="Animation">Animation</string>
     <string name="AutoCAD">AutoCAD</string>
     <string name="Programming">Programming</string>
-    <string name="Microsoft">MS Office</string>
+    <string name="MSOffice">MS Office</string>
     <string name="Mathematics">Mathematics</string>
     <string name="Sciences">Sciences</string>
     <string name="Languages">Languages</string>
@@ -24,7 +24,7 @@
     <string name="FullName">Fullname</string>
     <string name="Mentor">Mentor</string>
     <string name="CurrentlyAccepting">Currently Accepting</string>
-    <string name="email"><u>email</u></string>
+    <string name="email">Email</string>
     <string name="bio">bioEssay</string>
     <string name="FBNamePrompt">FB Username</string>
     <string name="LinkedInPrompt">LinkedIn Username</string>
@@ -45,7 +45,7 @@
     <string name="Mentors">Mentors</string>
     <string name="Requests">Requests</string>
     <string name="back">back</string>
-    <string name="defSubjRate">9999/hr</string>
+    <string name="defSubjRate">0/hr</string>
     <string name="ConstRates">My rate per hour does not vary.</string>
     <string name="AltRates">I charge depending on the subject.</string>
     <string name="RatePrompt">How do you determine your rate per hour?</string>
@@ -60,7 +60,18 @@
     <string name="THU">THU</string>
     <string name="FRI">FRI</string>
     <string name="SAT">SAT</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profileImage">Profile Image</string>
+    <string name="SchedulePrompt">Schedule</string>
+    <string name="Password">Password</string>
+    <string name="fbUser_Prompt">Facebook Username (optional)</string>
+    <string name="lInUser_Prompt">LinkedIn Username (optional)</string>
+    <string name="bioEssay_Prompt">Bio</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="prevMonth">-</string>
+    <string name="nextMonth">+</string>
+    <string name="defTime">12:59 PM</string>
+    <string name="hintElaborate">Elaborate your situation</string>
+    <string name="hintStartTime">Start Time</string>
+    <string name="hintEndTime">End Time</string>
 </resources>

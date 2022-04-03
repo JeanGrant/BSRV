@@ -1,7 +1,7 @@
 package com.example.mentor.CreateAccount;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.mentor.Login_Signup.Main_Activity;
+import com.example.mentor.Homepage.Homepage;
 import com.example.mentor.R;
 import com.example.mentor.databinding.FragmentCreateAccFinalizeBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class CreateAcc_Finalize extends Fragment {
+public class createAcc_Finalize extends Fragment {
 
     View view;
     String email, password, confirmpassword;
@@ -38,7 +39,7 @@ public class CreateAcc_Finalize extends Fragment {
         binding = FragmentCreateAccFinalizeBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
-        binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateAcc_Subjects()).commit());
+        binding.imgBTNBack.setOnClickListener(view -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new createAcc_Subjects()).commit());
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
@@ -54,6 +55,9 @@ public class CreateAcc_Finalize extends Fragment {
             } else {
                 if (password.equals(binding.inpTXTConfirmPassword.getText().toString())) {
                     fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+                        binding.layoutContents.setVisibility(View.GONE);
+                        binding.progressBar.setVisibility(View.VISIBLE);
+
                         Account_Details.User_Details.setAuthLevel(0);
                         Account_Details.User_Details.setEmail(email);
                         Account_Details.User_Details.setIsAccepting(true);
@@ -76,8 +80,19 @@ public class CreateAcc_Finalize extends Fragment {
 
                         df.set(userInfo);
 
-                        startActivity(new Intent(getActivity(), Main_Activity.class));
-                    }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+                        new Handler().postDelayed(() -> {
+                            Account_Details.User_Details.initUser();
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            SwitchLayout.activityStarter(getContext(), Homepage.class);
+                        }, 3000);
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        binding.layoutContents.setVisibility(View.VISIBLE);
+                        binding.progressBar.setVisibility(View.GONE);});
                 } else {
                     binding.inpTXTPassword.setError("Password does not match");
                 }

@@ -50,6 +50,7 @@ apply plugin: 'com.google.gms.google-services'
 dependencies {
 
 
+    implementation 'com.google.android.gms:play-services-analytics-impl:17.0.0'
     implementation 'com.google.firebase:firebase-database:20.0.3'
     implementation 'com.google.firebase:firebase-firestore:23.0.2'
     implementation 'com.google.firebase:firebase-auth:19.2.0'

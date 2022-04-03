@@ -1,25 +1,38 @@
 package com.example.mentor.Homepage;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.R;
+import com.example.mentor.adapters.CalendarAdapter;
+import com.example.mentor.adapters.SubjectRatesAdapter;
 import com.example.mentor.databinding.FragmentUserProfileBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.misc.SubjectRates;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
-public class User_Profile extends Fragment {
+public class User_Profile extends Fragment implements CalendarAdapter.OnItemListener{
 
-    View view;
-    FragmentUserProfileBinding binding;
-    ArrayList<Long> rates;
-    Boolean isMentor;
+    private View view;
+    private FragmentUserProfileBinding binding;
+    private ArrayList<Long> rates;
+    private Boolean isMentor;
+    private LocalDate selectedDate;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -33,7 +46,7 @@ public class User_Profile extends Fragment {
         return view;
     }
 
-    public Boolean initLayout(){
+    public void initLayout(){
 
         Boolean isAccepting = Account_Details.User_Details.getIsAccepting();
         if(isAccepting != null){
@@ -61,63 +74,164 @@ public class User_Profile extends Fragment {
         binding.txtLInUser.setText(Account_Details.User_Details.getlInUser());
         rates = new ArrayList<>(Account_Details.User_Details.rates);
         initLstSubj();
-
-
-        return true;
+        selectedDate = LocalDate.now();
+        setMonthView();
     }
-    public void initLstSubj() {
+
+    private void initLstSubj() {
+        Boolean isMentor = Account_Details.User_Details.getIsMentor();
+        ArrayList<Long> rates = Account_Details.User_Details.rates;
         Integer subjects = Account_Details.User_Details.getSubjects();
+        List<SubjectRates> list_subjrate = new ArrayList<>();
         for (int i = 0; i < 11; i++) {
+            SubjectRates subjRates = new SubjectRates();
             if ((subjects & (1 << i)) > 0) {
+                if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
                 switch (i) {
                     case 0:
-                        binding.layoutAdobePs.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesAdobePs.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesAdobePs.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_adobe_ps, null);
+                        subjRates.name = getResources().getString(R.string.AdobePs);
+                        subjRates.red = 37;
+                        subjRates.green = 93;
+                        subjRates.blue = 170;
+                        Log.i("subjRates wawa", i+subjRates.name);
                         break;
                     case 1:
-                        binding.layoutAnimation.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesAnimation.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesAnimation.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_animation, null);
+                        subjRates.name = getResources().getString(R.string.Animation);
+                        subjRates.red = 52;
+                        subjRates.green = 34;
+                        subjRates.blue = 76;
+                        Log.i("subjRates wawa", i+subjRates.name);
                         break;
                     case 2:
-                        binding.layoutArts.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesArts.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesArts.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_arts, null);
+                        subjRates.name = getResources().getString(R.string.Arts);
+                        subjRates.red = 127;
+                        subjRates.green = 38;
+                        subjRates.blue = 175;
                         break;
                     case 3:
-                        binding.layoutAutoCAD.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesAutoCAD.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesAutoCAD.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_autocad, null);
+                        subjRates.name = getResources().getString(R.string.AutoCAD);
+                        subjRates.red = 127;
+                        subjRates.green = 18;
+                        subjRates.blue = 11;
                         break;
                     case 4:
-                        binding.layoutProgramming.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesProgramming.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesProgramming.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_programming, null);
+                        subjRates.name = getResources().getString(R.string.Programming);
+                        subjRates.red = 43;
+                        subjRates.green = 160;
+                        subjRates.blue = 189;
                         break;
                     case 5:
-                        binding.layoutMSOffice.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesMSOffice.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesMSOffice.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_ms_office, null);
+                        subjRates.name = getResources().getString(R.string.MSOffice);
+                        subjRates.red = 184;
+                        subjRates.green = 41;
+                        subjRates.blue = 22;
                         break;
                     case 6:
-                        binding.layoutMathematics.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesMathematics.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesMathematics.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_mathematics, null);
+                        subjRates.name = getResources().getString(R.string.Mathematics);
+                        subjRates.red = 189;
+                        subjRates.green = 143;
+                        subjRates.blue = 6;
                         break;
                     case 7:
-                        binding.layoutSciences.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesSciences.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesSciences.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_science, null);
+                        subjRates.name = getResources().getString(R.string.Sciences);
+                        subjRates.red = 24;
+                        subjRates.green = 134;
+                        subjRates.blue = 55;
                         break;
                     case 8:
-                        binding.layoutLanguages.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesLanguages.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesLanguages.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_languages, null);
+                        subjRates.name = getResources().getString(R.string.Languages);
+                        subjRates.red = 107;
+                        subjRates.green = 134;
+                        subjRates.blue = 34;
                         break;
                     case 9:
-                        binding.layoutLaw.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesLaw.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesLaw.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_law, null);
+                        subjRates.name = getResources().getString(R.string.Law);
+                        subjRates.red = 3;
+                        subjRates.green = 62;
+                        subjRates.blue = 88;
                         break;
                     case 10:
-                        binding.layoutEngineering.setVisibility(View.VISIBLE);
-                        if(isMentor){binding.txtRatesEngineering.setText("₱"+rates.get(i)+"/hr");}else{binding.txtRatesEngineering.setVisibility(View.GONE);}
+                        subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_engineering, null);
+                        subjRates.name = getResources().getString(R.string.Engineering);
+                        subjRates.red = 173;
+                        subjRates.green = 79;
+                        subjRates.blue = 50;
                         break;
                     default:
                         break;
                 }
+                list_subjrate.add(subjRates);
             }
         }
+        if(list_subjrate.size()>0){
+//            binding.progressBar.setVisibility(View.GONE);
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+            binding.recyclerSubjects.setLayoutManager(mGridLayoutManager);
+            binding.recyclerSubjects.setVisibility(View.VISIBLE);
+            SubjectRatesAdapter subjectRatesAdapter = new SubjectRatesAdapter(list_subjrate);
+            binding.recyclerSubjects.setAdapter(subjectRatesAdapter);
+            binding.recyclerSubjects.setHasFixedSize(true);
+        } else{
+            Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void setMonthView() {
+        binding.txtMonthView.setText(monthYearFromDate(selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
+        binding.recyclerCalendar.setLayoutManager(layoutManager);
+        binding.recyclerCalendar.setAdapter(calendarAdapter);
+        binding.recyclerCalendar.setVisibility(View.VISIBLE);
+    }
+
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for(int i=1; i<=42; i++){
+            if(i<=dayOfWeek || i>daysInMonth + dayOfWeek){
+                daysInMonthArray.add("");
+            }else{
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+            }
+        }
+        return daysInMonthArray;
+    }
+
+    private String monthYearFromDate(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
+
+    @Override
+    public void onItemClick(int position, String dayText) {
+        if(!dayText.equals("")){
+
+        }
+    }
+
+    private void previousMonthAction(){
+        selectedDate = selectedDate.minusMonths(1);
+        setMonthView();
+    }
+
+    private void nextMonthAction(){
+        selectedDate = selectedDate.plusMonths(1);
+        setMonthView();
     }
 }

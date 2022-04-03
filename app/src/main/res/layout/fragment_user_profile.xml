@@ -68,18 +68,27 @@
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_14ssp" />
 
-                <TextView
-                    android:id="@+id/txt_Status"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_Email"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/mako"
-                    android:text="@string/CurrentlyAccepting"
-                    android:textAlignment="center"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/_10ssp" />
+                    app:cardBackgroundColor="@color/green"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:id="@+id/txt_Status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:fontFamily="@font/mako"
+                        android:text="@string/CurrentlyAccepting"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+                </com.google.android.material.card.MaterialCardView>
             </RelativeLayout>
         </LinearLayout>
 
@@ -167,485 +176,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@string/SubjectsPrompt"
                     android:fontFamily="@font/podkova"
+                    android:text="@string/SubjectsPrompt"
                     android:textSize="15sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSubjects"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_10sdp">
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:padding="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:visibility="gone"/>
 
-                    <androidx.constraintlayout.helper.widget.Flow
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:constraint_referenced_ids="layout_AdobePs,layout_Animation,layout_AutoCAD, layout_Programming, layout_MSOffice, layout_Mathematics, layout_Sciences, layout_Arts, layout_Languages, layout_Engineering, layout_Law"
-                        app:flow_horizontalGap="@dimen/_5sdp"
-                        app:flow_horizontalBias="0"
-                        app:flow_verticalBias="0"
-                        app:flow_verticalGap="@dimen/_5sdp"
-                        app:flow_verticalStyle="spread"
-                        app:flow_wrapMode="aligned"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RelativeLayout
-                        android:id="@+id/layout_AdobePs"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_AdobePs"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_adobe_ps"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_AdobePs"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_AdobePs"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/AdobePs"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesAdobePs"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_AdobePs"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Animation"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/AdobeAeViolet"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Animation"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_animation"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Animation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Animation"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Animation"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                        <TextView
-                            android:id="@+id/txt_RatesAnimation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Animation"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_AutoCAD"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/AutoCADRed"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_AutoCAD"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_autocad"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_AutoCAD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_AutoCAD"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/AutoCAD"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesAutoCAD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_AutoCAD"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Programming"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/ProgrammingCyan"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Programming"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_programming"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Programming"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Programming"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Programming"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                        <TextView
-                            android:id="@+id/txt_RatesProgramming"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Programming"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_MSOffice"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/MSOfficeOrange"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_MSOffice"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_ms_office"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_MSOffice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_MSOffice"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Microsoft"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesMSOffice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_MSOffice"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Mathematics"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/MathYellow"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Mathematics"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_mathematics"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Mathematics"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Mathematics"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Mathematics"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesMathematics"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Mathematics"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Sciences"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/ScienceGreen"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Sciences"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_science"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Sciences"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Sciences"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Sciences"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                        <TextView
-                            android:id="@+id/txt_RatesSciences"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Sciences"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Arts"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/ArtsPurple"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Arts"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_arts"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Arts"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Arts"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Arts"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                        <TextView
-                            android:id="@+id/txt_RatesArts"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Arts"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Languages"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/LanguageGreen"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Languages"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_languages"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Languages"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Languages"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Languages"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesLanguages"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Languages"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Engineering"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/EngineeringOrange"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Engineering"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_engineering"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Engineering"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Engineering"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Engineering"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                        <TextView
-                            android:id="@+id/txt_RatesEngineering"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Engineering"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/layout_Law"
-                        android:layout_width="@dimen/subjects_layout_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                        android:gravity="center"
-                        android:backgroundTint="@color/LawBlue"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="@integer/subjectVisibility"
-                        android:paddingVertical="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/img_Law"
-                            android:layout_width="@dimen/subjects_imgView_widthheight"
-                            android:layout_height="@dimen/subjects_imgView_widthheight"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_subjects_law"
-                            app:tint="@color/white" />
-                        <TextView
-                            android:id="@+id/txt_Law"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/img_Law"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/Law"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                        <TextView
-                            android:id="@+id/txt_RatesLaw"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Law"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
-                            android:text="@string/defSubjRate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-                    </RelativeLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/SchedulePrompt"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <Button
+                        android:id="@+id/btn_minusMonth"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="-"/>
                     <TextView
+                        android:id="@+id/txt_MonthView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="Mar 2022"
                         android:textAlignment="center"/>
                     <Button
+                        android:id="@+id/btn_plusMonth"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -706,8 +280,10 @@
                         android:textSize="@dimen/_12ssp"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerCalendar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="@dimen/_275sdp"
+                    android:visibility="gone"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

@@ -1,21 +1,28 @@
 package com.example.mentor.misc;
 
+import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public enum Account_Details {
 
-    User_Details("", "", "", "", "", "", false, false, 0, 0, true, "", new ArrayList<>(), false, new ArrayList<>()),
-    User_Clicked("", "", "", "", "", "", false, false, 0, 0, true, "", new ArrayList<>(), false, new ArrayList<>());
+    User_Details("", "", "", "", "", "", false, false, 0, 0, true, "", false, new ArrayList<>(), ""),
+    User_Clicked("", "", "", "", "", "", false, false, 0, 0, true, "", false, new ArrayList<>(), "");
 
-    public ArrayList<String> requests;
     public ArrayList<Long> rates;
-    private String fullName, email, fbUser, lInUser, bioEssay, picString, uID;
+    private String fullName, email, fbUser, lInUser, bioEssay, picString, uID, setDate;
     private Boolean isMentor, isAccepting, currSearch, currConnection;
     private Integer subjects, authLevel;
 
-    Account_Details(String fullName, String email, String fbUser, String lInUser, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer subjects, Integer authLevel, Boolean currSearch, String uID, ArrayList<String> requests, Boolean currConnection, ArrayList<Long> rates) {
+    Account_Details(String fullName, String email, String fbUser, String lInUser, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer subjects, Integer authLevel, Boolean currSearch, String uID, Boolean currConnection, ArrayList<Long> rates, String setDate) {
         this.fullName = fullName;
         this.email = email;
         this.fbUser = fbUser;
@@ -28,9 +35,9 @@ public enum Account_Details {
         this.authLevel = authLevel;
         this.currSearch = currSearch;
         this.uID = uID;
-        this.requests = requests;
         this.currConnection = currConnection;
         this.rates = rates;
+        this.setDate = setDate;
     }
 
     public String getFullName() {
@@ -77,11 +84,11 @@ public enum Account_Details {
 
     public String getUID(){return uID;}
 
-    public ArrayList<String> getRequests(){return requests;}
-
     public Boolean getCurrConnection(){return currConnection;}
 
     public ArrayList<Long> getRates(){return rates;}
+
+    public String getSetDate(){return setDate;}
 
     public void setFullName(String fullName){this.fullName = fullName;}
 
@@ -107,11 +114,37 @@ public enum Account_Details {
 
     public void setUID(String uID){this.uID = uID;}
 
-    public void setRequests(ArrayList<String> requests){this.requests = requests;}
-
     public void setCurrConnection (Boolean currConnection){this.currConnection = currConnection;}
 
     public void setRates(ArrayList<Long> rates){this.rates = rates;}
+
+    public void setSetDate(String setDate){this.setDate = setDate;}
+
+    public void initUser() {
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        FirebaseUser fUser = fAuth.getCurrentUser();
+        assert fUser != null;
+        DocumentReference df = fStore.collection("Users").document(fUser.getUid());
+        df.get().addOnSuccessListener(documentSnapshot -> {
+            Log.d("TAG", "onSuccess" + documentSnapshot.getData());
+            User_Details.setFullName(documentSnapshot.getString("FullName"));
+            User_Details.setEmail(documentSnapshot.getString("Email"));
+            User_Details.setFBUser(documentSnapshot.getString("FB_Username"));
+            User_Details.setLInUser(documentSnapshot.getString("LinkedIn_Username"));
+            User_Details.setBioEssay(documentSnapshot.getString("bioEssay"));
+            User_Details.setAuthLevel(Objects.requireNonNull(documentSnapshot.getLong("AuthLevel")).intValue());
+            User_Details.setSubjects(Objects.requireNonNull(documentSnapshot.getLong("subjectsBinary")).intValue());
+            User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
+            User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
+            User_Details.setCurrSearch(true);
+            User_Details.setUID(fUser.getUid());
+            if(documentSnapshot.get("SubjectRates") != null){
+                User_Details.setRates((ArrayList<Long>) documentSnapshot.get("SubjectRates"));
+            }
+            User_Details.setCurrConnection(false);
+        });
+    }
 
     public List<String> initLstSubj() {
         List<String> lstSubj = new ArrayList<>();
@@ -159,7 +192,7 @@ public enum Account_Details {
         return lstSubj;
     }
 
-    public Boolean reset(){
+    public void reset(){
         this.fullName = "";
         this.email = "";
         this.fbUser = "";
@@ -170,7 +203,7 @@ public enum Account_Details {
         this.isAccepting = false;
         this.subjects = 0;
         this.authLevel = 0;
-
-        return true;
+        this.rates.clear();
+        this.setDate = "";
     }
 }

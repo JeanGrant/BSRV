@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccount.CreateAcc_Subjects"
+    tools:context=".CreateAccount.createAcc_Subjects"
     android:orientation="vertical">
 
     <ImageButton
         android:id="@+id/imgBTN_back"
-        android:layout_width="@dimen/_39sdp"
-        android:layout_height="@dimen/_39sdp"
+        android:layout_width="@dimen/smallSQBTN_size"
+        android:layout_height="@dimen/smallSQBTN_size"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginStart="@dimen/smallSQBTN_margin"
+        android:layout_marginTop="@dimen/smallSQBTN_margin"
         android:adjustViewBounds="true"
-        android:background="@drawable/roundedbutton_transparent"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/back"
-        android:paddingVertical="@dimen/_7sdp"
+        android:padding="@dimen/smallSQBTN_padding"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
@@ -27,25 +27,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imgBTN_back"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/mako"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/subtitle_font"
         android:text="@string/createAccSubjects"
-        android:textSize="@dimen/_15ssp"
-        android:layout_marginTop="@dimen/_30sdp"/>
+        android:textSize="@dimen/subtitle_txtsize"
+        android:textColor="@color/subtitle_txtcolor"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/txt_SubjectsPrompt"
-        android:layout_above="@+id/btnProceed">
+        android:layout_above="@+id/btnProceed"
+        android:layout_below="@+id/txt_SubjectsPrompt">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:padding="@dimen/_5sdp">
 
             <androidx.constraintlayout.helper.widget.Flow
                 android:layout_width="0dp"
@@ -60,440 +61,438 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_AdobePs"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:padding="@dimen/subjects_layout_padding">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/AdobePsblue"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/chk_AdobePs"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
 
-                <ImageView
-                    android:id="@+id/img_AdobePs"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_AdobePs"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_adobe_ps"
-                    app:tint="@color/white" />
+                    <ImageView
+                        android:id="@+id/img_AdobePs"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_adobe_ps"
+                        app:tint="@color/AdobePsblue"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_AdobePs"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/AdobePs"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txt_AdobePs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/AdobePs"
+                        android:textColor="@color/AdobePsblue"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <RelativeLayout
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Animation"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/AdobeAeViolet"
-                android:padding="@dimen/subjects_layout_padding">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/AdobeAeViolet"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
 
-                <CheckBox
-                    android:id="@+id/chk_Animation"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
+                    <ImageView
+                        android:id="@+id/img_Animation"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_animation"
+                        app:tint="@color/AdobeAeViolet"/>
 
-                <ImageView
-                    android:id="@+id/img_Animation"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Animation"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_animation"
-                    app:tint="@color/white" />
+                    <TextView
+                        android:id="@+id/txt_Animation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Animation"
+                        android:textColor="@color/AdobeAeViolet"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Animation"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Animation"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_AutoCAD"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/AutoCADRed"
-                android:padding="@dimen/subjects_layout_padding">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/AutoCADRed"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
 
-                <CheckBox
-                    android:id="@+id/chk_AutoCAD"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
+                    <ImageView
+                        android:id="@+id/img_AutoCAD"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_autocad"
+                        app:tint="@color/AutoCADRed"/>
 
-                <ImageView
-                    android:id="@+id/img_AutoCAD"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_AutoCAD"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_autocad"
-                    app:tint="@color/white" />
+                    <TextView
+                        android:id="@+id/txt_AutoCAD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/AutoCAD"
+                        android:textColor="@color/AutoCADRed"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_AutoCAD"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/AutoCAD"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <com.google.android.material.card.MaterialCardView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Programming"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/ProgrammingCyan"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/ProgrammingCyan"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Programming"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_programming"
+                        app:tint="@color/ProgrammingCyan"/>
+
+                    <TextView
+                        android:id="@+id/txt_Programming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Programming"
+                        android:textColor="@color/ProgrammingCyan"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Programming"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Programming"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Programming"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_programming"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Programming"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Programming"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_MSOffice"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/MSOfficeOrange"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/MSOfficeOrange"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_MSOffice"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_ms_office"
+                        app:tint="@color/MSOfficeOrange"/>
+
+                    <TextView
+                        android:id="@+id/txt_MSOffice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/MSOffice"
+                        android:textColor="@color/MSOfficeOrange"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_MSOffice"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_MSOffice"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_MSOffice"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_ms_office"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_MSOffice"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Microsoft"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Mathematics"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/MathYellow"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/MathYellow"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Mathematics"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_mathematics"
+                        app:tint="@color/MathYellow"/>
+
+                    <TextView
+                        android:id="@+id/txt_Mathematics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Mathematics"
+                        android:textColor="@color/MathYellow"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Mathematics"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Mathematics"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Mathematics"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_mathematics"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Mathematics"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Mathematics"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Sciences"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/ScienceGreen"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/ScienceGreen"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Sciences"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_science"
+                        app:tint="@color/ScienceGreen"/>
+
+                    <TextView
+                        android:id="@+id/txt_Sciences"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Sciences"
+                        android:textColor="@color/ScienceGreen"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Sciences"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Sciences"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Sciences"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_science"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Sciences"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Sciences"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Arts"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/ArtsPurple"
-                android:padding="@dimen/_3sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/ArtsPurple"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Arts"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_arts"
+                        app:tint="@color/ArtsPurple"/>
+
+                    <TextView
+                        android:id="@+id/txt_Arts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Arts"
+                        android:textColor="@color/ArtsPurple"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Arts"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Arts"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Arts"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_arts"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Arts"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Arts"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Languages"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/LanguageGreen"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/LanguageGreen"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Languages"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_languages"
+                        app:tint="@color/LanguageGreen"/>
+
+                    <TextView
+                        android:id="@+id/txt_Languages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Languages"
+                        android:textColor="@color/LanguageGreen"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Languages"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Languages"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Languages"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_languages"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Languages"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Languages"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Engineering"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/EngineeringOrange"
-                android:padding="@dimen/subjects_layout_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/EngineeringOrange"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/img_Engineering"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_engineering"
+                        app:tint="@color/EngineeringOrange"/>
+
+                    <TextView
+                        android:id="@+id/txt_Engineering"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Engineering"
+                        android:textColor="@color/EngineeringOrange"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:id="@+id/chk_Engineering"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_Engineering"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Engineering"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_engineering"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Engineering"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Engineering"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-            <RelativeLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layout_Law"
                 android:layout_width="@dimen/subjects_layout_width"
                 android:layout_height="@dimen/subjects_layout_height"
-                android:background="@drawable/roundedbutton_blue_outline_smaller_radius"
-                android:backgroundTint="@color/LawBlue"
-                android:padding="@dimen/subjects_layout_padding"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/LawBlue"
+                app:strokeWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/subjects_layout_padding"
+                    tools:ignore="UseCompoundDrawables">
 
-                <CheckBox
-                    android:id="@+id/chk_Law"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:buttonTint="@color/white" />
+                    <ImageView
+                        android:id="@+id/img_Law"
+                        android:layout_width="@dimen/subjects_imgView_widthheight"
+                        android:layout_height="@dimen/subjects_imgView_widthheight"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_subjects_filled_law"
+                        app:tint="@color/LawBlue"/>
 
-                <ImageView
-                    android:id="@+id/img_Law"
-                    android:layout_width="@dimen/subjects_imgView_widthheight"
-                    android:layout_height="@dimen/subjects_imgView_widthheight"
-                    android:layout_alignTop="@+id/chk_Law"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/subjects_imgView_marginTop"
-                    android:src="@drawable/ic_subjects_law"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_Law"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="@dimen/subjects_txtView_verticalMargin"
-                    android:text="@string/Law"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txt_Law"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/subjects_txtView_verticalMargin"
+                        android:text="@string/Law"
+                        android:textColor="@color/LawBlue"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/btnProceed"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/longBTN_width"
+        android:layout_height="@dimen/longBTN_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_50sdp"
-        android:background="@drawable/roundedbutton_blue_outline"
+        android:background="@drawable/longBTN_style_v2"
         android:text="@string/Proceed"
-        android:textColor="@color/blue" />
+        android:fontFamily="@font/longBTN_font"
+        android:textColor="@color/longBTN_txtcolor_v2"
+        android:textSize="@dimen/longBTN_txtsize"/>
 </RelativeLayout>

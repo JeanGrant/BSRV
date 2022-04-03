@@ -3,6 +3,7 @@ package com.example.mentor.adapters;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,10 @@ public class SubjectRatesAdapter extends RecyclerView.Adapter<SubjectRatesAdapte
         void setUserData(SubjectRates subjectRates){
             binding.imgSubject.setImageDrawable(subjectRates.drawable);
             binding.txtSubject.setText(subjectRates.name);
-            binding.txtSubjectRates.setText(subjectRates.rate);
+            if(subjectRates.rate != null) {
+                if (!subjectRates.rate.trim().isEmpty()) {binding.txtSubjectRates.setText(subjectRates.rate);}
+                else{binding.txtSubjectRates.setVisibility(View.GONE);}
+            }else{binding.txtSubjectRates.setVisibility(View.GONE);}
             binding.layoutSubject.getBackground().setColorFilter(
                     Color.argb(255, subjectRates.red, subjectRates.green, subjectRates.blue),
                     PorterDuff.Mode.SRC_ATOP);

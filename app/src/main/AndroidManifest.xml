@@ -14,21 +14,11 @@
         android:hardwareAccelerated="true"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Login_Signup.Login"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".Homepage.Homepage"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
             android:hardwareAccelerated="true"/>
-        <activity
-            android:name=".Login_Signup.Signup"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".Login_Signup.Main_Activity"
             android:exported="true"

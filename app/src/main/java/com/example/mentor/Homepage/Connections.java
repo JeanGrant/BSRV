@@ -72,9 +72,6 @@ public class Connections extends Fragment implements UserListener {
                     if (currentUserId.equals(queryDocumentSnapshot.getId())) {
                         continue;
                     }
-                    if (!Account_Details.User_Details.getRequests().contains(queryDocumentSnapshot.getId())){
-                        continue;
-                    }
                     User user = new User();
                     user.fullName = queryDocumentSnapshot.getString("FullName");
                     user.email = queryDocumentSnapshot.getString("Email");
@@ -87,11 +84,6 @@ public class Connections extends Fragment implements UserListener {
                     user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
                     user.subjectsBinary = Objects.requireNonNull(queryDocumentSnapshot.getLong("subjectsBinary")).intValue();
                     user.uid = queryDocumentSnapshot.getId();
-                    if(queryDocumentSnapshot.get("userRequests") == null){
-                        user.requests.clear();
-                    } else{
-                        user.requests = (ArrayList<String>) queryDocumentSnapshot.get("userRequests");
-                    }
                     list_users.add(user);
                 }
                 if(list_users.size()>0){
