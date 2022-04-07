@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.databinding.LayoutSubjectContainerBinding;
@@ -60,7 +61,7 @@ public class SubjectRatesAdapter extends RecyclerView.Adapter<SubjectRatesAdapte
                 else{binding.txtSubjectRates.setVisibility(View.GONE);}
             }else{binding.txtSubjectRates.setVisibility(View.GONE);}
             binding.layoutSubject.getBackground().setColorFilter(
-                    Color.argb(255, subjectRates.red, subjectRates.green, subjectRates.blue),
+                    subjectRates.hexColor,
                     PorterDuff.Mode.SRC_ATOP);
         }
     }

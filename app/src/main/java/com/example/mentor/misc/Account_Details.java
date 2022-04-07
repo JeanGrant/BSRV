@@ -2,21 +2,23 @@ package com.example.mentor.misc;
 
 import android.util.Log;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 public enum Account_Details {
 
-    User_Details("", "", "", "", false, false, 0, true, "", false, "", new ArrayList<>(), new ArrayList<>()),
-    User_Clicked("", "", "", "", false, false, 0, true, "", false, "", new ArrayList<>(), new ArrayList<>());
+    User_Details("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new ArrayList<>()),
+    User_Clicked("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new ArrayList<>());
 
     public ArrayList<Long> rates;
     public ArrayList<String> subjects;
-    private String fullName, email, bioEssay, picString, uID, setDate;
+    private String fullName, email, bioEssay, picString, uID;
     private Boolean isMentor, isAccepting, currSearch, currConnection;
     private Integer authLevel;
+    private LocalDate setDate;
 
-    Account_Details(String fullName, String email, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer authLevel, Boolean currSearch, String uID, Boolean currConnection, String setDate, ArrayList<String> subjects, ArrayList<Long> rates) {
+    Account_Details(String fullName, String email, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer authLevel, Boolean currSearch, String uID, Boolean currConnection, LocalDate setDate, ArrayList<String> subjects, ArrayList<Long> rates) {
         this.fullName = fullName;
         this.email = email;
         this.bioEssay = bioEssay;
@@ -66,7 +68,7 @@ public enum Account_Details {
 
     public Boolean getCurrConnection(){return currConnection;}
 
-    public String getSetDate(){return setDate;}
+    public LocalDate getSetDate(){return setDate;}
 
     public ArrayList<String> getSubjects() {return subjects;}
 
@@ -92,7 +94,7 @@ public enum Account_Details {
 
     public void setCurrConnection (Boolean currConnection){this.currConnection = currConnection;}
 
-    public void setSetDate(String setDate){this.setDate = setDate;}
+    public void setSetDate(LocalDate setDate){this.setDate = setDate;}
 
     public void setSubjects(ArrayList<String> subjects){this.subjects = subjects;}
 
@@ -116,7 +118,6 @@ public enum Account_Details {
         this.isMentor = false;
         this.isAccepting = false;
         this.authLevel = 0;
-        this.setDate = "";
         this.subjects.clear();
         this.rates.clear();
     }

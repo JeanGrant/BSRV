@@ -38,6 +38,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_baseline_arrow_back_24" />
+
                 <ImageButton
                     android:id="@+id/imgBTN_Request"
                     android:layout_width="@dimen/_30sdp"
@@ -52,7 +53,8 @@
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_person_add_24" />
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:tint="@color/green"/>
             </RelativeLayout>
 
             <TextView
@@ -79,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/btn_minusMonth"
+                    android:id="@+id/btn_minusDay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -93,7 +95,7 @@
                     android:text=""
                     android:textAlignment="center"/>
                 <Button
-                    android:id="@+id/btn_plusMonth"
+                    android:id="@+id/btn_plusDay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

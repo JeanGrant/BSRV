@@ -50,7 +50,7 @@
     <string name="AltRates">I charge depending on the subject.</string>
     <string name="RatePrompt">How do you determine your rate per hour?</string>
     <string name="setConstRate">Set a constant rate per hour</string>
-    <string name="SendProposal">On-the-Look</string>
+    <string name="SendProposal">Find Users</string>
     <string name="Proposals">Proposals</string>
     <string name="SendMessage">Send</string>
     <string name="SUN">SUN</string>
@@ -74,4 +74,12 @@
     <string name="hintElaborate">Elaborate your situation</string>
     <string name="hintStartTime">Start Time</string>
     <string name="hintEndTime">End Time</string>
+    <string name="SubjectPrompt">Subject:</string>
+    <string name="namePrompt">Name:</string>
+    <string name="datePrompt">Date:</string>
+    <string name="timePrompt">Time:</string>
+    <string name="descPrompt">Description:</string>
+    <string name="counterProposal">Offer a Counter Proposal</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
 </resources>

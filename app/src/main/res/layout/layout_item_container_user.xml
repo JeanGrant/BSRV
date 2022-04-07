@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:id="@+id/layout_mainContainer">
+    android:id="@+id/layout_mainContainer"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_1sdp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_8sdp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,13 +30,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgBTN_Request"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_UserPic"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,25 +64,5 @@
                 style="@style/autoscroll"
                 android:fontFamily="@font/mako"/>
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/imgBTN_Request"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/Request"
-            android:paddingVertical="@dimen/_3sdp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_person_add_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="#20000000"/>
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

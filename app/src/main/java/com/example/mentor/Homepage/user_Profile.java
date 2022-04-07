@@ -1,5 +1,7 @@
 package com.example.mentor.Homepage;
 
+import static androidx.core.content.res.ResourcesCompat.getColor;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,17 +21,22 @@ import com.example.mentor.adapters.SubjectRatesAdapter;
 import com.example.mentor.databinding.FragmentUserProfileBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.SubjectRates;
+import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class User_Profile extends Fragment implements CalendarAdapter.OnItemListener{
+public class user_Profile extends Fragment implements CalendarAdapter.OnItemListener{
 
     private FragmentUserProfileBinding binding;
     private ArrayList<Long> rates;
@@ -44,6 +51,9 @@ public class User_Profile extends Fragment implements CalendarAdapter.OnItemList
         // Inflate the layout for this fragment
         binding = FragmentUserProfileBinding.inflate(inflater, container, false);
         View viewLayout = binding.getRoot();
+
+        binding.btnMinusMonth.setOnClickListener(view -> previousMonthAction());
+        binding.btnPlusMonth.setOnClickListener(view -> nextMonthAction());
 
         initLayout();
         return viewLayout;
@@ -61,6 +71,7 @@ public class User_Profile extends Fragment implements CalendarAdapter.OnItemList
         fStore.collection("Users").document(fUser).get().addOnCompleteListener(task -> {
             if(task.isSuccessful() && task.getResult() != null){
                 task.addOnSuccessListener(documentSnapshot -> {
+                    Account_Details.User_Details.setUID(fUser);
                     Account_Details.User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
                     Boolean isAccepting = Account_Details.User_Details.getIsAccepting();
                     if(isAccepting != null){
@@ -109,95 +120,67 @@ public class User_Profile extends Fragment implements CalendarAdapter.OnItemList
         List<SubjectRates> list_subjrate = new ArrayList<>();
         for (int i = 0; i < subjects.size(); i++) {
             SubjectRates subjRates = new SubjectRates();
-            if(isMentor){
-                if(rates.size()>0){
-                    subjRates.rate = "₱"+rates.get(i)+"/hr";
-                }}
+            if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
             switch (subjects.get(i)) {
                 case "Adobe Ps":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_adobe_ps, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_adobe_ps, null);
                     subjRates.name = getResources().getString(R.string.AdobePs);
-                    subjRates.red = 37;
-                    subjRates.green = 93;
-                    subjRates.blue = 170;
-                    Log.i("subjRates wawa", i+subjRates.name);
+                    subjRates.hexColor = getColor(getResources(), R.color.AdobePsblue, null);
                     break;
                 case "Animation":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_animation, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_animation, null);
                     subjRates.name = getResources().getString(R.string.Animation);
-                    subjRates.red = 52;
-                    subjRates.green = 34;
-                    subjRates.blue = 76;
-                    Log.i("subjRates wawa", i+subjRates.name);
+                    subjRates.hexColor = getColor(getResources(), R.color.AdobeAeViolet, null);
                     break;
                 case "Arts":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_arts, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_arts, null);
                     subjRates.name = getResources().getString(R.string.Arts);
-                    subjRates.red = 127;
-                    subjRates.green = 38;
-                    subjRates.blue = 175;
+                    subjRates.hexColor = getColor(getResources(), R.color.ArtsPurple, null);
                     break;
                 case "AutoCAD":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_autocad, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_autocad, null);
                     subjRates.name = getResources().getString(R.string.AutoCAD);
-                    subjRates.red = 127;
-                    subjRates.green = 18;
-                    subjRates.blue = 11;
+                    subjRates.hexColor = getColor(getResources(), R.color.AutoCADRed, null);
                     break;
                 case "Engineering":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_engineering, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_engineering, null);
                     subjRates.name = getResources().getString(R.string.Engineering);
-                    subjRates.red = 173;
-                    subjRates.green = 79;
-                    subjRates.blue = 50;
+                    subjRates.hexColor = getColor(getResources(), R.color.EngineeringOrange, null);
                     break;
                 case "Languages":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_languages, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_languages, null);
                     subjRates.name = getResources().getString(R.string.Languages);
-                    subjRates.red = 107;
-                    subjRates.green = 134;
-                    subjRates.blue = 34;
+                    subjRates.hexColor = getColor(getResources(), R.color.LanguageGreen, null);
                     break;
                 case "Law":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_law, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_law, null);
                     subjRates.name = getResources().getString(R.string.Law);
-                    subjRates.red = 3;
-                    subjRates.green = 62;
-                    subjRates.blue = 88;
+                    subjRates.hexColor = getColor(getResources(), R.color.LawBlue, null);
                     break;
                 case "MS Office":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_ms_office, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_ms_office, null);
                     subjRates.name = getResources().getString(R.string.MSOffice);
-                    subjRates.red = 184;
-                    subjRates.green = 41;
-                    subjRates.blue = 22;
+                    subjRates.hexColor = getColor(getResources(), R.color.MSOfficeOrange, null);
                     break;
                 case "Mathematics":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_mathematics, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_mathematics, null);
                     subjRates.name = getResources().getString(R.string.Mathematics);
-                    subjRates.red = 189;
-                    subjRates.green = 143;
-                    subjRates.blue = 6;
+                    subjRates.hexColor = getColor(getResources(), R.color.MathYellow, null);
                     break;
                 case "Programming":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_programming, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_programming, null);
                     subjRates.name = getResources().getString(R.string.Programming);
-                    subjRates.red = 43;
-                    subjRates.green = 160;
-                    subjRates.blue = 189;
+                    subjRates.hexColor = getColor(getResources(), R.color.ProgrammingCyan, null);
                     break;
                 case "Sciences":
-                    subjRates.drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_subjects_science, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_science, null);
                     subjRates.name = getResources().getString(R.string.Sciences);
-                    subjRates.red = 24;
-                    subjRates.green = 134;
-                    subjRates.blue = 55;
+                    subjRates.hexColor = getColor(getResources(), R.color.ScienceGreen, null);
                     break;
                 default:
                     break;
             }
             list_subjrate.add(subjRates);
-            Log.i("subjRates wawa", list_subjrate.toString());
         }
         if(list_subjrate.size()>0){
 //            binding.progressBar.setVisibility(View.GONE);
@@ -246,7 +229,24 @@ public class User_Profile extends Fragment implements CalendarAdapter.OnItemList
 
     @Override
     public void onItemClick(int position, String dayText) {
-
+        if(!dayText.equals("")){
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy ", java.util.Locale.getDefault());
+            try {
+                String selectedMY = sdf.format(Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                sdf = new SimpleDateFormat("dd MMMM yyyy ", java.util.Locale.getDefault());
+                Date selectedDay = sdf.parse(dayText + " " + selectedMY);
+                Log.i("selectedDay", selectedDay.toString());
+                assert selectedDay != null;
+                LocalDate selectedLocalDay = selectedDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Account_Details.User_Details.setSetDate(selectedLocalDay);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.i("selectedDay", e.getMessage());
+                Log.i("selectedDay", dayText + " " + selectedDate);
+            }
+            Account_Details.User_Clicked.setUID(Account_Details.User_Details.getUID());
+            SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new dailyTime_preview(), "dailyTime_Preview");
+        }
     }
 
     private void previousMonthAction(){

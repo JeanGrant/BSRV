@@ -31,28 +31,28 @@ public class Homepage extends AppCompatActivity {
 
         Log.i("Homepage onCreate getUID", Account_Details.User_Details.getUID());
 
-        SwitchLayout.fragmentStarter(getSupportFragmentManager(), new User_Profile(), "user_Profile");
-        binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+        SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
+        binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));
 
         binding.imgBTNHome.setOnClickListener(view -> {
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new Search_Users(), "search_Users");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
-            binding.imgBTNProfile.setBackgroundResource(Color.alpha(0));
+            binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));
         });
 
         binding.imgBTNConnections.setOnClickListener(view -> {
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new Connections(), "connections");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
-            binding.imgBTNProfile.setBackgroundResource(Color.alpha(0));
+            binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));
         });
 
         binding.imgBTNProfile.setOnClickListener(view -> {
-            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new User_Profile(), "user_Profile");
+            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
-            binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+            binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));
         });
 
         binding.imgBTNLogout.setOnClickListener(view -> {
@@ -74,7 +74,7 @@ public class Homepage extends AppCompatActivity {
                     break;
                 case "search_Users":
                 case "connections":
-                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new User_Profile(), "user_Profile");
+                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
                     binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
                     binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
                     binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);

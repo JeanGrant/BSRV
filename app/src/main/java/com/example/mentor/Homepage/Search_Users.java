@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -37,7 +38,8 @@ public class Search_Users extends Fragment implements UserListener {
         binding = FragmentSearchUsersBinding.inflate(inflater, container, false);
         View viewLayout = binding.getRoot();
 
-        getUsers();
+        if(Account_Details.User_Details.getCurrSearch()){getUsers();}
+        else{getProposals();}
         initSwitches();
 
         binding.btnProposals.setOnClickListener(view -> {
@@ -73,15 +75,12 @@ public class Search_Users extends Fragment implements UserListener {
                     }
                     User user = new User();
                     user.uid = queryDocumentSnapshot.getId();
+                    user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
+                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
                     user.fullName = queryDocumentSnapshot.getString("fullName");
                     user.pictureStr= queryDocumentSnapshot.getString("picture");
-                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
                     user.email = queryDocumentSnapshot.getString("email");
-                    user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
                     user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
-                    user.bioEssay = queryDocumentSnapshot.getString("bioEssay");
-                    user.subjects = (ArrayList<String>) queryDocumentSnapshot.get("subjects");
-                    user.rates = (ArrayList<Long>) queryDocumentSnapshot.get("subjectRates");
                     list_users.add(user);
                 }
                 if(list_users.size()>0){
@@ -104,25 +103,25 @@ public class Search_Users extends Fragment implements UserListener {
     private void getProposals(){
         binding.recyclerUsers.setVisibility(View.INVISIBLE);
         binding.progressBar.setVisibility(View.VISIBLE);
-        fStore.collection("Users").get().addOnCompleteListener(task -> {
-            String currentUserId = FirebaseAuth.getInstance().getUid();
+        String fUser = Account_Details.User_Details.getUID();
+        fStore.collection("Users").document(fUser).collection("proposals").get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 List<User> list_users = new ArrayList<>();
                 for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                    assert currentUserId != null;
-                    //skip if current loaded user is the logged in user
-                    if (currentUserId.equals(queryDocumentSnapshot.getId())) {
-                        continue;
-                    }
-                    //skip if current loaded user's account type is the same as logged in user
-                    if (queryDocumentSnapshot.getBoolean("isMentor") == Account_Details.User_Details.getIsMentor()) {
-                        continue;
-                    }
                     User user = new User();
-                    user.uid = queryDocumentSnapshot.getId();
-                    user.fullName = queryDocumentSnapshot.getString("FullName");
-                    user.pictureStr= queryDocumentSnapshot.getString("Picture");
-                    user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("AuthLevel")).intValue();
+                    if(Account_Details.User_Details.getUID().equals(queryDocumentSnapshot.getString("requestorUID"))) {
+                        user.uid = queryDocumentSnapshot.getString("requesteeUID");
+                        user.fullName = queryDocumentSnapshot.getString("requesteeName");
+                        user.pictureStr = queryDocumentSnapshot.getString("requesteePic");
+                        user.isMentor = queryDocumentSnapshot.getBoolean("requesteeIsMentor");
+                        user.email = queryDocumentSnapshot.getString("requesteeEmail");
+                    }else if(Account_Details.User_Details.getUID().equals(queryDocumentSnapshot.getString("requesteeUID"))){
+                        user.uid = queryDocumentSnapshot.getString("requestorUID");
+                        user.fullName = queryDocumentSnapshot.getString("requestorName");
+                        user.pictureStr = queryDocumentSnapshot.getString("requestorPic");
+                        user.isMentor = queryDocumentSnapshot.getBoolean("requestorIsMentor");
+                        user.email = queryDocumentSnapshot.getString("requestorEmail");
+                    }
                     list_users.add(user);
                 }
                 if(list_users.size()>0){
@@ -133,8 +132,8 @@ public class Search_Users extends Fragment implements UserListener {
                     UsersAdapter usersAdapter = new UsersAdapter(list_users, this);
                     binding.recyclerUsers.setAdapter(usersAdapter);
                     binding.recyclerUsers.setHasFixedSize(true);
-                }else{Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();}}
-            else{Toast.makeText(getContext(), "Error getting list of users", Toast.LENGTH_SHORT).show();}
+                }else{Toast.makeText(getContext(), "No proposals found", Toast.LENGTH_SHORT).show();}}
+            else{Toast.makeText(getContext(), "Error getting list of proposals", Toast.LENGTH_SHORT).show();}
         });
     }
 
@@ -146,23 +145,20 @@ public class Search_Users extends Fragment implements UserListener {
         Account_Details.User_Clicked.setEmail(user.email);
         Account_Details.User_Clicked.setIsMentor(user.isMentor);
         Account_Details.User_Clicked.setIsAccepting(user.isAccepting);
-        Account_Details.User_Clicked.setBioEssay(user.bioEssay);
         Account_Details.User_Clicked.setAuthLevel(user.authLvl);
-        Account_Details.User_Clicked.subjects = user.subjects;
-        Account_Details.User_Clicked.rates = user.rates;
         SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new user_preview(), "user_Preview");
     }
 
     public void initSwitches() {
         if(Account_Details.User_Details.getCurrSearch()){
-            binding.btnSendProposal.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnSendProposal.setBackgroundResource(R.drawable.roundedbutton_blue);
             binding.btnSendProposal.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.btnProposals.setBackgroundColor(this.requireContext().getColor(R.color.transparent));
+            binding.btnProposals.setBackgroundResource(R.drawable.roundedbutton_blue_outline);;
             binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.blue));
         }else {
-            binding.btnProposals.setBackgroundColor(this.requireContext().getColor(R.color.blue));
+            binding.btnProposals.setBackgroundResource(R.drawable.roundedbutton_blue);;
             binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.btnSendProposal.setBackgroundColor(this.requireContext().getColor(R.color.transparent));
+            binding.btnSendProposal.setBackgroundResource(R.drawable.roundedbutton_blue_outline);;
             binding.btnSendProposal.setTextColor(this.requireContext().getColor(R.color.blue));
         }
     }

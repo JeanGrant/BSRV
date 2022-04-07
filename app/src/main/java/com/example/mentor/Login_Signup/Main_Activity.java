@@ -29,6 +29,7 @@ public class Main_Activity extends AppCompatActivity {
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         if(fAuth.getCurrentUser() != null) {
             SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
+            finish();
         }else {
             binding.imgDivider.setVisibility(View.VISIBLE);
             binding.switchSign.setVisibility(View.VISIBLE);
