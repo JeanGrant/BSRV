@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">BSRV</string>
+    <string name="app_name">Studify</string>
     <string name="Login">Login to existing account</string>
     <string name="Signup">Create a new account</string>
-    <string name="app_tagline">Community inspired learning</string>
+    <string name="app_tagline">Bringing Realistic Students\' Versatility</string>
     <string name="createAccType">I am creating an account as a:</string>
     <string name="createAccDetail">We\'d like to know you better:</string>
     <string name="Proceed">Proceed</string>
@@ -82,4 +82,10 @@
     <string name="counterProposal">Offer a Counter Proposal</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
+    <string name="AccCreateNotice">Account Creation Notice</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="AccCreateNoticeMSG">We, the BSRV, give great importance to the privacy and security of our users. Therefore, before we can show your profile to the rest of the BSRV community, we require your email to be verified.\n\nAdditionally, as an applying mentor, our teeam will be personally reviewing your submitted profile in a maximum span of seven (7) business days. During this time, we may conduct an additional interview through your email.\n\nWe sincerely hope for your cooperation. Thank you for your understanding!</string>
+    <string name="requestUID">ID:</string>
+    <string name="statusPrompt">Status:</string>
+    <string name="hintDate">Date</string>
 </resources>

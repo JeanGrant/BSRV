@@ -118,7 +118,7 @@ public enum Account_Details {
         this.isMentor = false;
         this.isAccepting = false;
         this.authLevel = 0;
-        this.subjects.clear();
-        this.rates.clear();
+        if(this.subjects != null){this.subjects.clear();}
+        if(this.rates != null){this.rates.clear();}
     }
 }

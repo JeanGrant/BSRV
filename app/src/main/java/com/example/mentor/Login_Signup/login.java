@@ -14,6 +14,8 @@ import com.example.mentor.Homepage.Homepage;
 import com.example.mentor.databinding.FragmentLoginBinding;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -32,6 +34,7 @@ public class login extends Fragment {
         View viewLayout = binding.getRoot();
 
         fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
         binding.btnProceed.setOnClickListener(view -> {
 

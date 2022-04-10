@@ -1,7 +1,10 @@
 package com.example.mentor.Homepage;
 
+import static androidx.core.content.res.ResourcesCompat.getColor;
+
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,18 +24,18 @@ import com.example.mentor.adapters.DailyTimeAdapter;
 import com.example.mentor.databinding.FragmentDailyTimePreviewBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.ClickedUser_Schedule;
-import com.example.mentor.misc.User;
 import com.example.mentor.utilities.SwitchLayout;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,8 +50,8 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
     private FragmentDailyTimePreviewBinding binding;
     private int hour, minute;
     private FirebaseFirestore fStore;
-    private final String fUser = Account_Details.User_Details.getUID();
-    private final String fClicked = Account_Details.User_Clicked.getUID();
+    Account_Details fClicked = Account_Details.User_Clicked;
+    Account_Details fUser = Account_Details.User_Details;
     private LocalDate selectedDate;
 
     @Override
@@ -64,15 +67,19 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
 
         binding.imgBTNRequest.setOnClickListener(view -> {
             binding.cardSendProposal.setVisibility(View.VISIBLE);
+            binding.cardMainContent.setVisibility(View.GONE);
             OffsetTime offset = OffsetTime.now();
             binding.btnTimeStartPicker.setText(String.format(Locale.getDefault(), "%02d:%02d", offset.getHour(), offset.getMinute()));
             binding.btnTimeEndPicker.setText(String.format(Locale.getDefault(), "%02d:%02d", offset.getHour(), offset.getMinute()+1));
         });
 
-        binding.imgBTNCancelMSG.setOnClickListener(view -> binding.cardSendProposal.setVisibility(View.GONE));
+        binding.imgBTNCancelMSG.setOnClickListener(view -> {
+            binding.cardSendProposal.setVisibility(View.GONE);
+            binding.cardMainContent.setVisibility(View.VISIBLE);
+        });
 
         binding.imgBTNBack.setOnClickListener(view -> {
-            if(fUser.equals(fClicked)) {
+            if(fUser.getUID().equals(fClicked.getUID())) {
                 SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new user_Profile(), "user_Profile");
             } else {SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new Search_Users(), "search_Users");}
         });
@@ -81,56 +88,16 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         binding.btnTimeEndPicker.setOnClickListener(view -> popTimePicker(binding.btnTimeEndPicker));
 
         binding.btnProceed.setOnClickListener(view -> {
-            if(Objects.requireNonNull(binding.inpTXTElaboration.getText()).toString().trim().isEmpty()){
+            if(!binding.drpSubject.getSelectedItem().toString().equals("Occupied") && Objects.requireNonNull(binding.inpTXTElaboration.getText()).toString().trim().isEmpty()){
                 binding.inpTXTElaboration.setError("This field is required");
             }else{
-                fStore = FirebaseFirestore.getInstance();
-                Map<String,Object> requestInfo;
-                requestInfo = new HashMap<>();
-                requestInfo.put("status", 0);
-                requestInfo.put("requestorUID", Account_Details.User_Details.getUID());
-                requestInfo.put("requestorName", Account_Details.User_Details.getFullName());
-                requestInfo.put("requestorPic", Account_Details.User_Details.getPicString());
-                requestInfo.put("requestorEmail", Account_Details.User_Details.getEmail());
-                requestInfo.put("requestorIsMentor", Account_Details.User_Details.getIsMentor());
-                requestInfo.put("requesteeUID", Account_Details.User_Clicked.getUID());
-                requestInfo.put("requesteeName", Account_Details.User_Clicked.getFullName());
-                requestInfo.put("requesteePic", Account_Details.User_Clicked.getPicString());
-                requestInfo.put("requesteeEmail", Account_Details.User_Clicked.getEmail());
-                requestInfo.put("requesteeIsMentor", Account_Details.User_Clicked.getIsMentor());
-                requestInfo.put("subject", binding.drpSubject.getSelectedItem().toString());
-                requestInfo.put("date", binding.txtMonthView.getText().toString());
-                requestInfo.put("startTime", binding.btnTimeStartPicker.getText().toString());
-                requestInfo.put("endTime", binding.btnTimeEndPicker.getText().toString());
-                requestInfo.put("description", binding.inpTXTElaboration.getText().toString());
-
-                String collectionPath = "proposals";
-                if(fUser.equals(fClicked)){
-                    collectionPath = "schedules";
-                }
-                String finalCollectionPath = collectionPath;
-                fStore.collection("Users").document(fClicked).collection(collectionPath).get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        DocumentReference document = fStore.collection("Users").document(fClicked).collection(finalCollectionPath).document(fUser);
-                        document.set(requestInfo);
-                    }
-                });
-                fStore.collection("Users").document(fUser).collection(collectionPath)
-                        .get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        DocumentReference document = fStore.collection("Users").document(fUser).collection(finalCollectionPath).document(fClicked);
-                        document.set(requestInfo);
-                    }
-                });
-                Toast.makeText(getContext(), "Request Sent", Toast.LENGTH_SHORT).show();
-                binding.cardSendProposal.setVisibility(View.GONE);
-                initDailyCalendar();
+                addProposal();
             }
         });
 
         binding.btnPlusDay.setOnClickListener(view -> {
             selectedDate = selectedDate.plusDays(1);
-            Account_Details.User_Details.setSetDate(selectedDate);
+            fUser.setSetDate(selectedDate);
             Log.i("selectedDay", selectedDate.toString());
             initLayout();
             initDailyCalendar();
@@ -138,7 +105,7 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         });
         binding.btnMinusDay.setOnClickListener(view -> {
             selectedDate = selectedDate.minusDays(1);
-            Account_Details.User_Details.setSetDate(selectedDate);
+            fUser.setSetDate(selectedDate);
             Log.i("selectedDay", selectedDate.toString());
             initLayout();
             initDailyCalendar();
@@ -148,13 +115,112 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         return viewLayout;
     }
 
+    private void addProposal() {
+        fStore = FirebaseFirestore.getInstance();
+        Map<String,Object> requestInfo;
+        requestInfo = new HashMap<>();
+        requestInfo.put("status", 0);
+        requestInfo.put("requestorUID", fUser.getUID());
+        requestInfo.put("requestorName", fUser.getFullName());
+        requestInfo.put("requestorPic", fUser.getPicString());
+        requestInfo.put("requestorEmail", fUser.getEmail());
+        requestInfo.put("requestorIsMentor", fUser.getIsMentor());
+        requestInfo.put("requesteeUID", fClicked.getUID());
+        requestInfo.put("requesteeName", fClicked.getFullName());
+        requestInfo.put("requesteePic", fClicked.getPicString());
+        requestInfo.put("requesteeEmail", fClicked.getEmail());
+        requestInfo.put("requesteeIsMentor", fClicked.getIsMentor());
+        requestInfo.put("subject", binding.drpSubject.getSelectedItem().toString());
+        requestInfo.put("date", binding.txtMonthView.getText().toString());
+        requestInfo.put("startTime", binding.btnTimeStartPicker.getText().toString());
+        requestInfo.put("endTime", binding.btnTimeEndPicker.getText().toString());
+        requestInfo.put("description", String.valueOf(binding.inpTXTElaboration.getText()));
+
+        String collectionPath;
+        if(fUser.getUID().equals(fClicked.getUID())){collectionPath = "schedules";}
+        else{collectionPath = "proposals";}
+
+        fStore.collection("Users").document(fClicked.getUID()).collection(collectionPath).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (task.getResult().size() > 0) {
+                    boolean isDocuExists=false;
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                        if (Objects.requireNonNull(requestInfo.get("requestorUID")).equals(queryDocumentSnapshot.get("requestorUID"))) {
+                            if (Objects.requireNonNull(requestInfo.get("date")).equals(queryDocumentSnapshot.get("date"))) {
+                                if (Objects.requireNonNull(requestInfo.get("subject")).equals(queryDocumentSnapshot.get("subject"))) {
+                                    DocumentReference document = fStore.collection("Users").document(fClicked.getUID())
+                                            .collection(collectionPath).document(queryDocumentSnapshot.getId());
+                                    document.set(requestInfo);
+                                    document = fStore.collection("Users").document(fUser.getUID())
+                                            .collection(collectionPath).document(queryDocumentSnapshot.getId());
+                                    document.set(requestInfo);
+                                    isDocuExists = true;
+                                }
+                            }
+                        }
+                    }
+                    Log.i("fClicked isDocuExists", String.valueOf(isDocuExists));
+                    if(!isDocuExists){
+                        CollectionReference collection = fStore.collection("Users").document(fClicked.getUID()).collection(collectionPath);
+                        collection.add(requestInfo).addOnSuccessListener(documentReference -> fStore.collection("Users").document(fClicked.getUID()).collection(collectionPath).get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                if (task1.getResult().size() > 0) {
+                                    for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
+                                        if (Objects.requireNonNull(requestInfo.get("requestorUID")).equals(queryDocumentSnapshot.get("requestorUID"))) {
+                                            if (Objects.requireNonNull(requestInfo.get("date")).equals(queryDocumentSnapshot.get("date"))) {
+                                                if (Objects.requireNonNull(requestInfo.get("subject")).equals(queryDocumentSnapshot.get("subject"))) {
+                                                    Log.i("match", queryDocumentSnapshot.getId());
+                                                    DocumentReference document = fStore.collection("Users").document(fUser.getUID())
+                                                            .collection(collectionPath).document(queryDocumentSnapshot.getId());
+                                                    document.set(requestInfo);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }));
+                    }
+                }else{
+                    Log.i("addProposal", "collection does not exist; creating new collection");
+                    CollectionReference collection = fStore.collection("Users").document(fClicked.getUID()).collection(collectionPath);
+                    collection.add(requestInfo).addOnSuccessListener(documentReference -> fStore.collection("Users").document(fClicked.getUID()).collection(collectionPath).get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            if (task1.getResult().size() > 0) {
+                                for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
+                                    if (Objects.requireNonNull(requestInfo.get("requestorUID")).equals(queryDocumentSnapshot.get("requestorUID"))) {
+                                        if (Objects.requireNonNull(requestInfo.get("date")).equals(queryDocumentSnapshot.get("date"))) {
+                                            if (Objects.requireNonNull(requestInfo.get("subject")).equals(queryDocumentSnapshot.get("subject"))) {
+                                                Log.i("match", queryDocumentSnapshot.getId());
+                                                DocumentReference document = fStore.collection("Users").document(fUser.getUID())
+                                                        .collection(collectionPath).document(queryDocumentSnapshot.getId());
+                                                document.set(requestInfo);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }));
+                }
+            }else{
+                Log.i("addProposal", "task failed");
+            }
+        });
+
+        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        binding.cardSendProposal.setVisibility(View.GONE);
+        binding.cardMainContent.setVisibility(View.VISIBLE);
+        initDailyCalendar();
+    }
+
     private void initSpinner() {
         // Spinner click listener
         binding.drpSubject.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categories = new ArrayList<>(Account_Details.User_Details.subjects);
         if(fUser.equals(fClicked)){
-            categories.add("Other");
+            categories.add("Occupied");
         }
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, categories);
@@ -167,18 +233,23 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
     private void initLayout(){
         Boolean isAccepting;
         String headerText;
-        if(!fUser.equals(fClicked)){
+        if(!fUser.getUID().equals(fClicked.getUID())){
+            binding.imgBTNRequest.setVisibility(View.VISIBLE);
+            Log.i("different", fUser.getUID() + " & " + fClicked.getUID());
             isAccepting = Account_Details.User_Clicked.getIsAccepting();
             if (isAccepting != null) {
                 if (isAccepting) {
-                    binding.imgBTNRequest.setColorFilter(android.R.color.holo_green_light);
+                    Log.i("isAccepting", isAccepting.toString());
+                    binding.imgBTNRequest.setColorFilter(getColor(getResources(), R.color.green, null), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    binding.imgBTNRequest.setColorFilter(android.R.color.holo_red_dark);
+                    Log.i("isNotAccepting", isAccepting.toString());
+                    binding.imgBTNRequest.setColorFilter(getColor(getResources(), R.color.red, null), PorterDuff.Mode.SRC_ATOP);
                 }
             }
-            headerText = Account_Details.User_Clicked.getFullName() + "'s " + getResources().getString(R.string.SchedulePrompt);
+            headerText = fClicked.getFullName() + "'s " + getResources().getString(R.string.SchedulePrompt);
         }else{
-            headerText = Account_Details.User_Details.getFullName() + "'s " + getResources().getString(R.string.SchedulePrompt);
+            Log.i("same", fUser.getUID() + " & " + fClicked.getUID());
+            headerText = fUser.getFullName() + "'s " + getResources().getString(R.string.SchedulePrompt);
         }
         binding.txtHeader.setText(headerText);
     }
@@ -207,7 +278,9 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        if(binding.drpSubject.getSelectedItem().toString().equals("Occupied")){
+            binding.inpTXTElaboration.setVisibility(View.GONE);
+        }
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -216,106 +289,159 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
     }
 
     public void getSchedule(){
-        List<String> listSchedule = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
+        List<ClickedUser_Schedule> listSchedule = new ArrayList<>();
+        DateTimeFormatter dMy = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        DateTimeFormatter Hm = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDate selectedDate = LocalDate.parse(binding.txtMonthView.getText().toString().trim(),dMy);
 
         fStore = FirebaseFirestore.getInstance();
-        fStore.collection("Users").document(fClicked).collection("schedules")
-                .get().addOnCompleteListener(task -> {
-                    if(task.isSuccessful() && task.getResult() != null){
-                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                            ClickedUser_Schedule schedule = new ClickedUser_Schedule();
-                            if (Objects.equals(queryDocumentSnapshot.getString("date"), binding.txtMonthView.getText().toString())) {
-                                schedule.reqName = queryDocumentSnapshot.getString("requestorName");
-                                schedule.reqSubject = queryDocumentSnapshot.getString("subject");
-                                schedule.reqDate = queryDocumentSnapshot.getString("date");
-                                schedule.reqStartTime = queryDocumentSnapshot.getString("startTime");
-                                schedule.reqEndTime = queryDocumentSnapshot.getString("endTime");
-                                schedule.reqDescription = queryDocumentSnapshot.getString("description");
+        fStore.collection("Users").document(fClicked.getUID()).collection("schedules").get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                if (task.getResult().size() > 0) {
+                    Log.i("taskSize", String.valueOf(task.getResult().size()));
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                        Log.i("schedules", binding.txtMonthView.getText().toString());
+                        LocalDate documentDate = LocalDate.parse(queryDocumentSnapshot.getString("date").trim(),dMy);
+                        if (documentDate.isEqual(selectedDate)) {
+                            Log.i("schedulesEqual", binding.txtMonthView.getText().toString());
 
-                                Date comp_StartTime1 = null;
-                                Date comp_StartTime2 = null;
-                                Date startTime = null;
-                                Date endTime = null;
-                                try {
-                                    comp_StartTime1 = sdf.parse("00:00");
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    comp_StartTime2 = sdf.parse("00:30");
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    startTime = sdf.parse(schedule.reqStartTime);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    endTime = sdf.parse(schedule.reqEndTime);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+                            LocalTime comp_StartTime1 = LocalTime.parse("00:00", Hm);
+                            LocalTime comp_StartTime2 = LocalTime.parse("00:30", Hm);
+                            LocalTime startTime = LocalTime.parse(queryDocumentSnapshot.getString("startTime"), Hm);
+                            LocalTime endTime = LocalTime.parse(queryDocumentSnapshot.getString("endTime"), Hm);
 
-                                Log.i("startTime", startTime + " comp:" + comp_StartTime1 + " - " + comp_StartTime2);
-                                Log.i("endTime", schedule.reqEndTime);
+                            Log.i("startTime", startTime + " comp:" + comp_StartTime1 + " - " + comp_StartTime2);
+                            Log.i("endTime", Hm.format(endTime));
 
-                                for (int i = 0; i < 48; i++) {
-                                    assert comp_StartTime1 != null;
-                                    if ((Objects.requireNonNull(startTime).after(comp_StartTime1) || sdf.format(startTime).equals(sdf.format(comp_StartTime1))) && startTime.before(comp_StartTime2)) {
-                                        listSchedule.add(schedule.reqName);
-
-                                        Date comp_EndTime1;
-                                        comp_EndTime1 = comp_StartTime1;
-                                        Date comp_EndTime2;
-                                        comp_EndTime2 = comp_StartTime2;
-
-                                        for (int j = 0; j < 48; j++) {
-                                            assert comp_EndTime2 != null;
-                                            assert endTime != null;
-                                            if (endTime.after(comp_EndTime1) && (endTime.before(comp_EndTime2) || sdf.format(endTime).equals(sdf.format(comp_EndTime2)))) {
-                                                listSchedule.set(listSchedule.size() - 1, schedule.reqEndTime);
-                                            } else if (comp_EndTime1.before(endTime)) {
-                                                listSchedule.add(schedule.reqSubject);
-                                            } else {
-                                                listSchedule.add("");
-                                            }
-                                            Objects.requireNonNull(comp_EndTime1).setTime(comp_EndTime1.getTime() + 30 * 60000);
-                                            Objects.requireNonNull(comp_EndTime2).setTime(comp_EndTime2.getTime() + 30 * 60000);
-                                        }
-                                    } else {
-                                        listSchedule.add("");
-                                    }
-                                    Objects.requireNonNull(comp_StartTime1).setTime(comp_StartTime1.getTime() + 30 * 60000);
-                                    Objects.requireNonNull(comp_StartTime2).setTime(comp_StartTime2.getTime() + 30 * 60000);
-                                }
-                            } else {
-                                Log.i("date no match", "no match");
-                                Log.i("getDate", queryDocumentSnapshot.getString("date") + " and " + binding.txtMonthView.getText().toString());
-                                for (int i = 0; i < 48; i++) {
-                                    listSchedule.add("");
-                                }
-                            }
-                            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-                            binding.recyclerDailyTime.setLayoutManager(mLinearLayoutManager);
-                            List<String> dailyTime = new ArrayList<>();
-
-                            Date populate_Time = null;
-                            try {
-                                populate_Time = sdf.parse("00:00");
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
                             for (int i = 0; i < 48; i++) {
-                                assert populate_Time != null;
-                                dailyTime.add(sdf.format(populate_Time) + " - " + sdf.format(populate_Time.getTime() + 30 * 60000));
-                                populate_Time.setTime(populate_Time.getTime() + 30 * 60000);
-                            }
+                                if ((startTime.isAfter(comp_StartTime1) || startTime.equals(comp_StartTime1)) && startTime.isBefore(comp_StartTime2)) {
 
-                            DailyTimeAdapter dailyTimeAdapter = new DailyTimeAdapter(dailyTime, listSchedule);
-                            binding.recyclerDailyTime.setAdapter(dailyTimeAdapter);
-                            binding.scrollDailyCalendar.setVisibility(View.VISIBLE);
-                        }}});
+                                    LocalTime comp_EndTime1 = comp_StartTime1;
+                                    LocalTime comp_EndTime2 = comp_StartTime2;
+
+                                    for (int j = 0; j < 48; j++) {
+                                        ClickedUser_Schedule scheduleEnd = new ClickedUser_Schedule();
+                                        scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
+                                        Log.d("requestorName", scheduleEnd.reqName);
+                                        scheduleEnd.reqSubject = queryDocumentSnapshot.getString("subject");
+                                        scheduleEnd.reqDate = queryDocumentSnapshot.getString("date");
+                                        scheduleEnd.reqStartTime = queryDocumentSnapshot.getString("startTime");
+                                        scheduleEnd.reqEndTime = queryDocumentSnapshot.getString("endTime");
+                                        scheduleEnd.reqDescription = queryDocumentSnapshot.getString("description");
+                                        scheduleEnd.txtColor = getColor(getResources(), R.color.white, null);
+                                        switch (scheduleEnd.reqSubject){
+                                            case "Adobe Ps":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.AdobePsblue, null);
+                                                break;
+                                            case "Animation":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.AdobeAeViolet, null);
+                                                break;
+                                            case "Arts":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.ArtsPurple, null);
+                                                break;
+                                            case "AutoCAD":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.AutoCADRed, null);
+                                                break;
+                                            case "Engineering":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.EngineeringOrange, null);
+                                                break;
+                                            case "Languages":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.LanguageGreen, null);
+                                                break;
+                                            case "Law":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.LawBlue, null);
+                                                break;
+                                            case "MS Office":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.MSOfficeOrange, null);
+                                                break;
+                                            case "Mathematics":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.MathYellow, null);
+                                                break;
+                                            case "Programming":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.ProgrammingCyan, null);
+                                                break;
+                                            case "Sciences":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.ScienceGreen, null);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        if (endTime.isAfter(comp_EndTime1) && (endTime.isBefore(comp_EndTime2) || endTime.equals(comp_EndTime2))) {
+                                            scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
+                                            Log.i("schedulesEndName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
+                                            listSchedule.add(scheduleEnd);}
+                                        else if (comp_EndTime1.isBefore(endTime)) {
+                                            scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
+                                            Log.i("schedulesEndName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
+                                            listSchedule.add(scheduleEnd);
+                                        } else {
+                                            scheduleEnd.reqName = "";
+                                            Log.i("schedulesBlankName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
+                                            listSchedule.add(scheduleEnd);
+                                        }
+                                        comp_EndTime1 = comp_EndTime1.plusMinutes(30);
+                                        comp_EndTime2 = comp_EndTime2.plusMinutes(30);
+                                    }
+                                } else {
+                                    ClickedUser_Schedule schedule = new ClickedUser_Schedule();
+                                    schedule.reqName = "";
+                                    listSchedule.add(schedule);
+                                }
+                                comp_StartTime1 = comp_StartTime1.plusMinutes(30);
+                                comp_StartTime2 = comp_StartTime2.plusMinutes(30);
+                            }
+                        }
+                        else {
+                            Log.i("date no match", "no match");
+                            Log.i("getDate", queryDocumentSnapshot.getString("date") + " and " + binding.txtMonthView.getText().toString());
+                            for (int i = 0; i < 48; i++) {
+                                ClickedUser_Schedule schedule = new ClickedUser_Schedule();
+                                schedule.reqName = "notDate";
+                                listSchedule.add(schedule);
+                            }
+                        }
+                        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+                        binding.recyclerDailyTime.setLayoutManager(mLinearLayoutManager);
+                        List<String> dailyTime = new ArrayList<>();
+
+                        LocalTime populate_Time = LocalTime.parse("00:00", Hm);
+
+                        for (int i = 0; i < 48; i++) {
+                            Log.d("listSchedule", i + " Subject " + listSchedule.get(i).reqSubject);
+                            assert populate_Time != null;
+                            dailyTime.add(Hm.format(populate_Time) + " - " + Hm.format(populate_Time.plusMinutes(30)));
+                            populate_Time = populate_Time.plusMinutes(30);
+                        }
+
+                        DailyTimeAdapter dailyTimeAdapter = new DailyTimeAdapter(dailyTime, listSchedule);
+                        binding.recyclerDailyTime.setAdapter(dailyTimeAdapter);
+                        binding.scrollDailyCalendar.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    Log.i("task", String.valueOf(task.getResult().size()));
+                    for (int i = 0; i < 48; i++) {
+                        ClickedUser_Schedule schedule = new ClickedUser_Schedule();
+                        schedule.reqName = "";
+                        listSchedule.add(schedule);
+                    }
+                    LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+                    binding.recyclerDailyTime.setLayoutManager(mLinearLayoutManager);
+                    List<String> dailyTime = new ArrayList<>();
+
+                    LocalTime populate_Time = LocalTime.parse("00:00", Hm);
+
+                    for (int i = 0; i < 48; i++) {
+                        assert populate_Time != null;
+                        dailyTime.add(Hm.format(populate_Time) + " - " + Hm.format(populate_Time.plusMinutes(30)));
+                        populate_Time = populate_Time.plusMinutes(30);
+                    }
+
+                    DailyTimeAdapter dailyTimeAdapter = new DailyTimeAdapter(dailyTime, listSchedule);
+                    binding.recyclerDailyTime.setAdapter(dailyTimeAdapter);
+                    binding.scrollDailyCalendar.setVisibility(View.VISIBLE);
+                }
+            }
+                });
     }
 }

@@ -13,6 +13,8 @@ import com.example.mentor.databinding.ActivityMainBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Main_Activity extends AppCompatActivity {
 
@@ -27,14 +29,15 @@ public class Main_Activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        if(fAuth.getCurrentUser() != null) {
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        FirebaseUser fUser = fAuth.getCurrentUser();
+        if(fUser != null) {
             SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
             finish();
         }else {
             binding.imgDivider.setVisibility(View.VISIBLE);
             binding.switchSign.setVisibility(View.VISIBLE);
             binding.frameLayout.setVisibility(View.VISIBLE);
-            binding.progressBar.setVisibility(View.GONE);
             Account_Details.User_Details.reset();
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new login(), "login");
         }

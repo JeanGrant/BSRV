@@ -5,4 +5,5 @@ import java.util.ArrayList;
 
 public class ClickedUser_Schedule implements Serializable {
     public String reqDate, reqStartTime, reqEndTime, reqSubject, reqName, reqDescription;
+    public int bgColor, txtColor;
 }

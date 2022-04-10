@@ -78,16 +78,34 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                         if(isAccepting){binding.txtStatus.setText(R.string.CurrentlyAccepting);
                         }else{binding.txtStatus.setText(R.string.NoLongerAccepting);}
                     }
+
+                    Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
+                    isMentor = Account_Details.User_Details.getIsMentor();
                     Account_Details.User_Details.setAuthLevel(documentSnapshot.getLong("authLevel").intValue());
-                    switch (Objects.requireNonNull(Account_Details.User_Details.getAuthLevel())){
-                        case(0):
+                    if(isMentor) {
+                        if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
                             binding.txtAuthLVL.setText(R.string.AuthLVL_0);
-                            break;
-                        case(1):
+                        } else if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                            if(documentSnapshot.getLong("authLevel").intValue()<1) {
+                                if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                    fStore.collection("Users").document(fUser).update("authLevel", 1);
+                                }
+                            }
                             binding.txtAuthLVL.setText(R.string.AuthLVL_1);
-                            break;
-                        case(2):
+                        } else if (Account_Details.User_Details.getAuthLevel() == 2) {
                             binding.txtAuthLVL.setText(R.string.AuthLVL_2);
+                        } }
+                    else{
+                        if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
+                            binding.txtAuthLVL.setText(R.string.AuthLVL_0);
+                        } else {
+                            if(documentSnapshot.getLong("authLevel").intValue()<1) {
+                                if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                    fStore.collection("Users").document(fUser).update("authLevel", 2);
+                                }
+                            }
+                            binding.txtAuthLVL.setText(R.string.AuthLVL_2);
+                        }
                     }
                     Account_Details.User_Details.setFullName(documentSnapshot.getString("fullName"));
                     binding.txtFullName.setText(Account_Details.User_Details.getFullName());
@@ -96,8 +114,6 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                     Account_Details.User_Details.setBioEssay(documentSnapshot.getString("bioEssay"));
                     binding.txtBio.setText(Account_Details.User_Details.getBioEssay());
 
-                    Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
-                    isMentor = Account_Details.User_Details.getIsMentor();
                     Account_Details.User_Details.rates = (ArrayList<Long>) documentSnapshot.get("subjectRates");
                     rates = Account_Details.User_Details.rates;
                     Account_Details.User_Details.subjects = (ArrayList<String>) documentSnapshot.get("subjects");

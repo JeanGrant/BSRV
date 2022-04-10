@@ -1,22 +1,25 @@
 package com.example.mentor.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mentor.R;
 import com.example.mentor.databinding.LayoutDailytimeCellBinding;
+import com.example.mentor.misc.ClickedUser_Schedule;
 
 import java.util.List;
 
 public class DailyTimeAdapter extends RecyclerView.Adapter<DailyTimeAdapter.UserViewHolder>{
 
     private final List<String> dayTime;
-    private final List<String> schedule;
+    private final List<ClickedUser_Schedule> schedule;
 
-    public DailyTimeAdapter(List<String> dateTime, List<String> schedule) {
+    public DailyTimeAdapter(List<String> dateTime, List<ClickedUser_Schedule> schedule) {
         this.dayTime = dateTime;
         this.schedule = schedule;
     }
@@ -35,6 +38,11 @@ public class DailyTimeAdapter extends RecyclerView.Adapter<DailyTimeAdapter.User
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        if(position>0) {
+            if (schedule.get(position).reqName.equals(schedule.get(position - 1).reqName)) {
+                schedule.get(position).txtColor = schedule.get(position).bgColor;
+            }
+        }
         holder.setUserData(dayTime.get(position), schedule.get(position));
     }
 
@@ -51,13 +59,18 @@ public class DailyTimeAdapter extends RecyclerView.Adapter<DailyTimeAdapter.User
             super(dailytimeCellBinding.getRoot());
             binding = dailytimeCellBinding;
         }
-        void setUserData(String dailyTime, String scheduleName){
+        void setUserData(String dailyTime, ClickedUser_Schedule scheduleName){
             binding.txtDailyTime.setText(dailyTime);
-            if(scheduleName.isEmpty()){
+            if(scheduleName.reqName.isEmpty()){
+                Log.i("scheduleName", "isEmpty " + scheduleName.reqName);
                 binding.txtSchedule.setBackgroundColor(Color.argb(255, 255,255,255));
             }else{
-                binding.txtSchedule.setBackgroundColor(Color.argb(255,0,0,0));
-                binding.txtSchedule.setText(scheduleName);
+
+                Log.i("scheduleName", "!isEmpty " + scheduleName.reqName);
+                binding.txtSchedule.setBackgroundColor(scheduleName.bgColor);
+                String header = scheduleName.reqName + " " + scheduleName.reqSubject;
+                binding.txtSchedule.setText(header);
+                binding.txtSchedule.setTextColor(scheduleName.txtColor);
             }
         }
     }

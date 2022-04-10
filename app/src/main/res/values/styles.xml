@@ -10,4 +10,9 @@
         <item name="android:scrollHorizontally">true</item>
     </style>
 
+    <style name="TimePickerDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/brown</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

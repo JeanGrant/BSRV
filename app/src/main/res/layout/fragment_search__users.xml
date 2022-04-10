@@ -21,8 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_SendProposal"
@@ -34,7 +33,7 @@
             android:fontFamily="@font/baloo"
             android:text="@string/SendProposal"
             android:textColor="@color/blue"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_Proposals"

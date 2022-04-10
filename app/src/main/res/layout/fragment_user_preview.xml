@@ -209,20 +209,19 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="-"/>
+                                android:text="@string/prevMonth"/>
                             <TextView
                                 android:id="@+id/txt_MonthView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
-                                android:text="Mar 2022"
                                 android:textAlignment="center"/>
                             <Button
                                 android:id="@+id/btn_plusMonth"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="+"/>
+                                android:text="@string/nextMonth"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -303,9 +302,10 @@
             app:cardElevation="@dimen/_2sdp"
             app:cardUseCompatPadding="true">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/layout_Navigation"
@@ -327,23 +327,27 @@
                         android:id="@+id/imgBTN_Delete"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
+                        android:layout_alignWithParentIfMissing="true"
                         android:layout_marginVertical="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_toStartOf="@id/imgNull"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/back"
                         android:src="@drawable/ic_outline_delete_outline_24"
+                        android:visibility="gone"
                         app:tint="#D10000" />
 
                     <ImageView
                         android:id="@+id/imgNull"
                         android:layout_width="1dp"
                         android:layout_height="@dimen/_25sdp"
-                        android:layout_alignTop="@id/imgBTN_Accept"
-                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_alignWithParentIfMissing="true"
+                        android:layout_alignTop="@id/imgBTN_minimize"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_toStartOf="@id/imgBTN_Accept"
                         android:background="#30000000"
-                        android:contentDescription="@null" />
+                        android:contentDescription="@null"
+                        android:visibility="gone" />
 
                     <ImageButton
                         android:id="@+id/imgBTN_Accept"
@@ -355,28 +359,90 @@
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/back"
                         android:src="@drawable/ic_baseline_check_24"
+                        android:visibility="gone"
                         app:tint="#57D100" />
                 </RelativeLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_below="@id/layout_Navigation"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerProposals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FAFAFA"
+                    android:padding="@dimen/_20sdp"
+                    android:visibility="gone"/>
 
                 <RelativeLayout
                     android:id="@+id/layout_mainBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layout_Navigation"
                     android:background="#FAFAFA"
-                    android:padding="@dimen/_20sdp">
+                    android:padding="@dimen/_20sdp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/uidPrompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/podkova"
+                        android:text="@string/requestUID"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <TextView
+                        android:id="@+id/txtRequestUID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/uidPrompt"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/uidPrompt"
+                        android:fontFamily="@font/mako"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/uidPrompt"
+                        android:background="#30000000"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/statusPrompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/uidPrompt"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/podkova"
+                        android:text="@string/statusPrompt"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_reqStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/statusPrompt"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/statusPrompt"
+                        android:fontFamily="@font/mako"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/statusPrompt"
+                        android:background="#30000000"
+                        android:contentDescription="@null" />
 
                     <TextView
                         android:id="@+id/subjectPrompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/statusPrompt"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/podkova"
                         android:text="@string/SubjectPrompt"
                         android:textSize="@dimen/_11ssp" />
@@ -469,7 +535,6 @@
                         android:layout_below="@id/descPrompt"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/mako"
-                        android:text="@string/FullName"
                         android:textSize="@dimen/_10ssp" />
 
                     <ImageView
@@ -480,12 +545,111 @@
                         android:contentDescription="@null" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/layout_counter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FAFAFA"
+                    android:padding="@dimen/_20sdp"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:id="@+id/layout_counterDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hintDate" />
+
+                        <Button
+                            android:id="@+id/btn_DatePicker"
+                            style="?android:spinnerStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mako"
+                            android:text="@string/defTime"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="#30000000"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_below="@id/layout_counterDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hintStartTime" />
+
+                        <Button
+                            android:id="@+id/btn_TimeStartPicker"
+                            style="?android:spinnerStyle"
+                            android:layout_width="@dimen/_85sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mako"
+                            android:text="@string/defTime"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="#30000000"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_below="@id/layout_counterDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hintEndTime" />
+
+                        <Button
+                            android:id="@+id/btn_TimeEndPicker"
+                            style="?android:spinnerStyle"
+                            android:layout_width="@dimen/_85sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mako"
+                            android:text="@string/defTime"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="#30000000"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+                </RelativeLayout>
+
                 <LinearLayout
                     android:id="@+id/layout_actionContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layout_mainBody"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -504,7 +668,8 @@
                         android:textColor="@color/blue"
                         android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
-            </RelativeLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

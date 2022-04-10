@@ -35,7 +35,11 @@ public class createAcc_Type extends Fragment {
             binding.btnStudent.setTextColor(ContextCompat.getColor(requireContext(),R.color.SQBTN_txtcolor));
             binding.cardMentor.setCardBackgroundColor(ContextCompat.getColor(requireContext(),R.color.blue));
             binding.btnMentor.setTextColor(ContextCompat.getColor(requireContext(),R.color.white));
+            binding.layoutNotice.setVisibility(View.VISIBLE);
         });
+
+        binding.btnDismiss.setOnClickListener(view -> binding.layoutNotice.setVisibility(View.GONE));
+
         binding.cardStudent.setOnClickListener(view -> {
             Account_Details.User_Details.setIsMentor(false);
             binding.cardMentor.setCardBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white));

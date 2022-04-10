@@ -1,6 +1,7 @@
 package com.example.mentor.CreateAccount;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,6 @@ public class createAcc_Finalize extends Fragment {
             } else {
                 if (password.equals(binding.inpTXTConfirmPassword.getText().toString())) {
                     fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-                        binding.layoutContents.setVisibility(View.GONE);
-                        binding.progressBar.setVisibility(View.VISIBLE);
 
                         Account_Details.User_Details.setAuthLevel(0);
                         Account_Details.User_Details.setEmail(email);
@@ -63,6 +62,10 @@ public class createAcc_Finalize extends Fragment {
 
                         FirebaseUser fUser = fAuth.getCurrentUser();
                         assert fUser != null;
+
+                        fUser.sendEmailVerification().addOnSuccessListener(unused -> Toast.makeText(requireContext(), "Verification sent to your email", Toast.LENGTH_SHORT)
+                                .show()).addOnFailureListener(e -> Log.i("onFailure: Email not Sent", e.getMessage()));
+
                         DocumentReference df = fStore.collection("Users").document(fUser.getUid());
                         Map<String,Object> userInfo = new HashMap<>();
                         userInfo.put("isMentor", Account_Details.User_Details.getIsMentor());
@@ -78,10 +81,7 @@ public class createAcc_Finalize extends Fragment {
                         df.set(userInfo);
 
                         SwitchLayout.activityStarter(getContext(), Homepage.class);
-                    }).addOnFailureListener(e -> {
-                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        binding.layoutContents.setVisibility(View.VISIBLE);
-                        binding.progressBar.setVisibility(View.GONE);});
+                    }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
                 } else {
                     binding.inpTXTPassword.setError("Password does not match");
                 }
