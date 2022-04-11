@@ -644,12 +644,24 @@
                     </LinearLayout>
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/txt_paymentProcedure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FAFAFA"
+                    android:padding="@dimen/_20sdp"
+                    android:visibility="gone"
+                    android:textSize="@dimen/_12ssp"
+                    android:text="@string/paymentProcedureTXT"
+                    android:textAlignment="textStart"
+                    android:fontFamily="@font/mako"/>
+
                 <LinearLayout
                     android:id="@+id/layout_actionContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="match_parent"

@@ -23,17 +23,18 @@ import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.SubjectRates;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class user_Profile extends Fragment implements CalendarAdapter.OnItemListener{
@@ -81,12 +82,16 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
 
                     Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
                     isMentor = Account_Details.User_Details.getIsMentor();
-                    Account_Details.User_Details.setAuthLevel(documentSnapshot.getLong("authLevel").intValue());
+
+                    Long authLevel = documentSnapshot.getLong("authLevel");
+                    assert authLevel != null;
+                    Account_Details.User_Details.setAuthLevel(authLevel.intValue());
+
                     if(isMentor) {
                         if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
                             binding.txtAuthLVL.setText(R.string.AuthLVL_0);
                         } else if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                            if(documentSnapshot.getLong("authLevel").intValue()<1) {
+                            if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                                     fStore.collection("Users").document(fUser).update("authLevel", 1);
                                 }
@@ -99,7 +104,7 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                         if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
                             binding.txtAuthLVL.setText(R.string.AuthLVL_0);
                         } else {
-                            if(documentSnapshot.getLong("authLevel").intValue()<1) {
+                            if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                                     fStore.collection("Users").document(fUser).update("authLevel", 2);
                                 }
@@ -119,6 +124,8 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                     Account_Details.User_Details.subjects = (ArrayList<String>) documentSnapshot.get("subjects");
                     subjects = Account_Details.User_Details.subjects;
 
+                    assert subjects != null;
+
                     initLstSubj(isMentor, rates, subjects);
                     selectedDate = LocalDate.now();
                     setMonthView();
@@ -127,6 +134,7 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                     binding.layoutHeader.setVisibility(View.VISIBLE);
                     binding.txtBio.setVisibility(View.VISIBLE);
                     binding.cardSecondary.setVisibility(View.VISIBLE);
+                    prop2sched();
                 });
             }
         });
@@ -246,20 +254,13 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.equals("")){
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy ", java.util.Locale.getDefault());
-            try {
-                String selectedMY = sdf.format(Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-                sdf = new SimpleDateFormat("dd MMMM yyyy ", java.util.Locale.getDefault());
-                Date selectedDay = sdf.parse(dayText + " " + selectedMY);
-                Log.i("selectedDay", selectedDay.toString());
-                assert selectedDay != null;
-                LocalDate selectedLocalDay = selectedDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Account_Details.User_Details.setSetDate(selectedLocalDay);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                Log.i("selectedDay", e.getMessage());
-                Log.i("selectedDay", dayText + " " + selectedDate);
-            }
+            DateTimeFormatter MY = DateTimeFormatter.ofPattern("MMMM yyyy ");
+            String selectedMY = MY.format(selectedDate);
+            DateTimeFormatter dMY = DateTimeFormatter.ofPattern("dd MMMM yyyy ");
+            LocalDate selectedDay = LocalDate.parse(dayText + " " + selectedMY, dMY);
+            Log.i("selectedDay", selectedDay.toString());
+            Account_Details.User_Details.setSetDate(selectedDay);
+
             Account_Details.User_Clicked.setUID(Account_Details.User_Details.getUID());
             SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new dailyTime_preview(), "dailyTime_Preview");
         }
@@ -273,5 +274,97 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
     private void nextMonthAction(){
         selectedDate = selectedDate.plusMonths(1);
         setMonthView();
+    }
+
+    private void prop2sched(){
+        CollectionReference collection = fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("proposals");
+
+        collection.get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        if(task.getResult().size()>0){
+
+                            for (QueryDocumentSnapshot qDocSnap : task.getResult()){
+                                Long status = qDocSnap.getLong("status");
+                                assert status != null;
+                                if (status.intValue()==3){
+                                    Map<String, Object> scheduleInfo;
+                                    scheduleInfo = new HashMap<>();
+                                    scheduleInfo.put("requestorUID", qDocSnap.getString("requestorUID"));
+                                    scheduleInfo.put("requestorName", qDocSnap.getString("requestorName"));
+                                    scheduleInfo.put("requestorPic", qDocSnap.getString("requestorPic"));
+                                    scheduleInfo.put("requestorEmail", qDocSnap.getString("requestorEmail"));
+                                    scheduleInfo.put("requestorIsMentor", qDocSnap.getBoolean("requestorIsMentor"));
+                                    scheduleInfo.put("requesteeUID", qDocSnap.getString("requesteeUID"));
+                                    scheduleInfo.put("requesteeName", qDocSnap.getString("requesteeName"));
+                                    scheduleInfo.put("requesteePic", qDocSnap.getString("requesteePic"));
+                                    scheduleInfo.put("requesteeEmail", qDocSnap.getString("requesteeEmail"));
+                                    scheduleInfo.put("requesteeIsMentor", qDocSnap.getBoolean("requesteeIsMentor"));
+                                    scheduleInfo.put("subject", qDocSnap.getString("subject"));
+                                    scheduleInfo.put("date", qDocSnap.getString("date"));
+                                    scheduleInfo.put("startTime", qDocSnap.getString("startTime"));
+                                    scheduleInfo.put("endTime", qDocSnap.getString("endTime"));
+                                    scheduleInfo.put("description", qDocSnap.getString("description"));
+
+                                    DocumentReference document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requestorUID"))).collection("schedules").document(qDocSnap.getId());
+                                    document.set(scheduleInfo);
+                                    document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requesteeUID"))).collection("schedules").document(qDocSnap.getId());
+                                    document.set(scheduleInfo);
+
+                                    document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requestorUID"))).collection("proposals").document(qDocSnap.getId());
+                                    document.update("status", 4);
+                                    document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requesteeUID"))).collection("proposals").document(qDocSnap.getId());
+                                    document.update("status", 4);
+
+                                    document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requestorUID")));
+                                    document.get().addOnSuccessListener(documentSnapshot -> {
+
+                                        DocumentReference document1 = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requestorUID")));
+
+                                        Map<String, Object> history;
+                                        history = new HashMap<>();
+
+                                        if(documentSnapshot.get("transactionHistory") != null){
+                                            ArrayList<String> transactionHistory = (ArrayList<String>) documentSnapshot.get("transactionHistory");
+                                            if(!transactionHistory.contains(String.valueOf(scheduleInfo.get("requesteeUID")))){
+                                                transactionHistory.add(String.valueOf(scheduleInfo.get("requesteeUID")));
+                                                history.put("transactionHistory", transactionHistory);
+                                                document1.update(history);
+                                            }
+                                        }else{
+                                            ArrayList<String> transactionHistory = new ArrayList<>();
+                                            transactionHistory.add(String.valueOf(scheduleInfo.get("requesteeUID")));
+                                            history.put("transactionHistory", transactionHistory);
+                                            document1.update(history);
+                                        }
+                                    });
+
+                                    document = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requesteeUID")));
+                                    document.get().addOnSuccessListener(documentSnapshot -> {
+
+                                        DocumentReference document1 = fStore.collection("Users").document(String.valueOf(scheduleInfo.get("requesteeUID")));
+
+                                        Map<String, Object> history;
+                                        history = new HashMap<>();
+
+                                        if(documentSnapshot.get("transactionHistory") != null){
+                                            ArrayList<String> transactionHistory = (ArrayList<String>) documentSnapshot.get("transactionHistory");
+                                            if(!transactionHistory.contains(String.valueOf(scheduleInfo.get("requestorUID")))){
+                                                transactionHistory.add(String.valueOf(scheduleInfo.get("requestorUID")));
+                                                history.put("transactionHistory", transactionHistory);
+                                                document1.update(history);
+                                            }
+                                        }else{
+                                            ArrayList<String> transactionHistory = new ArrayList<>();
+                                            transactionHistory.add(String.valueOf(scheduleInfo.get("requestorUID")));
+                                            history.put("transactionHistory", transactionHistory);
+                                            document1.update(history);
+                                        }
+
+                                    });
+                                }
+                            }
+                        }
+                    }
+                });
     }
 }

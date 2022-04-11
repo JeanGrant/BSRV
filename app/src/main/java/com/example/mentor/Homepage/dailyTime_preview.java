@@ -219,7 +219,7 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         binding.drpSubject.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categories = new ArrayList<>(Account_Details.User_Details.subjects);
-        if(fUser.equals(fClicked)){
+        if(fUser.getUID().equals(fClicked.getUID())){
             categories.add("Occupied");
         }
         // Creating adapter for spinner
@@ -298,7 +298,11 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         fStore.collection("Users").document(fClicked.getUID()).collection("schedules").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 if (task.getResult().size() > 0) {
-                    Log.i("taskSize", String.valueOf(task.getResult().size()));
+                    for (int i = 0; i < 48; i++) {
+                        ClickedUser_Schedule schedule = new ClickedUser_Schedule();
+                        schedule.reqName = "";
+                        listSchedule.add(schedule);
+                    }
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                         Log.i("schedules", binding.txtMonthView.getText().toString());
                         LocalDate documentDate = LocalDate.parse(queryDocumentSnapshot.getString("date").trim(),dMy);
@@ -313,13 +317,13 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
                             Log.i("startTime", startTime + " comp:" + comp_StartTime1 + " - " + comp_StartTime2);
                             Log.i("endTime", Hm.format(endTime));
 
-                            for (int i = 0; i < 48; i++) {
+                            for (int h = 0; h < 48; h++) {
                                 if ((startTime.isAfter(comp_StartTime1) || startTime.equals(comp_StartTime1)) && startTime.isBefore(comp_StartTime2)) {
 
                                     LocalTime comp_EndTime1 = comp_StartTime1;
                                     LocalTime comp_EndTime2 = comp_StartTime2;
 
-                                    for (int j = 0; j < 48; j++) {
+                                    for (int j = h; j < 48; j++) {
                                         ClickedUser_Schedule scheduleEnd = new ClickedUser_Schedule();
                                         scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
                                         Log.d("requestorName", scheduleEnd.reqName);
@@ -363,21 +367,19 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
                                             case "Sciences":
                                                 scheduleEnd.bgColor = getColor(getResources(), R.color.ScienceGreen, null);
                                                 break;
+                                            case "Occupied":
+                                                scheduleEnd.bgColor = getColor(getResources(), R.color.black, null);
+                                                break;
                                             default:
                                                 break;
                                         }
-                                        if (endTime.isAfter(comp_EndTime1) && (endTime.isBefore(comp_EndTime2) || endTime.equals(comp_EndTime2))) {
+                                        if (comp_EndTime1.isBefore(endTime)) {
                                             scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
                                             Log.i("schedulesEndName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
-                                            listSchedule.add(scheduleEnd);}
-                                        else if (comp_EndTime1.isBefore(endTime)) {
-                                            scheduleEnd.reqName = queryDocumentSnapshot.getString("requestorName");
-                                            Log.i("schedulesEndName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
-                                            listSchedule.add(scheduleEnd);
+                                            listSchedule.set(j, scheduleEnd);
                                         } else {
                                             scheduleEnd.reqName = "";
                                             Log.i("schedulesBlankName", scheduleEnd.reqName + " " + scheduleEnd.bgColor);
-                                            listSchedule.add(scheduleEnd);
                                         }
                                         comp_EndTime1 = comp_EndTime1.plusMinutes(30);
                                         comp_EndTime2 = comp_EndTime2.plusMinutes(30);
@@ -385,7 +387,6 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
                                 } else {
                                     ClickedUser_Schedule schedule = new ClickedUser_Schedule();
                                     schedule.reqName = "";
-                                    listSchedule.add(schedule);
                                 }
                                 comp_StartTime1 = comp_StartTime1.plusMinutes(30);
                                 comp_StartTime2 = comp_StartTime2.plusMinutes(30);
@@ -396,8 +397,7 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
                             Log.i("getDate", queryDocumentSnapshot.getString("date") + " and " + binding.txtMonthView.getText().toString());
                             for (int i = 0; i < 48; i++) {
                                 ClickedUser_Schedule schedule = new ClickedUser_Schedule();
-                                schedule.reqName = "notDate";
-                                listSchedule.add(schedule);
+                                schedule.reqName = "";
                             }
                         }
                         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());

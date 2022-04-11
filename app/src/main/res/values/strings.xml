@@ -88,4 +88,8 @@
     <string name="requestUID">ID:</string>
     <string name="statusPrompt">Status:</string>
     <string name="hintDate">Date</string>
+    <string name="paymentProcedure">View Payment Procedure</string>
+    <string name="meetLink">Set Google Meet Link</string>
+    <string name="confirmPayment">Confirm Payment</string>
+    <string name="paymentProcedureTXT">Here are a few reminders when conducting your payment:\n\n1. Identify the subject in this particular proposal.\n2. Identify the corresponding subject rate in this particular mentor.\n3. Kindly send your payment through our GCash Account Number: xxxxxxx\n4. Kindly wait a maximum of three (3) business days for our team to confirm your payment.\n\nShould you have problems/concerns, kindly email us through: xxxx@xxxxx</string>
 </resources>

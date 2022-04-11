@@ -31,9 +31,7 @@ import com.example.mentor.misc.Proposal;
 import com.example.mentor.misc.ProposalListener;
 import com.example.mentor.misc.SubjectRates;
 import com.example.mentor.utilities.SwitchLayout;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -94,6 +92,12 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
                     binding.layoutActionContainer.setVisibility(View.GONE);
                     binding.recyclerProposals.setVisibility(View.VISIBLE);
                 }
+                else if (binding.txtPaymentProcedure.getVisibility()==View.VISIBLE){
+                    binding.txtPaymentProcedure.setVisibility(View.GONE);
+                    binding.layoutActionContainer.setVisibility(View.VISIBLE);
+                    binding.layoutMainBody.setVisibility(View.VISIBLE);
+                    binding.imgBTNDelete.setVisibility(View.VISIBLE);
+                }
                 else{
                     binding.layoutProposal.setVisibility(View.GONE);
                 }
@@ -123,6 +127,11 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
                 binding.layoutActionContainer.setVisibility(View.VISIBLE);
                 binding.btnOfferCounter.setText(R.string.counterProposal);
                 getProposalList();
+            }else if(binding.btnOfferCounter.getText().equals(getResources().getString(R.string.paymentProcedure))){
+                binding.imgBTNDelete.setVisibility(View.GONE);
+                binding.layoutMainBody.setVisibility(View.GONE);
+                binding.layoutActionContainer.setVisibility(View.GONE);
+                binding.txtPaymentProcedure.setVisibility(View.VISIBLE);
             }
 
         });
@@ -207,7 +216,7 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
     private void addProposal() {
 
         DocumentReference df =  fStore.collection("Users").document(fClicked).collection("proposals").document(binding.txtRequestUID.getText().toString());
-        df.get().addOnSuccessListener((OnSuccessListener<DocumentSnapshot>) documentSnapshot -> {
+        df.get().addOnSuccessListener(documentSnapshot -> {
 
             Map<String,Object> requestInfo;
             requestInfo = new HashMap<>();
@@ -273,34 +282,22 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
                 for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                     //skip if current loaded user is the logged in user
                     if (binding.txtRequestUID.getText().toString().equals(queryDocumentSnapshot.getId())) {
-                        Map<String,Object> scheduleInfo;
-                        scheduleInfo = new HashMap<>();
-                        scheduleInfo.put("requestorUID", queryDocumentSnapshot.getString("requestorUID"));
-                        scheduleInfo.put("requestorName", queryDocumentSnapshot.getString("requestorName"));
-                        scheduleInfo.put("requestorPic", queryDocumentSnapshot.getString("requestorPic"));
-                        scheduleInfo.put("requestorEmail", queryDocumentSnapshot.getString("requestorEmail"));
-                        scheduleInfo.put("requestorIsMentor", queryDocumentSnapshot.getBoolean("requestorIsMentor"));
-                        scheduleInfo.put("requesteeUID", queryDocumentSnapshot.getString("requesteeUID"));
-                        scheduleInfo.put("requesteeName", queryDocumentSnapshot.getString("requesteeName"));
-                        scheduleInfo.put("requesteePic", queryDocumentSnapshot.getString("requesteePic"));
-                        scheduleInfo.put("requesteeEmail", queryDocumentSnapshot.getString("requesteeEmail"));
-                        scheduleInfo.put("requesteeIsMentor", queryDocumentSnapshot.getBoolean("requesteeIsMentor"));
-                        scheduleInfo.put("subject", queryDocumentSnapshot.getString("subject"));
-                        scheduleInfo.put("date", queryDocumentSnapshot.getString("date"));
-                        scheduleInfo.put("startTime", queryDocumentSnapshot.getString("startTime"));
-                        scheduleInfo.put("endTime", queryDocumentSnapshot.getString("endTime"));
-                        scheduleInfo.put("description", queryDocumentSnapshot.getString("description"));
+                        Long reqStatus = queryDocumentSnapshot.getLong("status");
+                        assert reqStatus != null;
+                        if((reqStatus.intValue()==0 && fUser.equals(queryDocumentSnapshot.getString("requesteeUID"))) || (reqStatus.intValue()==1 && fUser.equals(queryDocumentSnapshot.getString("requestorUID")))){
+                            DocumentReference df = fStore.collection("Users").document(fClicked).collection("proposals").document(queryDocumentSnapshot.getId());
+                            df.update("status", 2);
+                            df = fStore.collection("Users").document(fUser).collection("proposals").document(queryDocumentSnapshot.getId());
+                            df.update("status", 2);
+                            getProposalList();
+                            binding.layoutMainBody.setVisibility(View.GONE);
+                            binding.layoutActionContainer.setVisibility(View.GONE);
+                            binding.recyclerProposals.setVisibility(View.VISIBLE);
+                            binding.imgBTNDelete.setVisibility(View.GONE);
+                            binding.imgBTNAccept.setVisibility(View.GONE);
+                            binding.imgNull.setVisibility(View.GONE);
 
-                        DocumentReference document = fStore.collection("Users").document(fClicked).collection("proposals").document(queryDocumentSnapshot.getId());
-                        document.delete();
-                        document = fStore.collection("Users").document(fUser).collection("proposals").document(queryDocumentSnapshot.getId());
-                        document.delete();
-                        document = fStore.collection("Users").document(fClicked).collection("schedules").document(queryDocumentSnapshot.getId());
-                        document.set(scheduleInfo);
-                        document = fStore.collection("Users").document(fUser).collection("schedules").document(queryDocumentSnapshot.getId());
-                        document.set(scheduleInfo);
-
-                        binding.layoutProposal.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
@@ -428,6 +425,7 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
         List<SubjectRates> list_subjrate = new ArrayList<>();
         for (int i = 0; i < subjects.size(); i++) {
             SubjectRates subjRates = new SubjectRates();
+            assert rates != null;
             if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
             switch (subjects.get(i)) {
                 case "Adobe Ps":
@@ -546,7 +544,10 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
                 request_status = "Waiting for Payment";
                 break;
             case 3:
-                request_status = "Waiting for Google Meet Link";
+                request_status = "Kindly re-Log In to Confirm Payment";
+                break;
+            case 4:
+                request_status = "Cleared Proposal";
                 break;
             default:
                 request_status = "Error";
@@ -565,9 +566,12 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
         if(fUser.equals(proposal.requesteeUID)){
             if(proposal.status==0){
                 binding.layoutActionContainer.setVisibility(View.VISIBLE);
+                binding.btnOfferCounter.setText(R.string.counterProposal);
                 binding.imgBTNAccept.setVisibility(View.VISIBLE);
                 binding.imgNull.setVisibility(View.VISIBLE);
-            }else {
+                binding.imgBTNDelete.setVisibility(View.VISIBLE);
+            }
+            else {
                 binding.layoutActionContainer.setVisibility(View.GONE);
                 binding.imgBTNAccept.setVisibility(View.GONE);
                 binding.imgNull.setVisibility(View.GONE);
@@ -575,15 +579,22 @@ public class user_preview extends Fragment implements CalendarAdapter.OnItemList
         }else if (fUser.equals(proposal.requestorUID)){
             if(proposal.status==1){
                 binding.layoutActionContainer.setVisibility(View.VISIBLE);
+                binding.btnOfferCounter.setText(R.string.counterProposal);
                 binding.imgBTNAccept.setVisibility(View.VISIBLE);
                 binding.imgNull.setVisibility(View.VISIBLE);
-            }else {
+                binding.imgBTNDelete.setVisibility(View.VISIBLE);
+            }else if(proposal.status==2) {
+                binding.layoutActionContainer.setVisibility(View.VISIBLE);
+                binding.btnOfferCounter.setText(R.string.paymentProcedure);
+                binding.imgBTNAccept.setVisibility(View.GONE);
+                binding.imgNull.setVisibility(View.GONE);
+                binding.imgBTNDelete.setVisibility(View.VISIBLE);
+            }
+            else {
                 binding.layoutActionContainer.setVisibility(View.GONE);
                 binding.imgBTNAccept.setVisibility(View.GONE);
                 binding.imgNull.setVisibility(View.GONE);
             }
         }
-        binding.imgBTNDelete.setVisibility(View.VISIBLE);
-        binding.btnOfferCounter.setText(R.string.counterProposal);
     }
 }

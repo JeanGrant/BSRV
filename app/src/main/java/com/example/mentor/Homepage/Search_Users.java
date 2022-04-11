@@ -121,14 +121,18 @@ public class Search_Users extends Fragment implements UserListener {
         fStore.collection("Users").document(fUser).collection("proposals").get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+
+                    Long status = queryDocumentSnapshot.getLong("status");
+                    assert status != null;
+
                     if (fUser.equals(queryDocumentSnapshot.getString("requestorUID"))) {
                         if (list_uid.size() > 0) {
-                            if (list_uid.contains(queryDocumentSnapshot.getString("requesteeUID"))) {
+                            if (list_uid.contains(queryDocumentSnapshot.getString("requesteeUID")) && status.intValue()<4) {
                                 continue;
                             }
                         }
                         list_uid.add(queryDocumentSnapshot.getString("requesteeUID"));
-                    } else if (fUser.equals(queryDocumentSnapshot.getString("requesteeUID"))) {
+                    } else if (fUser.equals(queryDocumentSnapshot.getString("requesteeUID")) && status.intValue()<4) {
                         if (list_uid.size() > 0) {
                             if (list_uid.contains(queryDocumentSnapshot.getString("requestorUID"))) {
                                 continue;
@@ -168,36 +172,6 @@ public class Search_Users extends Fragment implements UserListener {
                 if (list_uid.isEmpty()) {Toast.makeText(requireContext(), "No proposals found", Toast.LENGTH_SHORT).show();}
             }else{Toast.makeText(getContext(), "Error getting list of proposals", Toast.LENGTH_SHORT).show();}
         });
-        //Recycler view initialization for obtained unique UIDs
-//        Log.d("recyclerProposals", "initialize recyler");
-//        if(list_uid.size()>0){
-//            Log.d("recyclerProposals", "list_uid size" + list_uid.size());
-//            fStore.collection("Users").get().addOnCompleteListener(task -> {
-//                if (task.isSuccessful() && task.getResult() != null) {
-//                    List<User> list_users = new ArrayList<>();
-//                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-//                        User user = new User();
-//                        user.uid = queryDocumentSnapshot.getId();
-//                        user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
-//                        user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
-//                        user.fullName = queryDocumentSnapshot.getString("fullName");
-//                        user.pictureStr= queryDocumentSnapshot.getString("picture");
-//                        user.email = queryDocumentSnapshot.getString("email");
-//                        user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
-//                        list_users.add(user);
-//                    }
-//                    if(list_users.size()>0){
-//                        binding.progressBar.setVisibility(View.GONE);
-//                        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-//                        binding.recyclerUsers.setLayoutManager(mLinearLayoutManager);
-//                        binding.recyclerUsers.setVisibility(View.VISIBLE);
-//                        UsersAdapter usersAdapter = new UsersAdapter(list_users, this);
-//                        binding.recyclerUsers.setAdapter(usersAdapter);
-//                        binding.recyclerUsers.setHasFixedSize(true);
-//                    }else{Toast.makeText(getContext(), "No proposals found", Toast.LENGTH_SHORT).show();}}
-//                else{Toast.makeText(getContext(), "Error getting list of proposals", Toast.LENGTH_SHORT).show();}
-//            });
-//        }
     }
 
     @Override
