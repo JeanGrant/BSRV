@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.mentor.Homepage.Homepage;
+import com.example.mentor.Homepage.homepage;
 import com.example.mentor.R;
 import com.example.mentor.databinding.FragmentCreateAccFinalizeBinding;
 import com.example.mentor.misc.Account_Details;
@@ -80,7 +80,7 @@ public class createAcc_Finalize extends Fragment {
 
                         df.set(userInfo);
 
-                        SwitchLayout.activityStarter(getContext(), Homepage.class);
+                        SwitchLayout.activityStarter(getContext(), homepage.class);
                     }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
                 } else {
                     binding.inpTXTPassword.setError("Password does not match");

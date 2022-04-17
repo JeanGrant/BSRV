@@ -10,11 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import com.example.mentor.Homepage.Homepage;
+import com.example.mentor.Homepage.homepage;
 import com.example.mentor.databinding.FragmentLoginBinding;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
@@ -50,7 +49,7 @@ public class login extends Fragment {
                 fAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
                     binding.layoutContents.setVisibility(View.GONE);
                     binding.progressBar.setVisibility(View.VISIBLE);
-                    SwitchLayout.activityStarter(getContext(), Homepage.class);
+                    SwitchLayout.activityStarter(getContext(), homepage.class);
                 }).addOnFailureListener(e -> {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     binding.layoutContents.setVisibility(View.VISIBLE);

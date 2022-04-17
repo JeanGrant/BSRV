@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_ProductDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/ProductDescPrompt"
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageButton
+                    android:id="@+id/imgBTN_ProductDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <RelativeLayout
+            android:id="@+id/layout_ProductDesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="#F9F9F9"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/mako"/>
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_PromoVid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/PromoVidPrompt"
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageButton
+                    android:id="@+id/imgBTN_PromoVid"
+                    android:contentDescription="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <RelativeLayout
+            android:id="@+id/layout_PromoVid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="#F9F9F9">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/mako"/>
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_AboutUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/AboutUsPrompt"
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageButton
+                    android:id="@+id/imgBTN_AboutUs"
+                    android:contentDescription="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <RelativeLayout
+            android:id="@+id/layout_AboutUs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="#F9F9F9">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/mako"/>
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_FAQs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/FAQsPrompt"
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageButton
+                    android:id="@+id/imgBTN_FAQs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <RelativeLayout
+            android:id="@+id/layout_FAQs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="#F9F9F9">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/mako"/>
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_WriteFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/WriteFeedback"
+                    android:textSize="@dimen/_12ssp" />
+
+                <ImageButton
+                    android:id="@+id/imgBTN_WriteFeedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:id="@+id/layout_WriteFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="#F9F9F9"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/WriteFeedbackPrompt"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/mako"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/longINP_font"
+                android:hint="@string/WriteFeedback"
+                android:textColor="@color/longINP_txtcolor"
+                android:textColorHint="@color/longINP_textColorHint"
+                app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                app:hintTextColor="@color/longINP_hintTextColor"
+                android:layout_centerHorizontal="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inpTXT_WriteFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/btnSendFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/longBTN_style_v2"
+                android:fontFamily="@font/longBTN_font"
+                android:text="@string/SendMessage"
+                android:textColor="@color/longBTN_txtcolor_v2"
+                android:textSize="@dimen/_10sdp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_editProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="@string/editProfile"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/mako"
+            android:textAllCaps="false"
+            android:textAlignment="textStart" />
+
+        <Button
+            android:id="@+id/btn_Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="@string/logout"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/mako"
+            android:textAllCaps="false"
+            android:textAlignment="textStart" />
+
+    </LinearLayout>
+
+</ScrollView>

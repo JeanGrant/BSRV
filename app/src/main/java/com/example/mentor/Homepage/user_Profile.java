@@ -2,7 +2,10 @@ package com.example.mentor.Homepage;
 
 import static androidx.core.content.res.ResourcesCompat.getColor;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.R;
 import com.example.mentor.adapters.CalendarAdapter;
+import com.example.mentor.adapters.ReviewsAdapter;
 import com.example.mentor.adapters.SubjectRatesAdapter;
 import com.example.mentor.databinding.FragmentUserProfileBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.misc.Reviews;
 import com.example.mentor.misc.SubjectRates;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,12 +41,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class user_Profile extends Fragment implements CalendarAdapter.OnItemListener{
 
     private FragmentUserProfileBinding binding;
-    private ArrayList<Long> rates;
+    private Map<String,Long> rates;
     private ArrayList<String> subjects;
     private Boolean isMentor;
     private LocalDate selectedDate;
@@ -52,6 +57,8 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
         // Inflate the layout for this fragment
         binding = FragmentUserProfileBinding.inflate(inflater, container, false);
         View viewLayout = binding.getRoot();
+
+        Log.i("getActivity", requireActivity().getClass().getCanonicalName());
 
         binding.btnMinusMonth.setOnClickListener(view -> previousMonthAction());
         binding.btnPlusMonth.setOnClickListener(view -> nextMonthAction());
@@ -67,7 +74,7 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
         binding.txtBio.setVisibility(View.INVISIBLE);
         binding.cardSecondary.setVisibility(View.INVISIBLE);
 
-        String fUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String fUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         fStore.collection("Users").document(fUser).get().addOnCompleteListener(task -> {
             if(task.isSuccessful() && task.getResult() != null){
@@ -119,87 +126,103 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                     Account_Details.User_Details.setBioEssay(documentSnapshot.getString("bioEssay"));
                     binding.txtBio.setText(Account_Details.User_Details.getBioEssay());
 
-                    Account_Details.User_Details.rates = (ArrayList<Long>) documentSnapshot.get("subjectRates");
+                    Account_Details.User_Details.rates = (Map<String,Long>) documentSnapshot.get("subjectRates");
                     rates = Account_Details.User_Details.rates;
                     Account_Details.User_Details.subjects = (ArrayList<String>) documentSnapshot.get("subjects");
                     subjects = Account_Details.User_Details.subjects;
+
+                    if(documentSnapshot.getString("picString") != null) {
+                        String picString = documentSnapshot.getString("picString");
+                        if (picString != null && !picString.isEmpty() && !picString.equals("null")) {
+                            Account_Details.User_Details.setPicString(picString);
+                            byte[] bytes = Base64.decode(picString, Base64.DEFAULT);
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            binding.imgUserPic.setImageBitmap(bitmap);
+                        }
+                    }
 
                     assert subjects != null;
 
                     initLstSubj(isMentor, rates, subjects);
                     selectedDate = LocalDate.now();
                     setMonthView();
-
-                    binding.progressBar.setVisibility(View.GONE);
-                    binding.layoutHeader.setVisibility(View.VISIBLE);
-                    binding.txtBio.setVisibility(View.VISIBLE);
-                    binding.cardSecondary.setVisibility(View.VISIBLE);
+                    getReviews();
                     prop2sched();
                 });
             }
         });
     }
 
-    private void initLstSubj(Boolean isMentor, ArrayList<Long> rates, ArrayList<String> subjects) {
+    private void initLstSubj(Boolean isMentor, Map<String,Long> rates, ArrayList<String> subjects) {
         List<SubjectRates> list_subjrate = new ArrayList<>();
         for (int i = 0; i < subjects.size(); i++) {
             SubjectRates subjRates = new SubjectRates();
-            if(isMentor){subjRates.rate = "₱"+rates.get(i)+"/hr";}
             switch (subjects.get(i)) {
                 case "Adobe Ps":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_adobe_ps, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_adobe_ps, null);
                     subjRates.name = getResources().getString(R.string.AdobePs);
                     subjRates.hexColor = getColor(getResources(), R.color.AdobePsblue, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Adobe Ps")+"/hr";}
                     break;
                 case "Animation":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_animation, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_animation, null);
                     subjRates.name = getResources().getString(R.string.Animation);
                     subjRates.hexColor = getColor(getResources(), R.color.AdobeAeViolet, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Animation")+"/hr";}
                     break;
                 case "Arts":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_arts, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_arts, null);
                     subjRates.name = getResources().getString(R.string.Arts);
                     subjRates.hexColor = getColor(getResources(), R.color.ArtsPurple, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Arts")+"/hr";}
                     break;
                 case "AutoCAD":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_autocad, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_autocad, null);
                     subjRates.name = getResources().getString(R.string.AutoCAD);
                     subjRates.hexColor = getColor(getResources(), R.color.AutoCADRed, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("AutoCAD")+"/hr";}
                     break;
                 case "Engineering":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_engineering, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_engineering, null);
                     subjRates.name = getResources().getString(R.string.Engineering);
                     subjRates.hexColor = getColor(getResources(), R.color.EngineeringOrange, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Engineering")+"/hr";}
                     break;
                 case "Languages":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_languages, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_languages, null);
                     subjRates.name = getResources().getString(R.string.Languages);
                     subjRates.hexColor = getColor(getResources(), R.color.LanguageGreen, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Languages")+"/hr";}
                     break;
                 case "Law":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_law, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_law, null);
                     subjRates.name = getResources().getString(R.string.Law);
                     subjRates.hexColor = getColor(getResources(), R.color.LawBlue, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Law")+"/hr";}
                     break;
                 case "MS Office":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_ms_office, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_ms_office, null);
                     subjRates.name = getResources().getString(R.string.MSOffice);
                     subjRates.hexColor = getColor(getResources(), R.color.MSOfficeOrange, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("MS Office")+"/hr";}
                     break;
                 case "Mathematics":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_mathematics, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_mathematics, null);
                     subjRates.name = getResources().getString(R.string.Mathematics);
                     subjRates.hexColor = getColor(getResources(), R.color.MathYellow, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Mathematics")+"/hr";}
                     break;
                 case "Programming":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_programming, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_programming, null);
                     subjRates.name = getResources().getString(R.string.Programming);
                     subjRates.hexColor = getColor(getResources(), R.color.ProgrammingCyan, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Programming")+"/hr";}
                     break;
                 case "Sciences":
-                    subjRates.drawable = ResourcesCompat.getDrawable(requireContext().getResources(), R.drawable.ic_subjects_science, null);
+                    subjRates.drawable = ResourcesCompat.getDrawable(requireActivity().getResources(), R.drawable.ic_subjects_science, null);
                     subjRates.name = getResources().getString(R.string.Sciences);
                     subjRates.hexColor = getColor(getResources(), R.color.ScienceGreen, null);
+                    if(isMentor){subjRates.rate = "₱"+rates.get("Sciences")+"/hr";}
                     break;
                 default:
                     break;
@@ -208,8 +231,8 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
         }
         if(list_subjrate.size()>0){
 //            binding.progressBar.setVisibility(View.GONE);
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
-            binding.recyclerSubjects.setLayoutManager(mGridLayoutManager);
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+            binding.recyclerSubjects.setLayoutManager(mLinearLayoutManager);
             binding.recyclerSubjects.setVisibility(View.VISIBLE);
             SubjectRatesAdapter subjectRatesAdapter = new SubjectRatesAdapter(list_subjrate);
             binding.recyclerSubjects.setAdapter(subjectRatesAdapter);
@@ -227,6 +250,70 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
         binding.recyclerCalendar.setLayoutManager(layoutManager);
         binding.recyclerCalendar.setAdapter(calendarAdapter);
         binding.recyclerCalendar.setVisibility(View.VISIBLE);
+    }
+
+    private void getReviews(){
+        fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("rating").get().addOnCompleteListener(task -> {
+           if(task.isSuccessful()){
+               if(task.getResult().size()>0){
+                   List<Reviews> list_reviews = new ArrayList<>();
+                   Integer ratingSum = 0;
+                   for(QueryDocumentSnapshot qDocSnap : task.getResult()){
+                       Reviews reviews = new Reviews();
+                       reviews.dateTime = qDocSnap.getString("dateTime");
+                       reviews.fullName = qDocSnap.getString("rator");
+                       reviews.comment = qDocSnap.getString("comment");
+                       Long rating = qDocSnap.getLong("rating");
+                       assert rating != null;
+                       reviews.rating = rating.intValue();
+                       list_reviews.add(reviews);
+                       ratingSum += reviews.rating;
+                   }
+                   int ratingAve = ratingSum / list_reviews.size();
+                   Log.i("list_reviews", String.valueOf(list_reviews.size()));
+                   if(list_reviews.size()>0){
+                       binding.ratingMentor.setRating(ratingAve);
+                       LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+                       binding.recyclerReviews.setLayoutManager(mLinearLayoutManager);
+                       binding.recyclerReviews.setVisibility(View.VISIBLE);
+                       ReviewsAdapter reviewsAdapter = new ReviewsAdapter(list_reviews);
+                       binding.recyclerReviews.setAdapter(reviewsAdapter);
+                       binding.recyclerReviews.setHasFixedSize(true);
+
+                       binding.progressBar.setVisibility(View.GONE);
+                       binding.layoutHeader.setVisibility(View.VISIBLE);
+                       binding.txtBio.setVisibility(View.VISIBLE);
+                       binding.cardSecondary.setVisibility(View.VISIBLE);
+                   } else {
+                       ViewGroup.LayoutParams params = binding.ratingMentor.getLayoutParams();
+                       params.height = 0;
+                       params.width = 0;
+                       binding.ratingMentor.setLayoutParams(params);
+                       binding.ratingMentor.setVisibility(View.GONE);
+                       binding.txtReviewsPrompt.setVisibility(View.GONE);
+                       binding.recyclerReviews.setVisibility(View.GONE);
+
+                       binding.progressBar.setVisibility(View.GONE);
+                       binding.layoutHeader.setVisibility(View.VISIBLE);
+                       binding.txtBio.setVisibility(View.VISIBLE);
+                       binding.cardSecondary.setVisibility(View.VISIBLE);
+                   }
+               }  else {
+                   ViewGroup.LayoutParams params = binding.ratingMentor.getLayoutParams();
+                   params.height = 0;
+                   params.width = 0;
+                   binding.ratingMentor.setLayoutParams(params);
+                   binding.ratingMentor.setVisibility(View.GONE);
+                   binding.txtReviewsPrompt.setVisibility(View.GONE);
+                   binding.recyclerReviews.setVisibility(View.GONE);
+
+                   binding.progressBar.setVisibility(View.GONE);
+                   binding.layoutHeader.setVisibility(View.VISIBLE);
+                   binding.txtBio.setVisibility(View.VISIBLE);
+                   binding.cardSecondary.setVisibility(View.VISIBLE);
+               }
+           }  else { Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show(); }
+        });
     }
 
     private ArrayList<String> daysInMonthArray(LocalDate date) {
@@ -254,15 +341,25 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.equals("")){
-            DateTimeFormatter MY = DateTimeFormatter.ofPattern("MMMM yyyy ");
+            DateTimeFormatter MY = DateTimeFormatter.ofPattern("MMMM yyyy");
             String selectedMY = MY.format(selectedDate);
-            DateTimeFormatter dMY = DateTimeFormatter.ofPattern("dd MMMM yyyy ");
+            DateTimeFormatter dMY = DateTimeFormatter.ofPattern("d MMMM yyyy");
             LocalDate selectedDay = LocalDate.parse(dayText + " " + selectedMY, dMY);
             Log.i("selectedDay", selectedDay.toString());
             Account_Details.User_Details.setSetDate(selectedDay);
 
             Account_Details.User_Clicked.setUID(Account_Details.User_Details.getUID());
-            SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new dailyTime_preview(), "dailyTime_Preview");
+
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isPreview",false);
+
+            Fragment fragment2 = new dailyTime_preview();
+            fragment2.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frameLayout, fragment2, "dailyTime_Preview")
+                    .commit();
         }
     }
 

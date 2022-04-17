@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/layout_mainContainer"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_1sdp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_8sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+            <TextView
+                android:id="@+id/txt_fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/podkova" />
+
+            <RatingBar
+                android:id="@+id/ratingMentor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/txt_Comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/mako"
+                android:maxWidth="@dimen/_130sdp"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/txt_DateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/mako"
+                android:maxWidth="@dimen/_130sdp"
+                android:maxLines="1"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10ssp" />
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -14,11 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.mentor.Homepage.user_Profile;
 import com.example.mentor.R;
 import com.example.mentor.databinding.FragmentCreateAccSubjectsBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.utilities.SwitchLayout;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class createAcc_Subjects extends Fragment implements View.OnClickListener{
 
@@ -119,7 +125,26 @@ public class createAcc_Subjects extends Fragment implements View.OnClickListener
                     if(Account_Details.User_Details.getIsMentor()) {
                         SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Rates(), "createAcc_Rates");
                     }else{
-                        SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Finalize(), "createAcc_Finalize");
+                        String currActivity = requireActivity().getClass().getCanonicalName();
+
+                        if(currActivity != null) {
+                            if (currActivity.equals("com.example.mentor.Homepage.homepage")) {
+                                FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+                                DocumentReference df = fStore.collection("Users").document(Account_Details.User_Details.getUID());
+
+                                Map<String,Object> updateInfo = new HashMap<>();
+                                updateInfo.put("fullName", Account_Details.User_Details.getFullName());
+                                updateInfo.put("bioEssay", Account_Details.User_Details.getBioEssay());
+                                updateInfo.put("subjects", Account_Details.User_Details.subjects);
+                                updateInfo.put("picString", Account_Details.User_Details.getPicString());
+
+                                df.update(updateInfo);
+
+                                SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new user_Profile(), "user_Profile");
+                            }else {
+                                SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new createAcc_Finalize(), "createAcc_Finalize");
+                            }
+                        }
                     }
                 } else {
                     Toast.makeText(getContext(), "Kindly add a subject.", Toast.LENGTH_SHORT).show();

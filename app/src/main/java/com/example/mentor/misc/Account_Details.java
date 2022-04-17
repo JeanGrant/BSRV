@@ -4,21 +4,23 @@ import android.util.Log;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public enum Account_Details {
 
-    User_Details("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new ArrayList<>()),
-    User_Clicked("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new ArrayList<>());
+    User_Details("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new HashMap<>()),
+    User_Clicked("", "", "", "", false, false, 0, true, "", false, LocalDate.now(), new ArrayList<>(), new HashMap<>());
 
-    public ArrayList<Long> rates;
+    public Map<String,Long> rates;
     public ArrayList<String> subjects;
     private String fullName, email, bioEssay, picString, uID;
     private Boolean isMentor, isAccepting, currSearch, currConnection;
     private Integer authLevel;
     private LocalDate setDate;
 
-    Account_Details(String fullName, String email, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer authLevel, Boolean currSearch, String uID, Boolean currConnection, LocalDate setDate, ArrayList<String> subjects, ArrayList<Long> rates) {
+    Account_Details(String fullName, String email, String bioEssay, String picString, Boolean isMentor, Boolean isAccepting, Integer authLevel, Boolean currSearch, String uID, Boolean currConnection, LocalDate setDate, ArrayList<String> subjects, Map<String,Long> rates) {
         this.fullName = fullName;
         this.email = email;
         this.bioEssay = bioEssay;
@@ -72,7 +74,7 @@ public enum Account_Details {
 
     public ArrayList<String> getSubjects() {return subjects;}
 
-    public ArrayList<Long> getRates(){return rates;}
+    public Map<String,Long> getRates(){return rates;}
 
     public void setFullName(String fullName){this.fullName = fullName;}
 
@@ -98,7 +100,7 @@ public enum Account_Details {
 
     public void setSubjects(ArrayList<String> subjects){this.subjects = subjects;}
 
-    public void setRates(ArrayList<Long> rates){this.rates = rates;}
+    public void setRates(Map<String,Long> rates){this.rates = rates;}
 
     public void toggleSubject (String item) {
         if (this.subjects.contains(item)){

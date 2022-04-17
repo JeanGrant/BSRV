@@ -1,14 +1,16 @@
 package com.example.mentor.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.R;
@@ -17,8 +19,9 @@ import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.User;
 import com.example.mentor.misc.UserListener;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
 
@@ -70,7 +73,31 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             if(user.pictureStr.trim().isEmpty()){
                 binding.imgUserPic.setImageResource(R.drawable.ic_baseline_person_24);
                 binding.imgUserPic.setColorFilter(Color.argb(255, 100, 100, 100));
+            }else{
+                byte[] bytes = Base64.decode(user.pictureStr, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                int cropSize = Math.min(bitmap.getWidth(), bitmap.getHeight());
+                Bitmap croppedBmp = Bitmap.createBitmap(bitmap, 0, 0, cropSize,cropSize);
+                binding.imgUserPic.setImageBitmap(croppedBmp);
             }
+            if(user.isMentor) {
+                binding.ratingMentor.setVisibility(View.VISIBLE);
+                if(user.rating != null) {
+                    binding.ratingMentor.setRating(user.rating);
+                }
+                String priceRange="";
+                if(user.minFee.equals(user.maxFee)){
+                    priceRange = "Price Range: " + user.minFee;
+                }else {
+                    priceRange = "Price Range: " + user.minFee + " - " + user.maxFee;
+                }
+                binding.txtPriceRange.setVisibility(View.VISIBLE);
+                binding.txtPriceRange.setText(priceRange);
+            }else {
+                binding.ratingMentor.setVisibility(View.GONE);
+                binding.txtPriceRange.setVisibility(View.GONE);
+            }
+
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));
         }
     }

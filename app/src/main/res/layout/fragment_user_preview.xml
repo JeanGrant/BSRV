@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".Homepage.user_preview"
+        tools:context=".Homepage.user_Preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="#FFFFFF"
@@ -40,6 +40,38 @@
                 android:src="@drawable/ic_baseline_arrow_back_24" />
 
             <ImageButton
+                android:id="@+id/imgBTN_visibility"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@id/imgBTN_favorite"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favorite"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_visibility_24" />
+
+            <ImageButton
+                android:id="@+id/imgBTN_favorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@id/imgBTN_proposals"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favorite"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_bookmark_border_24" />
+
+            <ImageButton
                 android:id="@+id/imgBTN_proposals"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -55,13 +87,14 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_folder_24" />
         </RelativeLayout>
+
         <ScrollView
             android:id="@+id/layout_mainContainer"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_below="@+id/layout_PreviewHeader"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarStyle="outsideInset"
-            android:layout_below="@+id/layout_PreviewHeader">
+            android:scrollbarStyle="outsideInset">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,9 +131,9 @@
                                 android:layout_height="@dimen/_80sdp"
                                 android:adjustViewBounds="true"
                                 android:background="@color/black"
+                                android:contentDescription="@string/profileImage"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_baseline_person_24"
-                                android:contentDescription="@string/profileImage"/>
+                                android:src="@drawable/ic_baseline_person_24" />
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
@@ -132,11 +165,21 @@
                             android:textColor="@color/blue"
                             android:textSize="@dimen/_14ssp" />
 
+                        <RatingBar
+                            android:id="@+id/ratingMentor"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txt_Email"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:numStars="5" />
+
                         <TextView
                             android:id="@+id/txt_Status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_Email"
+                            android:layout_below="@id/ratingMentor"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/mako"
@@ -188,8 +231,8 @@
                             android:orientation="vertical"
                             android:overScrollMode="never"
                             android:padding="20dp"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -204,84 +247,113 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/btn_minusMonth"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/prevMonth"/>
+                                android:text="@string/prevMonth" />
+
                             <TextView
                                 android:id="@+id/txt_MonthView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
-                                android:textAlignment="center"/>
+                                android:textAlignment="center" />
+
                             <Button
                                 android:id="@+id/btn_plusMonth"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/nextMonth"/>
+                                android:text="@string/nextMonth" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/SUN"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/MON"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/TUE"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/WED"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/THU"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/FRI"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/SAT"
                                 android:textAlignment="center"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
                         </LinearLayout>
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerCalendar"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_275sdp"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_ReviewsPrompt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/podkova"
+                            android:text="@string/CommentsPrompt"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerReviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

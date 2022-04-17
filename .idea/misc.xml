@@ -17,6 +17,7 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_baseline_import_contacts_24.xml" value="0.2065" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2065" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.2065" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1735" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_bsrv_02.xml" value="0.106" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_bsrv_03_scale.xml" value="0.106" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/ic_bsrv_04.xml" value="0.2065" />
@@ -30,10 +31,11 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedbutton_blue_outline.xml" value="0.2065" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedbutton_blue_outline_smaller_radius.xml" value="0.2295" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedbutton_transparent.xml" value="0.2595" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedlayout_white.xml" value="0.1735" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/lemon.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/nunito_bold.xml" value="0.22916666666666666" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/activity_homepage.xml" value="0.10400000000000001" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/activity_homepage.xml" value="0.16" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/activity_login.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/activity_row_users.xml" value="0.19895833333333332" />
@@ -49,14 +51,18 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_create_acc_subjects.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_daily_time_preview.xml" value="0.264" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_peoples.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_schedule_meeting.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_search__users.xml" value="0.264" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_user_preview.xml" value="0.2" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_user_profile.xml" value="0.136" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/fragment_user_profile.xml" value="0.264" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/item_container.xml" value="0.2223731884057971" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/item_container_user.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_calendar_cell.xml" value="0.176" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_dailytime_cell.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_proposal.xml" value="0.176" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_reviews.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_user.xml" value="0.4" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_subject_container.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/mipmap-anydpi-v26/ic_logoBSRV.xml" value="0.2065" />

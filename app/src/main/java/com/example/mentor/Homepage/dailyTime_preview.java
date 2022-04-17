@@ -30,14 +30,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.OffsetTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,8 +47,8 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
     private FragmentDailyTimePreviewBinding binding;
     private int hour, minute;
     private FirebaseFirestore fStore;
-    Account_Details fClicked = Account_Details.User_Clicked;
-    Account_Details fUser = Account_Details.User_Details;
+    private final Account_Details fClicked = Account_Details.User_Clicked;
+    private final Account_Details fUser = Account_Details.User_Details;
     private LocalDate selectedDate;
 
     @Override
@@ -81,7 +78,17 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
         binding.imgBTNBack.setOnClickListener(view -> {
             if(fUser.getUID().equals(fClicked.getUID())) {
                 SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new user_Profile(), "user_Profile");
-            } else {SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new Search_Users(), "search_Users");}
+            } else {
+                Bundle bundleOld = this.getArguments();
+
+                Fragment fragment2 = new user_Preview();
+                fragment2.setArguments(bundleOld);
+
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, fragment2, "user_Preview")
+                        .commit();
+            }
         });
 
         binding.btnTimeStartPicker.setOnClickListener(view -> popTimePicker(binding.btnTimeStartPicker));
@@ -255,10 +262,9 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
     }
 
     private void initDailyCalendar(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy ", java.util.Locale.getDefault());
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("d MMMM yyyy ");
         selectedDate = Account_Details.User_Details.getSetDate();
-        Date date = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        binding.txtMonthView.setText(sdf.format(date));
+        binding.txtMonthView.setText(sdf.format(selectedDate));
         getSchedule();
     }
 
@@ -290,7 +296,7 @@ public class dailyTime_preview extends Fragment implements AdapterView.OnItemSel
 
     public void getSchedule(){
         List<ClickedUser_Schedule> listSchedule = new ArrayList<>();
-        DateTimeFormatter dMy = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        DateTimeFormatter dMy = DateTimeFormatter.ofPattern("d MMMM yyyy");
         DateTimeFormatter Hm = DateTimeFormatter.ofPattern("HH:mm");
         LocalDate selectedDate = LocalDate.parse(binding.txtMonthView.getText().toString().trim(),dMy);
 

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".schedule_meeting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layout_mainBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp">
+                <TextView
+                    android:id="@+id/uidPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/requestUID"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtRequestUID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/uidPrompt"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/uidPrompt"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/uidPrompt"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/statusPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/uidPrompt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/statusPrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txt_reqStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/statusPrompt"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/statusPrompt"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/statusPrompt"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/subjectPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusPrompt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/SubjectPrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtSubject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/subjectPrompt"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/subjectPrompt"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/subjectPrompt"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/datePrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/subjectPrompt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/datePrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/datePrompt"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/datePrompt"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/datePrompt"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/timePrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/datePrompt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/timePrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/timePrompt"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/timePrompt"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/timePrompt"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/descPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timePrompt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/descPrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/descPrompt"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/txtDesc"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+                <TextView
+                    android:id="@+id/meetLinkPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtDesc"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/meetLinkPrompt"
+                    android:textSize="@dimen/_11ssp" />
+                <TextView
+                    android:id="@+id/txtMeetLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/meetLinkPrompt"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/mako"
+                    android:textSize="@dimen/_10ssp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@id/txtMeetLink"
+                    android:background="#30000000"
+                    android:contentDescription="@null" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMeetLink"
+                    android:layout_width="@dimen/longBTN_width"
+                    android:layout_height="@dimen/longBTN_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/longBTN_style_v1"
+                    android:fontFamily="@font/longBTN_font"
+                    android:text="@string/meetLink"
+                    android:textAllCaps="false"
+                    android:textColor="@color/longBTN_txtcolor_v1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_SetMeetLink"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#30000000"
+            android:visibility="gone">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:elevation="@dimen/_2sdp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardUseCompatPadding="true"
+                    android:layout_centerInParent="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_10sdp">
+
+                                <ImageButton
+                                    android:id="@+id/imgBTN_minimize"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:adjustViewBounds="true"
+                                    android:background="@android:color/transparent"
+                                    android:contentDescription="@string/logout"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/ic_baseline_arrow_back_24" />
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/inpTXT_MeetLink"
+                                    android:layout_width="@dimen/_200sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgBTN_minimize"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:fontFamily="@font/mako"
+                                    android:hint="@string/hintMeetLink"
+                                    android:inputType="textMultiLine"
+                                    android:maxLines="5"
+                                    android:textSize="@dimen/_12ssp" />
+
+                                <Button
+                                    android:id="@+id/btnSetMeetLink"
+                                    android:layout_width="@dimen/_200sdp"
+                                    android:layout_height="@dimen/longBTN_height"
+                                    android:layout_below="@+id/inpTXT_MeetLink"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="@dimen/_20sdp"
+                                    android:layout_marginBottom="@dimen/_20sdp"
+                                    android:background="@drawable/longBTN_style_v2"
+                                    android:fontFamily="@font/longBTN_font"
+                                    android:text="@string/setLink"
+                                    android:textColor="@color/longBTN_txtcolor_v2"
+                                    android:textSize="@dimen/longBTN_txtsize" />
+                        </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_confirmMeet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#30000000"
+            android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:cardElevation="@dimen/_2sdp"
+                    app:cardUseCompatPadding="true">
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                        <RelativeLayout
+                                            android:id="@+id/layout_Navigation"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                                <ImageButton
+                                                    android:id="@+id/imgBTN_minimizeConfirm"
+                                                    android:layout_width="@dimen/_25sdp"
+                                                    android:layout_height="@dimen/_25sdp"
+                                                    android:layout_alignParentStart="true"
+                                                    android:layout_marginVertical="@dimen/_10sdp"
+                                                    android:layout_marginStart="@dimen/_10sdp"
+                                                    android:background="@android:color/transparent"
+                                                    android:contentDescription="@string/back"
+                                                    android:src="@drawable/ic_baseline_arrow_back_24" />
+                                        </RelativeLayout>
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_1sdp"
+                                            android:background="#30000000"
+                                            android:contentDescription="@null" />
+
+                                        <TextView
+                                            android:id="@+id/txt_confirmMeet"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="#FAFAFA"
+                                            android:padding="@dimen/_20sdp"
+                                            android:visibility="visible"
+                                            android:textSize="@dimen/_12ssp"
+                                            android:text="@string/confirmMeetText"
+                                            android:textAlignment="center"
+                                            android:fontFamily="@font/mako"/>
+
+                                        <LinearLayout
+                                            android:id="@+id/layout_rateMentor"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="#FAFAFA"
+                                            android:padding="@dimen/_20sdp"
+                                            android:visibility="gone"
+                                            android:orientation="vertical"
+                                            android:gravity="center">
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="@dimen/_12ssp"
+                                                    android:text="@string/rateMentor"
+                                                    android:textAlignment="center"
+                                                    android:fontFamily="@font/mako"/>
+                                                <RatingBar
+                                                    android:id="@+id/rate_mentor"
+                                                    android:layout_marginTop="@dimen/_10sdp"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:numStars="5"
+                                                    android:rating="0"
+                                                    android:stepSize="1.0"/>
+                                                <com.google.android.material.textfield.TextInputLayout
+                                                    android:layout_width="@dimen/longINP_width"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="@dimen/_5sdp"
+                                                    android:fontFamily="@font/longINP_font"
+                                                    android:textColor="@color/longINP_txtcolor"
+                                                    android:textColorHint="@color/longINP_textColorHint"
+                                                    app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                                                    app:boxBackgroundMode="outline"
+                                                    app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                                                    app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                                                    app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                                                    app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                                                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                                                    app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                                                    android:hint="@string/commentMentor"
+                                                    app:hintTextColor="@color/longINP_hintTextColor">
+
+                                                        <com.google.android.material.textfield.TextInputEditText
+                                                            android:id="@+id/inpTXT_CommentMentor"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:inputType="textShortMessage"
+                                                            android:paddingStart="@dimen/_20sdp"
+                                                            android:paddingEnd="@dimen/_10sdp" />
+                                                </com.google.android.material.textfield.TextInputLayout>
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:id="@+id/txt_refundProcedure"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="#FAFAFA"
+                                            android:padding="@dimen/_20sdp"
+                                            android:visibility="gone"
+                                            android:textSize="@dimen/_12ssp"
+                                            android:text="@string/refundProcedure"
+                                            android:textAlignment="center"
+                                            android:fontFamily="@font/mako"/>
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_1sdp"
+                                            android:background="#10000000"
+                                            android:contentDescription="@null" />
+
+                                        <LinearLayout
+                                            android:id="@+id/layout_actionContainer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:visibility="visible">
+
+                                                <Button
+                                                    android:id="@+id/btnConfirm"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:background="@android:color/transparent"
+                                                    android:fontFamily="@font/baloo"
+                                                    android:text="@string/confirm"
+                                                    android:textAllCaps="false"
+                                                    android:textColor="@color/green"
+                                                    android:textSize="@dimen/_10ssp" />
+                                                <ImageView
+                                                    android:layout_width="1dp"
+                                                    android:layout_height="match_parent"
+                                                    android:background="#10000000"
+                                                    android:contentDescription="@null"/>
+                                                <Button
+                                                    android:id="@+id/btnRefund"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:background="@android:color/transparent"
+                                                    android:fontFamily="@font/baloo"
+                                                    android:text="@string/refund"
+                                                    android:textAllCaps="false"
+                                                    android:textColor="@color/red"
+                                                    android:textSize="@dimen/_10ssp" />
+                                        </LinearLayout>
+                                </LinearLayout>
+                        </ScrollView>
+                </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+
+</RelativeLayout>

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mentor">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.OP" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
@@ -14,7 +17,7 @@
         android:hardwareAccelerated="true"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Homepage.Homepage"
+            android:name=".Homepage.homepage"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"

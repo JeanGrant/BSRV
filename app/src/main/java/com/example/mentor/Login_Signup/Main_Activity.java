@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.mentor.CreateAccount.createAcc_Type;
-import com.example.mentor.Homepage.Homepage;
+import com.example.mentor.Homepage.homepage;
 import com.example.mentor.R;
 import com.example.mentor.databinding.ActivityMainBinding;
 import com.example.mentor.misc.Account_Details;
@@ -32,7 +32,7 @@ public class Main_Activity extends AppCompatActivity {
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
         FirebaseUser fUser = fAuth.getCurrentUser();
         if(fUser != null) {
-            SwitchLayout.activityStarter(Main_Activity.this, Homepage.class);
+            SwitchLayout.activityStarter(Main_Activity.this, homepage.class);
             finish();
         }else {
             binding.imgDivider.setVisibility(View.VISIBLE);

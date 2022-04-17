@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Homepage.search_Users"
+    android:gravity="center"
+    android:animateLayoutChanges="true">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/linear_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:weightSum="0"
+        android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Proposals"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedbutton_blue"
+            android:fontFamily="@font/baloo"
+            android:text="@string/meetings"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_History"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedbutton_blue_outline"
+            android:fontFamily="@font/baloo"
+            android:text="@string/history"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_11ssp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Following"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedbutton_blue_outline"
+            android:fontFamily="@font/baloo"
+            android:text="@string/Following"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_11ssp" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerUsers"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/linear_divider"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</RelativeLayout>

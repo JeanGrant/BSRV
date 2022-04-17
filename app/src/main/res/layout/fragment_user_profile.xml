@@ -4,19 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Homepage.user_Profile">
+    tools:context=".Homepage.user_Profile"
+    android:animateLayoutChanges="true">
     <RelativeLayout
         android:id="@+id/layout_mainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:animateLayoutChanges="true">
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"/>
 
         <LinearLayout
             android:id="@+id/layout_header"
@@ -25,7 +27,8 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_marginTop="20dp"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:animateLayoutChanges="true">
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,21 +49,23 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_person_24"
                         android:background="@color/black"
-                        android:adjustViewBounds="true"/>
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@null"/>
                 </androidx.cardview.widget.CardView>
             </androidx.cardview.widget.CardView>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/txt_fullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:fontFamily="@font/baloo"
-                    android:text=""
+                    android:text="@string/lorem"
                     android:textAlignment="center"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_17ssp" />
@@ -69,19 +74,23 @@
                     android:id="@+id/txt_Email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_fullName"
-                    android:layout_centerHorizontal="true"
                     android:fontFamily="@font/podkova"
-                    android:text=""
+                    android:text="@string/lorem"
                     android:textAlignment="center"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_14ssp" />
 
+                <RatingBar
+                    android:id="@+id/ratingMentor"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:numStars="5" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_Email"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:cardBackgroundColor="@color/green"
                     app:cardCornerRadius="@dimen/_10sdp"
@@ -98,39 +107,41 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
                 </com.google.android.material.card.MaterialCardView>
-            </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
             android:id="@+id/txt_Bio"
-            android:visibility="invisible"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_header"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:text=""
+            android:text="@string/lorem"
             android:textAlignment="center"
             android:textSize="@dimen/_11ssp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:visibility="visible" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_Secondary"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
             android:layout_marginBottom="30dp"
             android:layout_below="@+id/txt_Bio"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:animateLayoutChanges="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:animateLayoutChanges="true">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
-                    android:text=""
+                    android:text="@string/lorem"
                     android:fontFamily="@font/mako"
                     android:textSize="18sp"
                     android:textColor="@color/blue"/>
@@ -204,7 +215,7 @@
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
                     android:overScrollMode="never"
-                    android:padding="20dp"
+                    android:padding="10dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:visibility="gone"/>
 
@@ -226,20 +237,19 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="-"/>
+                        android:text="@string/prevMonth"/>
                     <TextView
                         android:id="@+id/txt_MonthView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Mar 2022"
                         android:textAlignment="center"/>
                     <Button
                         android:id="@+id/btn_plusMonth"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="+"/>
+                        android:text="@string/nextMonth"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -299,6 +309,23 @@
                     android:id="@+id/recyclerCalendar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_275sdp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/txt_ReviewsPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/podkova"
+                    android:text="@string/CommentsPrompt"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:visibility="gone"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

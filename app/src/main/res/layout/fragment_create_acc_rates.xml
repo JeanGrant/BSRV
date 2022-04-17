@@ -29,12 +29,12 @@
             android:id="@+id/txt_RatePrompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/RatePrompt"
-            android:fontFamily="@font/podkova"
-            android:textSize="@dimen/_13sdp"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/imgBTN_back"
-            android:layout_marginTop="@dimen/_50sdp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/podkova"
+            android:text="@string/RatePrompt"
+            android:textSize="@dimen/_13sdp" />
 
         <RadioGroup
             android:id="@+id/rdg_HowRates"

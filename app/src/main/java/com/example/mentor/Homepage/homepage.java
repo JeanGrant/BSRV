@@ -1,6 +1,5 @@
 package com.example.mentor.Homepage;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +10,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.mentor.Login_Signup.Main_Activity;
 import com.example.mentor.R;
 import com.example.mentor.databinding.ActivityHomepageBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.settings;
 import com.example.mentor.utilities.SwitchLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -25,9 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Homepage extends AppCompatActivity {
+public class homepage extends AppCompatActivity {
 
-    ActivityHomepageBinding binding;
+    private ActivityHomepageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,7 @@ public class Homepage extends AppCompatActivity {
         binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));
 
         binding.imgBTNHome.setOnClickListener(view -> {
-            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new Search_Users(), "search_Users");
+            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new search_Users(), "search_Users");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
             binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));
@@ -50,7 +48,7 @@ public class Homepage extends AppCompatActivity {
         });
 
         binding.imgBTNConnections.setOnClickListener(view -> {
-            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new Connections(), "connections");
+            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new peoples(), "connections");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
             binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));
@@ -64,10 +62,17 @@ public class Homepage extends AppCompatActivity {
             binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));
         });
 
-        binding.imgBTNLogout.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(), Main_Activity.class));
-            finish();
+        binding.imgBTNSettings.setOnClickListener(view -> {
+            Fragment myFragment = getSupportFragmentManager().findFragmentById(R.id.frameLayout);
+            if (myFragment != null) {
+                if ("settings".equals(myFragment.getTag())) {
+                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
+                } else {
+                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new settings(), "settings");
+                }
+            } else {
+                Log.i("myFragment", "myFragment is null");
+            }
         });
 
     }
@@ -86,13 +91,13 @@ public class Homepage extends AppCompatActivity {
                     SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
                     binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
                     binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
-                    binding.imgBTNProfile.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+                    binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));;
                     break;
                 case "user_Preview":
-                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new Search_Users(), "search_Users");
+                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new search_Users(), "search_Users");
                     binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
                     binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
-                    binding.imgBTNProfile.setBackgroundResource(Color.alpha(0));
+                    binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));;
                     break;
                 default:
                     Toast.makeText(getApplicationContext(), "Error Getting Tag", Toast.LENGTH_SHORT).show();
