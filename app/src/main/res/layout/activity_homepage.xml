@@ -89,15 +89,17 @@
         android:animateLayoutChanges="true">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_home"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            app:cardBackgroundColor="@color/white"
+            android:clickable="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <ImageButton
+                <ImageView
                     android:id="@+id/imgBTN_home"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
@@ -106,42 +108,46 @@
                     android:contentDescription="@string/home"
                     android:padding="@dimen/_3sdp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_drawables_home_outline" />
+                    android:src="@drawable/ic_drawables_home_outline"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_Connections"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            app:cardBackgroundColor="@color/white"
+            android:clickable="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <ImageButton
+                <ImageView
                     android:id="@+id/imgBTN_Connections"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/home"
-                    android:padding="@dimen/_3sdp"
+                    android:padding="@dimen/_1sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_drawables_contacts_outline" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_profile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            app:cardBackgroundColor="@color/white"
+            android:clickable="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <ImageButton
+                <ImageView
                     android:id="@+id/imgBTN_profile"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"

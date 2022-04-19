@@ -505,9 +505,10 @@ public class user_Preview extends Fragment implements CalendarAdapter.OnItemList
                 task.addOnSuccessListener(documentSnapshot -> {
                     Boolean isAccepting = Account_Details.User_Clicked.getIsAccepting();
                     if(isAccepting != null){
-                        if(isAccepting){binding.txtStatus.setText(R.string.CurrentlyAccepting);
-                        }else{binding.txtStatus.setText(R.string.NoLongerAccepting);}
+                        if(isAccepting){binding.progressBarStatus.setProgressTintList(AppCompatResources.getColorStateList(requireContext(),R.color.green));
+                        }else{binding.progressBarStatus.setProgressTintList(AppCompatResources.getColorStateList(requireContext(),R.color.red));}
                     }
+                    binding.progressBarStatus.setProgress(100,true);
                     binding.txtFullName.setText(Account_Details.User_Clicked.getFullName());
                     binding.txtEmail.setText(Account_Details.User_Clicked.getEmail());
                     Account_Details.User_Clicked.setBioEssay(documentSnapshot.getString("bioEssay"));
@@ -674,15 +675,42 @@ public class user_Preview extends Fragment implements CalendarAdapter.OnItemList
                     int ratingAve = ratingSum / list_reviews.size();
                     Log.i("list_reviews", String.valueOf(list_reviews.size()));
                     if(list_reviews.size()>0){
-                        binding.ratingMentor.setRating(ratingAve);
+                        String rating = ratingAve+".0";
+                        binding.txtRating.setText(rating);
                         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
                         binding.recyclerReviews.setLayoutManager(mLinearLayoutManager);
                         binding.recyclerReviews.setVisibility(View.VISIBLE);
                         ReviewsAdapter reviewsAdapter = new ReviewsAdapter(list_reviews);
                         binding.recyclerReviews.setAdapter(reviewsAdapter);
                         binding.recyclerReviews.setHasFixedSize(true);
-                    } else { binding.ratingMentor.setVisibility(View.GONE); binding.txtReviewsPrompt.setVisibility(View.GONE); binding.recyclerReviews.setVisibility(View.GONE); }
-                }  else { binding.ratingMentor.setVisibility(View.GONE); binding.txtReviewsPrompt.setVisibility(View.GONE); binding.recyclerReviews.setVisibility(View.GONE); }
+                    }else {
+                        if(Account_Details.User_Clicked.getIsMentor()) {
+                            binding.txtRating.setText(R.string.noRatings);
+                        }else{
+                            binding.layoutRating.setVisibility(View.GONE);
+                        }
+                        binding.txtReviewsPrompt.setVisibility(View.GONE);
+                        binding.recyclerReviews.setVisibility(View.GONE);
+
+                        binding.progressBar.setVisibility(View.GONE);
+                        binding.layoutHeader.setVisibility(View.VISIBLE);
+                        binding.txtBio.setVisibility(View.VISIBLE);
+                        binding.cardSecondary.setVisibility(View.VISIBLE);
+                    }
+                }  else {
+                    if(Account_Details.User_Clicked.getIsMentor()) {
+                        binding.txtRating.setText(R.string.noRatings);
+                    }else{
+                        binding.layoutRating.setVisibility(View.GONE);
+                    }
+                    binding.txtReviewsPrompt.setVisibility(View.GONE);
+                    binding.recyclerReviews.setVisibility(View.GONE);
+
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.layoutHeader.setVisibility(View.VISIBLE);
+                    binding.txtBio.setVisibility(View.VISIBLE);
+                    binding.cardSecondary.setVisibility(View.VISIBLE);
+                }
             }  else { Toast.makeText(requireContext(), "Error retrieving data", Toast.LENGTH_SHORT).show(); }
         });
     }

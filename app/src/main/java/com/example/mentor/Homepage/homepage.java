@@ -39,7 +39,7 @@ public class homepage extends AppCompatActivity {
         SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
         binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_filled, null));
 
-        binding.imgBTNHome.setOnClickListener(view -> {
+        binding.cardHome.setOnClickListener(view -> {
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new search_Users(), "search_Users");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
@@ -47,7 +47,7 @@ public class homepage extends AppCompatActivity {
             prop2sched();
         });
 
-        binding.imgBTNConnections.setOnClickListener(view -> {
+        binding.cardConnections.setOnClickListener(view -> {
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new peoples(), "connections");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
@@ -55,7 +55,7 @@ public class homepage extends AppCompatActivity {
             prop2sched();
         });
 
-        binding.imgBTNProfile.setOnClickListener(view -> {
+        binding.cardProfile.setOnClickListener(view -> {
             SwitchLayout.fragmentStarter(getSupportFragmentManager(), new user_Profile(), "user_Profile");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));

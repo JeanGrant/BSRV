@@ -40,7 +40,10 @@
                 android:fontFamily="@font/baloo"
                 android:text="@string/SendProposal"
                 android:textColor="@color/blue"
-                android:textSize="@dimen/_12ssp"/>
+                android:textSize="@dimen/_12ssp"
+                android:clickable="true"
+                app:rippleColor="@color/blue"
+                android:foreground="?attr/selectableItemBackground"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_Proposals"
@@ -51,7 +54,10 @@
                 android:fontFamily="@font/baloo"
                 android:text="@string/Proposals"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_12ssp"
+                android:clickable="true"
+                app:rippleColor="@color/blue"
+                android:foreground="?attr/selectableItemBackground"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
     <ImageView
