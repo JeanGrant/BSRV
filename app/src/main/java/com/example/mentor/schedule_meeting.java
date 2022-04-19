@@ -128,31 +128,34 @@ public class schedule_meeting extends Fragment {
     }
 
     private void getDetails() {
+        Bundle bundle = this.getArguments();
+        String reqUID = "";
+        if(bundle != null) {
+            reqUID = bundle.getString("reqUID");
+        }
+
         Map<String,Object> proposal = new HashMap<>();
-        CollectionReference collection = fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("proposals");
-        collection.get().addOnCompleteListener(task -> {
-            for (QueryDocumentSnapshot qDocSnap : task.getResult()) {
-                if ((fUser.getUID().equals(qDocSnap.getString("requestorUID"))&&fClicked.getUID().equals(qDocSnap.getString("requesteeUID")))||(fUser.getUID().equals(qDocSnap.getString("requesteeUID"))&&fClicked.getUID().equals(qDocSnap.getString("requestorUID")))) {
-                    Long status = qDocSnap.getLong("status");
-                    assert status != null;
-                    proposal.put("status", status.intValue());
-                    proposal.put("uid", qDocSnap.getId());
-                    proposal.put("requesteeUID", qDocSnap.getString("requesteeUID"));
-                    proposal.put("requestorUID", qDocSnap.getString("requestorUID"));
-                    proposal.put("subject", qDocSnap.getString("subject"));
-                    proposal.put("date", qDocSnap.getString("date"));
-                    proposal.put("startTime", qDocSnap.getString("startTime"));
-                    proposal.put("endTime", qDocSnap.getString("endTime"));
-                    proposal.put("description", qDocSnap.getString("description"));
-
-                    String meetLink = qDocSnap.getString("meetLink");
-                    if(meetLink == null){meetLink="";}
-                    if(meetLink.trim().isEmpty()){meetLink = getResources().getString(R.string.noMeetLink);}
-                    proposal.put("meetLink", meetLink);
-
-                    initLayout(proposal);
-                }
+        DocumentReference df = fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("proposals").document(reqUID);
+        df.get().addOnSuccessListener(documentSnapshot -> {
+            Long status = documentSnapshot.getLong("status");
+            if(status != null) {
+                proposal.put("status", status.intValue());
             }
+            proposal.put("uid", documentSnapshot.getId());
+            proposal.put("requesteeUID", documentSnapshot.getString("requesteeUID"));
+            proposal.put("requestorUID", documentSnapshot.getString("requestorUID"));
+            proposal.put("subject", documentSnapshot.getString("subject"));
+            proposal.put("date", documentSnapshot.getString("date"));
+            proposal.put("startTime", documentSnapshot.getString("startTime"));
+            proposal.put("endTime", documentSnapshot.getString("endTime"));
+            proposal.put("description", documentSnapshot.getString("description"));
+
+            String meetLink = documentSnapshot.getString("meetLink");
+            if(meetLink == null){meetLink="";}
+            if(meetLink.trim().isEmpty()){meetLink = getResources().getString(R.string.noMeetLink);}
+            proposal.put("meetLink", meetLink);
+
+            initLayout(proposal);
         });
     }
 

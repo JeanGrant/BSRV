@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingVertical="@dimen/_10sdp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_100sdp">
@@ -35,23 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_fullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/lorem"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-                android:fontFamily="@font/podkova"/>
-
-            <TextView
-                android:id="@+id/txt_PriceRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
@@ -62,43 +49,44 @@
                 style="@style/autoscroll"
                 android:text="@string/lorem"
                 android:fontFamily="@font/mako"/>
-
-            <LinearLayout
-                android:id="@+id/layout_rating"
+            <TextView
+                android:id="@+id/txt_Subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout_name"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                style="@style/autoscroll"
+                android:text="@string/lorem"
+                android:fontFamily="@font/mako"/>
+            <TextView
+                android:id="@+id/txt_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                style="@style/autoscroll"
+                android:text="@string/lorem"
+                android:fontFamily="@font/mako"/>
+            <TextView
+                android:id="@+id/txt_reqUID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/lorem"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="@dimen/_11sdp"
-                    android:layout_height="@dimen/_11sdp"
-                    app:cardBackgroundColor="#78919E"
-                    app:cardCornerRadius="@dimen/_100sdp">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@null"
-                        android:padding="@dimen/_2sdp"
-                        android:src="@drawable/ic_baseline_star_rate_24"
-                        app:tint="@color/white" />
-                </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/txt_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/mako"
-                    android:text="@string/ratingPrompt"
-                    android:textSize="@dimen/_9ssp"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                android:fontFamily="@font/podkova"/>
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

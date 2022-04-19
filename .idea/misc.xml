@@ -11,6 +11,8 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/button_blue.xml" value="0.1445" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/calendar_background.xml" value="0.1" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/checkbox_selector.xml" value="0.2295" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/circular_progressbar.xml" value="0.183" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/circular_progressbar_shape.xml" value="0.183" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/drp_border_bottom.xml" value="0.124" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/drp_solidwhite.xml" value="0.186" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/drp_solidwhite_blueline.xml" value="0.186" />
@@ -32,6 +34,7 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedbutton_blue_outline_smaller_radius.xml" value="0.2295" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedbutton_transparent.xml" value="0.2595" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedlayout_white.xml" value="0.1735" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/drawable/roundedlayout_white_bgBlue.xml" value="0.183" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/lemon.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/font/nunito_bold.xml" value="0.22916666666666666" />
@@ -64,6 +67,8 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_proposal.xml" value="0.176" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_reviews.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_user.xml" value="0.4" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_user_proposal.xml" value="0.4" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_item_container_user_schedule.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/layout/layout_subject_container.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/mipmap-anydpi-v26/ic_logoBSRV.xml" value="0.2065" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Mentor/app/src/main/res/mipmap-anydpi-v26/ic_logo_round.xml" value="0.124" />

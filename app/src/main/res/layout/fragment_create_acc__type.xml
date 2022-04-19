@@ -19,7 +19,7 @@
             app:cardCornerRadius="@dimen/_40sdp"
             app:cardElevation="@dimen/_2sdp"
             app:cardUseCompatPadding="true"
-            android:visibility="gone">
+            android:visibility="visible">
             <com.google.android.material.card.MaterialCardView
                 app:cardCornerRadius="@dimen/_40sdp"
                 android:layout_margin="@dimen/_3sdp"

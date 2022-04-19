@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Homepage.user_Profile"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="#1C5563">
     <RelativeLayout
         android:id="@+id/layout_mainContainer"
         android:layout_width="match_parent"
@@ -20,119 +21,181 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
             android:layout_alignParentTop="true"
-            android:animateLayoutChanges="true">
-            <androidx.cardview.widget.CardView
+            android:animateLayoutChanges="true"
+            android:background="#1C5563"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingTop="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_20sdp">
+
+            <RelativeLayout
+                android:id="@+id/layout_userPic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/_40sdp"
-                app:cardElevation="@dimen/_2sdp"
-                app:cardUseCompatPadding="true">
-                <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="@dimen/_40sdp"
-                    android:layout_margin="@dimen/_3sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <ProgressBar
+                    android:id="@+id/progressBarStatus"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/circular_progressbar_shape"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/circular_progressbar" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/card_userPic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_55sdp"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_50sdp">
+
                     <ImageView
                         android:id="@+id/img_UserPic"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_baseline_person_24"
-                        android:background="@color/black"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
                         android:adjustViewBounds="true"
-                        android:contentDescription="@null"/>
-                </androidx.cardview.widget.CardView>
-            </androidx.cardview.widget.CardView>
+                        android:background="@color/black"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_baseline_person_24" />
+                </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
+
             <LinearLayout
+                android:id="@+id/layout_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:animateLayoutChanges="true">
+                android:layout_below="@id/layout_userPic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:animateLayoutChanges="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txt_fullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:fontFamily="@font/baloo"
+                    android:maxLength="30"
+                    android:maxLines="1"
                     android:text="@string/lorem"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_17ssp" />
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:id="@+id/txt_Email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:fontFamily="@font/podkova"
+                    android:maxLength="30"
+                    android:maxLines="1"
                     android:text="@string/lorem"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
 
-                <RatingBar
-                    android:id="@+id/ratingMentor"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:numStars="5" />
+            <LinearLayout
+                android:id="@+id/layout_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    app:cardBackgroundColor="#78919E"
+                    app:cardCornerRadius="@dimen/_100sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_baseline_star_rate_24"
+                        app:tint="@color/white" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/txt_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/green"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardUseCompatPadding="true">
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/mako"
+                    android:text="@string/ratingPrompt"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_rating"
+                android:layout_marginTop="@dimen/_22sdp"
+                app:cardBackgroundColor="#20FFFFFF"
+                app:cardCornerRadius="@dimen/_20sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_14sdp">
 
                     <TextView
-                        android:id="@+id/txt_Status"
+                        android:id="@+id/txt_bioPrompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:fontFamily="@font/mako"
-                        android:text="@string/CurrentlyAccepting"
-                        android:textAlignment="center"
+                        android:text="@string/aboutPrompt"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp" />
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
-        </LinearLayout>
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_Bio"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:text="@string/lorem"
-            android:textAlignment="center"
-            android:textSize="@dimen/_11ssp"
-            android:textStyle="italic"
-            android:visibility="visible" />
+                    <TextView
+                        android:id="@+id/txt_Bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:maxLength="250"
+                        android:text="@string/lorem"
+                        android:textAlignment="textStart"
+                        android:textColor="#DDDDDD"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="italic"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_Secondary"
             android:visibility="visible"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="-20dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="2dp"
-            android:layout_marginBottom="30dp"
-            android:layout_below="@+id/txt_Bio"
+            android:layout_below="@id/layout_header"
             android:layout_centerHorizontal="true"
             android:animateLayoutChanges="true">
             <LinearLayout
@@ -142,27 +205,11 @@
                 android:gravity="center_horizontal"
                 android:padding="20dp"
                 android:animateLayoutChanges="true">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/AuthLVLPrompt"
-                    android:fontFamily="@font/podkova"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/txt_AuthLVL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="@string/lorem"
-                    android:fontFamily="@font/mako"
-                    android:textSize="18sp"
-                    android:textColor="@color/blue"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:text="@string/FBNamePrompt"
                     android:fontFamily="@font/podkova"
                     android:textSize="15sp"
@@ -202,10 +249,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:fontFamily="@font/podkova"
                     android:text="@string/SubjectsPrompt"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -222,10 +269,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:fontFamily="@font/podkova"
                     android:text="@string/SchedulePrompt"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -326,7 +373,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>

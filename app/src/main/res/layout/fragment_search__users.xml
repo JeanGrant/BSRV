@@ -16,38 +16,44 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/linear_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:animateLayoutChanges="true">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_SendProposal"
-            android:layout_width="0dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:animateLayoutChanges="true"
+        android:background="@color/blue"
+        app:cardCornerRadius="@dimen/_10sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_weight="1"
-            android:background="@drawable/roundedbutton_blue_outline"
-            android:fontFamily="@font/baloo"
-            android:text="@string/SendProposal"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_12ssp"/>
+            android:orientation="horizontal"
+            android:animateLayoutChanges="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Proposals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_weight="1"
-            android:background="@drawable/roundedbutton_blue"
-            android:fontFamily="@font/baloo"
-            android:text="@string/Proposals"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp" />
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_SendProposal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:fontFamily="@font/baloo"
+                android:text="@string/SendProposal"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_12ssp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Proposals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:fontFamily="@font/baloo"
+                android:text="@string/Proposals"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
     <ImageView
         android:visibility="gone"
         android:layout_below="@id/linear_divider"
@@ -57,6 +63,7 @@
         android:contentDescription="@null"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingHorizontal="@dimen/_5sdp"
         android:id="@+id/recyclerUsers"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -83,10 +90,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:animateLayoutChanges="true">
+
         <RelativeLayout
             android:id="@+id/layout_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_alignParentBottom="true"
             android:animateLayoutChanges="true"
             android:background="@drawable/roundedlayout_white"
@@ -139,8 +147,8 @@
                 android:layout_below="@id/txt_SearchPrompt"
                 android:layout_alignStart="@id/txt_SearchPrompt"
                 android:layout_marginTop="@dimen/_15sdp"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/blue">
+                app:cardBackgroundColor="@color/blue"
+                app:cardUseCompatPadding="true">
 
                 <TextView
                     android:id="@+id/txt_cardMentor"
@@ -149,7 +157,7 @@
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:text="@string/Mentor"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -194,16 +202,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginVertical="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/img_cardRating"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
-                        android:contentDescription="@null"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:contentDescription="@null"
+                        android:visibility="gone"
                         app:tint="@color/white" />
 
                     <TextView
@@ -223,21 +231,22 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_toEndOf="@id/card_Rating"
                 app:cardUseCompatPadding="true">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginVertical="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/img_cardFee"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
-                        android:contentDescription="@null"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:contentDescription="@null"
+                        android:visibility="gone"
                         app:tint="@color/white" />
 
                     <TextView

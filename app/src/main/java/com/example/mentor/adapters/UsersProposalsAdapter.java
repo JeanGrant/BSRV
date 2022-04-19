@@ -13,18 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentor.R;
-import com.example.mentor.databinding.LayoutItemContainerUserBinding;
+import com.example.mentor.databinding.LayoutItemContainerUserProposalBinding;
 import com.example.mentor.misc.User;
 import com.example.mentor.misc.UserListener;
 
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
+public class UsersProposalsAdapter extends RecyclerView.Adapter<UsersProposalsAdapter.UserViewHolder>{
 
     private final List<User> users;
     private final UserListener userListener;
 
-    public UsersAdapter(List<User> users, UserListener userListener) {
+    public UsersProposalsAdapter(List<User> users, UserListener userListener) {
         this.users = users;
         this.userListener = userListener;
     }
@@ -32,13 +32,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutItemContainerUserBinding itemContainerUserBinding = LayoutItemContainerUserBinding.inflate(
+        LayoutItemContainerUserProposalBinding itemBinding = LayoutItemContainerUserProposalBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
 
-        return new UserViewHolder(itemContainerUserBinding);
+        return new UserViewHolder(itemBinding);
     }
 
     @Override
@@ -53,11 +53,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     class UserViewHolder extends RecyclerView.ViewHolder{
 
-        LayoutItemContainerUserBinding binding;
+        LayoutItemContainerUserProposalBinding binding;
 
-        UserViewHolder(LayoutItemContainerUserBinding itemContainerUserBinding){
-            super(itemContainerUserBinding.getRoot());
-            binding = itemContainerUserBinding;
+        UserViewHolder(LayoutItemContainerUserProposalBinding itemBinding){
+            super(itemBinding.getRoot());
+            binding = itemBinding;
         }
         void setUserData(User user){
             binding.txtFullName.setText(user.fullName);
@@ -81,6 +81,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                 }else{
                     binding.txtRating.setText(R.string.noRatings);
                 }
+
+                String numSentText = "Sent Proposals: " + user.numRatingSent;
+                binding.txtNumSentProposals.setText(numSentText);
+
                 String priceRange;
                 if(user.minFee != null && user.maxFee != null) {
                     if (user.minFee.equals(user.maxFee)) {
@@ -92,8 +96,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                     binding.txtPriceRange.setText(priceRange);
                 }
             }else {
-                binding.layoutRating.setVisibility(View.GONE);
+                binding.txtRating.setVisibility(View.GONE);
                 binding.txtPriceRange.setVisibility(View.GONE);
+                binding.layoutRating.setVisibility(View.GONE);
+                String numSentText = "Received Proposals: " + user.numRatingReceived;
+                binding.txtNumSentProposals.setText(numSentText);
             }
 
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));

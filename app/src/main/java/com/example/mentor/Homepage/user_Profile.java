@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,8 +28,8 @@ import com.example.mentor.databinding.FragmentUserProfileBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.Reviews;
 import com.example.mentor.misc.SubjectRates;
-import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -70,69 +71,73 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
     public void initLayout(){
 
         binding.progressBar.setVisibility(View.VISIBLE);
-        binding.layoutHeader.setVisibility(View.INVISIBLE);
-        binding.txtBio.setVisibility(View.INVISIBLE);
-        binding.cardSecondary.setVisibility(View.INVISIBLE);
+        binding.layoutHeader.setVisibility(View.GONE);
+        binding.txtBio.setVisibility(View.GONE);
+        binding.cardSecondary.setVisibility(View.GONE);
 
-        String fUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        String fUserUID = "";
+        if(fUser != null) {
+            fUserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
 
-        fStore.collection("Users").document(fUser).get().addOnCompleteListener(task -> {
+        fStore.collection("Users").document(fUserUID).get().addOnCompleteListener(task -> {
             if(task.isSuccessful() && task.getResult() != null){
-                task.addOnSuccessListener(documentSnapshot -> {
-                    Account_Details.User_Details.setUID(fUser);
-                    Account_Details.User_Details.setIsAccepting(documentSnapshot.getBoolean("isAccepting"));
-                    Boolean isAccepting = Account_Details.User_Details.getIsAccepting();
-                    if(isAccepting != null){
-                        if(isAccepting){binding.txtStatus.setText(R.string.CurrentlyAccepting);
-                        }else{binding.txtStatus.setText(R.string.NoLongerAccepting);}
-                    }
+                task.addOnSuccessListener(docSnap -> {
+                    Account_Details.User_Details.setUID(docSnap.getId());
+                    Account_Details.User_Details.setIsAccepting(docSnap.getBoolean("isAccepting"));
 
-                    Account_Details.User_Details.setIsMentor(documentSnapshot.getBoolean("isMentor"));
+                    Account_Details.User_Details.setIsMentor(docSnap.getBoolean("isMentor"));
                     isMentor = Account_Details.User_Details.getIsMentor();
 
-                    Long authLevel = documentSnapshot.getLong("authLevel");
+                    Long authLevel = docSnap.getLong("authLevel");
                     assert authLevel != null;
                     Account_Details.User_Details.setAuthLevel(authLevel.intValue());
 
                     if(isMentor) {
                         if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
-                            binding.txtAuthLVL.setText(R.string.AuthLVL_0);
+                            binding.progressBarStatus.setProgress(0, true);
                         } else if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                             if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                                    fStore.collection("Users").document(fUser).update("authLevel", 1);
+                                    fStore.collection("Users").document(docSnap.getId()).update("authLevel", 1);
                                 }
                             }
-                            binding.txtAuthLVL.setText(R.string.AuthLVL_1);
+                            binding.progressBarStatus.setProgress(50, true);
                         } else if (Account_Details.User_Details.getAuthLevel() == 2) {
-                            binding.txtAuthLVL.setText(R.string.AuthLVL_2);
+                            binding.progressBarStatus.setProgress(100, true);
                         } }
                     else{
                         if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
-                            binding.txtAuthLVL.setText(R.string.AuthLVL_0);
+                            binding.progressBarStatus.setProgress(0, true);
                         } else {
                             if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                                    fStore.collection("Users").document(fUser).update("authLevel", 2);
+                                    fStore.collection("Users").document(docSnap.getId()).update("authLevel", 2);
                                 }
                             }
-                            binding.txtAuthLVL.setText(R.string.AuthLVL_2);
+                            binding.progressBarStatus.setProgress(100, true);
                         }
                     }
-                    Account_Details.User_Details.setFullName(documentSnapshot.getString("fullName"));
+                    if(Account_Details.User_Details.getIsAccepting()){
+                        binding.progressBarStatus.setProgressTintList(AppCompatResources.getColorStateList(requireContext(), R.color.green));
+                    } else {
+                        binding.progressBarStatus.setProgressTintList(AppCompatResources.getColorStateList(requireContext(), R.color.red));
+                    }
+                    Account_Details.User_Details.setFullName(docSnap.getString("fullName"));
                     binding.txtFullName.setText(Account_Details.User_Details.getFullName());
-                    Account_Details.User_Details.setEmail(documentSnapshot.getString("email"));
+                    Account_Details.User_Details.setEmail(docSnap.getString("email"));
                     binding.txtEmail.setText(Account_Details.User_Details.getEmail());
-                    Account_Details.User_Details.setBioEssay(documentSnapshot.getString("bioEssay"));
+                    Account_Details.User_Details.setBioEssay(docSnap.getString("bioEssay"));
                     binding.txtBio.setText(Account_Details.User_Details.getBioEssay());
 
-                    Account_Details.User_Details.rates = (Map<String,Long>) documentSnapshot.get("subjectRates");
+                    Account_Details.User_Details.rates = (Map<String,Long>) docSnap.get("subjectRates");
                     rates = Account_Details.User_Details.rates;
-                    Account_Details.User_Details.subjects = (ArrayList<String>) documentSnapshot.get("subjects");
+                    Account_Details.User_Details.subjects = (ArrayList<String>) docSnap.get("subjects");
                     subjects = Account_Details.User_Details.subjects;
 
-                    if(documentSnapshot.getString("picString") != null) {
-                        String picString = documentSnapshot.getString("picString");
+                    if(docSnap.getString("picString") != null) {
+                        String picString = docSnap.getString("picString");
                         if (picString != null && !picString.isEmpty() && !picString.equals("null")) {
                             Account_Details.User_Details.setPicString(picString);
                             byte[] bytes = Base64.decode(picString, Base64.DEFAULT);
@@ -143,10 +148,14 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
 
                     assert subjects != null;
 
-                    initLstSubj(isMentor, rates, subjects);
                     selectedDate = LocalDate.now();
+
+                    initLstSubj(isMentor, rates, subjects);
+
                     setMonthView();
+
                     getReviews();
+
                     prop2sched();
                 });
             }
@@ -272,7 +281,8 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                    int ratingAve = ratingSum / list_reviews.size();
                    Log.i("list_reviews", String.valueOf(list_reviews.size()));
                    if(list_reviews.size()>0){
-                       binding.ratingMentor.setRating(ratingAve);
+                       String rating = ratingAve+".0";
+                       binding.txtRating.setText(rating);
                        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
                        binding.recyclerReviews.setLayoutManager(mLinearLayoutManager);
                        binding.recyclerReviews.setVisibility(View.VISIBLE);
@@ -285,11 +295,11 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                        binding.txtBio.setVisibility(View.VISIBLE);
                        binding.cardSecondary.setVisibility(View.VISIBLE);
                    } else {
-                       ViewGroup.LayoutParams params = binding.ratingMentor.getLayoutParams();
-                       params.height = 0;
-                       params.width = 0;
-                       binding.ratingMentor.setLayoutParams(params);
-                       binding.ratingMentor.setVisibility(View.GONE);
+                       if(isMentor) {
+                           binding.txtRating.setText(R.string.noRatings);
+                       }else{
+                           binding.layoutRating.setVisibility(View.GONE);
+                       }
                        binding.txtReviewsPrompt.setVisibility(View.GONE);
                        binding.recyclerReviews.setVisibility(View.GONE);
 
@@ -299,11 +309,11 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                        binding.cardSecondary.setVisibility(View.VISIBLE);
                    }
                }  else {
-                   ViewGroup.LayoutParams params = binding.ratingMentor.getLayoutParams();
-                   params.height = 0;
-                   params.width = 0;
-                   binding.ratingMentor.setLayoutParams(params);
-                   binding.ratingMentor.setVisibility(View.GONE);
+                   if(isMentor) {
+                       binding.txtRating.setText(R.string.noRatings);
+                   }else{
+                       binding.layoutRating.setVisibility(View.GONE);
+                   }
                    binding.txtReviewsPrompt.setVisibility(View.GONE);
                    binding.recyclerReviews.setVisibility(View.GONE);
 

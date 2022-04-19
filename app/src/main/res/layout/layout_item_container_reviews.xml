@@ -8,7 +8,7 @@
     android:id="@+id/layout_mainContainer"
     app:cardCornerRadius="@dimen/_10sdp"
     app:cardElevation="@dimen/_1sdp"
-    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_8sdp"
     android:layout_marginHorizontal="@dimen/_8sdp">
 
         <LinearLayout

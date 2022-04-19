@@ -11,10 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.mentor.R;
 import com.example.mentor.adapters.UsersAdapter;
+import com.example.mentor.adapters.UsersProposalsAdapter;
 import com.example.mentor.databinding.FragmentSearchUsersBinding;
 import com.example.mentor.misc.Account_Details;
 import com.example.mentor.misc.User;
@@ -53,6 +54,7 @@ public class search_Users extends Fragment implements UserListener {
         if(Account_Details.User_Details.getIsMentor()){
             Account_Details.User_Details.setCurrSearch(false);
             binding.btnSendProposal.setVisibility(View.GONE);
+            Log.d("recyclerProposals", "getProposals");
             getProposals();
         }else {
             if (Account_Details.User_Details.getCurrSearch()) {getHideUsers();}
@@ -296,7 +298,7 @@ public class search_Users extends Fragment implements UserListener {
                         Long ratingAve = queryDocumentSnapshot.getLong("ratingAve");
                         if(ratingAve != null) {
                             user.rating = ratingAve.intValue();
-                        } else { user.rating = 0; }
+                        } else { user.rating = null; }
                     }
                     list_users.add(user);
                 }
@@ -320,8 +322,8 @@ public class search_Users extends Fragment implements UserListener {
 
                 if(list_users.size()>0){
                     binding.progressBar.setVisibility(View.GONE);
-                    LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-                    binding.recyclerUsers.setLayoutManager(mLinearLayoutManager);
+                    GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+                    binding.recyclerUsers.setLayoutManager(mGridLayoutManager);
                     binding.recyclerUsers.setVisibility(View.VISIBLE);
                     UsersAdapter usersAdapter = new UsersAdapter(list_users, this);
                     binding.recyclerUsers.setAdapter(usersAdapter);
@@ -335,7 +337,7 @@ public class search_Users extends Fragment implements UserListener {
         });
     }
 
-    private void getProposals(){
+    private void getProposals() {
         binding.recyclerUsers.setVisibility(View.INVISIBLE);
         binding.progressBar.setVisibility(View.VISIBLE);
         String fUser = Account_Details.User_Details.getUID();
@@ -349,7 +351,7 @@ public class search_Users extends Fragment implements UserListener {
                     Long status = queryDocumentSnapshot.getLong("status");
                     assert status != null;
 
-                    if(queryDocumentSnapshot.get("hideUsers") != null) {
+                    if (queryDocumentSnapshot.get("hideUsers") != null) {
                         ArrayList<String> hideUsersUID = (ArrayList<String>) queryDocumentSnapshot.get("hideUsers");
                         assert hideUsersUID != null;
                         if (hideUsersUID.contains(queryDocumentSnapshot.getId())) {
@@ -358,15 +360,17 @@ public class search_Users extends Fragment implements UserListener {
                     }
 
                     if (fUser.equals(queryDocumentSnapshot.getString("requestorUID"))) {
+                        Log.d("recyclerProposals", "fUser is requestor");
                         if (list_uid.size() > 0) {
-                            if (list_uid.contains(queryDocumentSnapshot.getString("requesteeUID")) && status.intValue()<4) {
+                            if (list_uid.contains(queryDocumentSnapshot.getString("requesteeUID")) && status.intValue() < 4) {
                                 continue;
                             }
                         }
                         list_uid.add(queryDocumentSnapshot.getString("requesteeUID"));
-                    } else if (fUser.equals(queryDocumentSnapshot.getString("requesteeUID")) && status.intValue()<4) {
+                    } else if (fUser.equals(queryDocumentSnapshot.getString("requesteeUID"))) {
+                        Log.d("recyclerProposals", "fUser is requestee");
                         if (list_uid.size() > 0) {
-                            if (list_uid.contains(queryDocumentSnapshot.getString("requestorUID"))) {
+                            if (list_uid.contains(queryDocumentSnapshot.getString("requestorUID")) && status.intValue() < 4) {
                                 continue;
                             }
                         }
@@ -379,11 +383,11 @@ public class search_Users extends Fragment implements UserListener {
                         List<User> list_users = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
 
-                            if(!list_uid.contains(queryDocumentSnapshot.getId())){
+                            if (!list_uid.contains(queryDocumentSnapshot.getId())) {
                                 continue;
                             }
 
-                            if(searchKey != null) {
+                            if (searchKey != null) {
                                 Log.i("searchKey not null", searchKey);
                                 if (!searchKey.trim().isEmpty()) {
                                     if (searchMethod.equals(getResources().getString(R.string.Mentor))) {
@@ -396,12 +400,16 @@ public class search_Users extends Fragment implements UserListener {
                                             String toLowerCase = subject.get(i).toLowerCase(Locale.ROOT);
                                             subject.set(i, toLowerCase);
                                         }
-                                        if(!subject.contains(searchKey.toLowerCase(Locale.ROOT))){
+                                        if (!subject.contains(searchKey.toLowerCase(Locale.ROOT))) {
                                             continue;
                                         }
                                     }
-                                } else {Log.i("searchKey", "empty");}
-                            } else {Log.i("searchKey", "null");}
+                                } else {
+                                    Log.i("searchKey", "empty");
+                                }
+                            } else {
+                                Log.i("searchKey", "null");
+                            }
 
 
                             User user = new User();
@@ -409,79 +417,99 @@ public class search_Users extends Fragment implements UserListener {
                             user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
                             user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
                             user.fullName = queryDocumentSnapshot.getString("fullName");
-                            user.pictureStr= queryDocumentSnapshot.getString("picture");
+                            user.pictureStr = queryDocumentSnapshot.getString("picture");
                             user.email = queryDocumentSnapshot.getString("email");
                             user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
 
-                            Map<String, Long> fees = (Map<String, Long>) queryDocumentSnapshot.get("subjectRates");
-                            List<Map.Entry<String, Long>> list = new LinkedList<>(fees.entrySet());
+                            if(user.isMentor) {
+                                Map<String, Long> fees = (Map<String, Long>) queryDocumentSnapshot.get("subjectRates");
+                                List<Map.Entry<String, Long>> list = new LinkedList<>(fees.entrySet());
 
-                            if(searchKey.isEmpty()||!searchMethod.equals(getResources().getString(R.string.Subject))) {
-                                list.sort(Map.Entry.comparingByValue());
-                                for (int i = 0; i < list.size(); i++) {
-                                    if (list.get(i).getValue() > 0L) {
-                                        user.minFee = list.get(i).getValue();
-                                        break;
+                                if (searchKey.isEmpty() || !searchMethod.equals(getResources().getString(R.string.Subject))) {
+                                    list.sort(Map.Entry.comparingByValue());
+                                    for (int i = 0; i < list.size(); i++) {
+                                        if (list.get(i).getValue() > 0L) {
+                                            user.minFee = list.get(i).getValue();
+                                            break;
+                                        }
                                     }
+                                    Collections.reverse(list);
+                                    user.maxFee = list.get(0).getValue();
+                                } else if (searchMethod.equals(getResources().getString(R.string.Subject))) {
+                                    Map<String, Long> toLowerMap = new HashMap<>();
+                                    for (int i = 0; i < list.size(); i++) {
+                                        toLowerMap.put(list.get(i).getKey().toLowerCase(Locale.ROOT), list.get(i).getValue());
+                                    }
+                                    Log.i("toLowerMap", toLowerMap.toString());
+                                    user.minFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
+                                    user.maxFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
                                 }
-                                Collections.reverse(list);
-                                user.maxFee = list.get(0).getValue();
-                            }else if(searchMethod.equals(getResources().getString(R.string.Subject))){
-                                Map<String, Long> toLowerMap = new HashMap<>();
-                                for(int i = 0; i < list.size(); i++) {
-                                    toLowerMap.put(list.get(i).getKey().toLowerCase(Locale.ROOT), list.get(i).getValue());
-                                }
-                                Log.i("toLowerMap", toLowerMap.toString());
-                                user.minFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
-                                user.maxFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
                             }
-                            Log.i("price range", user.fullName + ": " + user.minFee + " - " + user.maxFee);
 
-                            if(queryDocumentSnapshot.getString("picString") != null) {
+                            if (queryDocumentSnapshot.getString("picString") != null) {
                                 String picString = queryDocumentSnapshot.getString("picString");
                                 if (picString != null && !picString.isEmpty() && !picString.equals("null")) {
                                     user.pictureStr = queryDocumentSnapshot.getString("picString");
                                 }
                             }
 
-                            if(user.isMentor) {
+                            if (user.isMentor) {
                                 Long ratingAve = queryDocumentSnapshot.getLong("ratingAve");
-                                if(ratingAve != null) {
+                                if (ratingAve != null) {
                                     user.rating = ratingAve.intValue();
-                                } else { user.rating = 0; }
+                                } else {
+                                    user.rating = null;
+                                }
                             }
-                            list_users.add(user);
-                        }
 
-                        if(!searchSort.isEmpty()) {
-                            if(searchSort.equals(getResources().getString(R.string.ratingAscend))) {
-                                list_users.sort(Comparator.comparing(u -> u.rating));
-                            }
-                            else if(searchSort.equals(getResources().getString(R.string.ratingDescend))) {
-                                list_users.sort(Comparator.comparing(u -> u.rating));
-                                Collections.reverse(list_users);
-                            }
-                            else if(searchSort.equals(getResources().getString(R.string.feeAscend))) {
-                                list_users.sort(Comparator.comparing(u -> u.minFee));
-                            }
-                            else if(searchSort.equals(getResources().getString(R.string.feeDescend))) {
-                                list_users.sort(Comparator.comparing(u -> u.maxFee));
-                                Collections.reverse(list_users);
-                            }
+                            fStore.collection("Users").document(user.uid).collection("proposals").get().addOnCompleteListener(task2 -> {
+                                if (task2.isSuccessful()) {
+                                    if (task2.getResult().size() > 0) {
+                                        user.numRatingSent = 0;
+                                        user.numRatingReceived = 0;
+                                        for (QueryDocumentSnapshot qDocSnap : task2.getResult()) {
+                                            if(user.isMentor) {
+                                                if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requestorUID"))) {
+                                                    user.numRatingSent += 1;
+                                                }
+                                            } else {
+                                                if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requesteeUID"))) {
+                                                    user.numRatingReceived += 1;
+                                                }
+                                            }
+                                        }
+
+                                        list_users.add(user);
+
+                                        if (!searchSort.isEmpty()) {
+                                            if (searchSort.equals(getResources().getString(R.string.ratingAscend))) {
+                                                list_users.sort(Comparator.comparing(u -> u.rating));
+                                            } else if (searchSort.equals(getResources().getString(R.string.ratingDescend))) {
+                                                list_users.sort(Comparator.comparing(u -> u.rating));
+                                                Collections.reverse(list_users);
+                                            } else if (searchSort.equals(getResources().getString(R.string.feeAscend))) {
+                                                list_users.sort(Comparator.comparing(u -> u.minFee));
+                                            } else if (searchSort.equals(getResources().getString(R.string.feeDescend))) {
+                                                list_users.sort(Comparator.comparing(u -> u.maxFee));
+                                                Collections.reverse(list_users);
+                                            }
+                                        }
+                                        if (list_users.size() > 0) {
+                                            binding.progressBar.setVisibility(View.GONE);
+                                            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+                                            binding.recyclerUsers.setLayoutManager(mGridLayoutManager);
+                                            binding.recyclerUsers.setVisibility(View.VISIBLE);
+                                            UsersProposalsAdapter adapter = new UsersProposalsAdapter(list_users, this);
+                                            binding.recyclerUsers.setAdapter(adapter);
+                                            binding.recyclerUsers.setHasFixedSize(true);
+                                        }
+                                    }
+                                }
+                            });
                         }
-                        if(list_users.size()>0){
-                            binding.progressBar.setVisibility(View.GONE);
-                            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-                            binding.recyclerUsers.setLayoutManager(mLinearLayoutManager);
-                            binding.recyclerUsers.setVisibility(View.VISIBLE);
-                            UsersAdapter usersAdapter = new UsersAdapter(list_users, this);
-                            binding.recyclerUsers.setAdapter(usersAdapter);
-                            binding.recyclerUsers.setHasFixedSize(true);
-                        }else{Toast.makeText(getContext(), "No proposals found", Toast.LENGTH_SHORT).show();}}
-                    else{Toast.makeText(getContext(), "Error getting list of proposals", Toast.LENGTH_SHORT).show();}
+                    }
                 });
-                if (list_uid.isEmpty()) {Toast.makeText(requireContext(), "No proposals found", Toast.LENGTH_SHORT).show();}
-            }else{Toast.makeText(getContext(), "Error getting list of proposals", Toast.LENGTH_SHORT).show();}
+            }
         });
     }
 
@@ -509,14 +537,14 @@ public class search_Users extends Fragment implements UserListener {
 
     public void initSwitches() {
         if(Account_Details.User_Details.getCurrSearch()){
-            binding.btnSendProposal.setBackgroundResource(R.drawable.roundedbutton_blue);
+            binding.btnSendProposal.setBackgroundColor(getResources().getColor(R.color.blue,null));
             binding.btnSendProposal.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.btnProposals.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+            binding.btnProposals.setBackgroundColor(getResources().getColor(R.color.transparent,null));
             binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.blue));
         }else {
-            binding.btnProposals.setBackgroundResource(R.drawable.roundedbutton_blue);
+            binding.btnProposals.setBackgroundColor(getResources().getColor(R.color.blue,null));
             binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.white));
-            binding.btnSendProposal.setBackgroundResource(R.drawable.roundedbutton_blue_outline);
+            binding.btnSendProposal.setBackgroundColor(getResources().getColor(R.color.transparent,null));
             binding.btnSendProposal.setTextColor(this.requireContext().getColor(R.color.blue));
         }
     }

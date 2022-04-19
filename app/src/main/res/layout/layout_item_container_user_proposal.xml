@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingVertical="@dimen/_10sdp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_100sdp">
@@ -35,9 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_fullName"
@@ -52,6 +50,19 @@
 
             <TextView
                 android:id="@+id/txt_PriceRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                style="@style/autoscroll"
+                android:text="@string/lorem"
+                android:fontFamily="@font/mako"/>
+
+            <TextView
+                android:id="@+id/txt_NumSentProposals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
@@ -99,6 +110,7 @@
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/black" />
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
