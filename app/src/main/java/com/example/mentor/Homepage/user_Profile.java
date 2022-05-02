@@ -70,6 +70,8 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
 
     public void initLayout(){
 
+        FirebaseAuth.getInstance().getCurrentUser().reload();
+
         binding.progressBar.setVisibility(View.VISIBLE);
         binding.layoutHeader.setVisibility(View.GONE);
         binding.txtBio.setVisibility(View.GONE);
@@ -93,30 +95,42 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                     Long authLevel = docSnap.getLong("authLevel");
                     assert authLevel != null;
                     Account_Details.User_Details.setAuthLevel(authLevel.intValue());
+                    Log.i("authLevel",authLevel.toString());
 
                     if(isMentor) {
-                        if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
-                            binding.progressBarStatus.setProgress(0, true);
-                        } else if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                        if (Account_Details.User_Details.getAuthLevel() == 2) {
+                            Log.i("authLevel","fully verified " + docSnap.getId());
+                            binding.progressBarStatus.setProgress(100, true);
+                        }
+                        else if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                             if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                    Log.i("authLevel","email is verified " + docSnap.getId());
                                     fStore.collection("Users").document(docSnap.getId()).update("authLevel", 1);
+                                    binding.progressBarStatus.setProgress(50, true);
                                 }
                             }
-                            binding.progressBarStatus.setProgress(50, true);
-                        } else if (Account_Details.User_Details.getAuthLevel() == 2) {
-                            binding.progressBarStatus.setProgress(100, true);
-                        } }
-                    else{
-                        if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
+                        }
+                        else if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
+                            fUser.sendEmailVerification().addOnSuccessListener(unused -> Toast.makeText(requireContext(), "Verification sent to your email", Toast.LENGTH_SHORT)
+                                    .show()).addOnFailureListener(e -> Log.i("onFailure: Email not Sent", e.getMessage()));
                             binding.progressBarStatus.setProgress(0, true);
-                        } else {
+                            Log.i("authLevel","email is not verified " + docSnap.getId());
+                        }
+                    }
+                    else{
+                        if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
                             if(authLevel.intValue()<1) {
                                 if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                                     fStore.collection("Users").document(docSnap.getId()).update("authLevel", 2);
                                 }
                             }
                             binding.progressBarStatus.setProgress(100, true);
+                        }
+                        else if (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
+                            fUser.sendEmailVerification().addOnSuccessListener(unused -> Toast.makeText(requireContext(), "Verification sent to your email", Toast.LENGTH_SHORT)
+                                    .show()).addOnFailureListener(e -> Log.i("onFailure: Email not Sent", e.getMessage()));
+                            binding.progressBarStatus.setProgress(0, true);
                         }
                     }
                     if(Account_Details.User_Details.getIsAccepting()){

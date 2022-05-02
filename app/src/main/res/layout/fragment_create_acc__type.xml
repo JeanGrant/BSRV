@@ -19,7 +19,7 @@
             app:cardCornerRadius="@dimen/_40sdp"
             app:cardElevation="@dimen/_2sdp"
             app:cardUseCompatPadding="true"
-            android:visibility="visible">
+            android:visibility="gone">
             <com.google.android.material.card.MaterialCardView
                 app:cardCornerRadius="@dimen/_40sdp"
                 android:layout_margin="@dimen/_3sdp"
@@ -47,15 +47,16 @@
             android:text="@string/createAccType"
             android:textSize="@dimen/subtitle_txtsize"
             android:fontFamily="@font/subtitle_font"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
         <LinearLayout
             android:id="@+id/layout_accType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="visible">
             <com.google.android.material.card.MaterialCardView
+                android:clickable="true"
                 android:id="@+id/card_Student"
                 android:layout_width="@dimen/SQBTN_size"
                 android:layout_height="@dimen/SQBTN_size"
@@ -74,17 +75,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/btn_Student"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_bsrv_03"
                         android:layout_centerHorizontal="true"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/btn_Student"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="@dimen/_20sdp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/SQBTN_txtfont"
                         android:text="@string/Student"
@@ -94,6 +96,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:clickable="true"
                 android:id="@+id/card_Mentor"
                 android:layout_width="@dimen/SQBTN_size"
                 android:layout_height="@dimen/SQBTN_size"
@@ -113,17 +116,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/btn_Mentor"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_bsrv_05"
                         android:layout_centerHorizontal="true"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/btn_Mentor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/SQBTN_txtfont"
                         android:text="@string/Mentor"

@@ -52,11 +52,13 @@ public class search_Users extends Fragment implements UserListener {
         searchKey = "";
 
         if(Account_Details.User_Details.getIsMentor()){
+            binding.fabSearch.setVisibility(View.GONE);
             Account_Details.User_Details.setCurrSearch(false);
             binding.btnSendProposal.setVisibility(View.GONE);
             Log.d("recyclerProposals", "getProposals");
             getProposals();
         }else {
+            binding.fabSearch.setVisibility(View.VISIBLE);
             if (Account_Details.User_Details.getCurrSearch()) {getHideUsers();}
             else {getProposals();}
             initSwitches();
@@ -205,6 +207,8 @@ public class search_Users extends Fragment implements UserListener {
     }
 
     private void getUsers(ArrayList<String> hideUsersUID){
+        Log.i("list_users","getUsers");
+        binding.layoutNoResults.setVisibility(View.GONE);
         binding.recyclerUsers.setVisibility(View.INVISIBLE);
         binding.progressBar.setVisibility(View.VISIBLE);
         fStore.collection("Users").get().addOnCompleteListener(task -> {
@@ -298,7 +302,7 @@ public class search_Users extends Fragment implements UserListener {
                         Long ratingAve = queryDocumentSnapshot.getLong("ratingAve");
                         if(ratingAve != null) {
                             user.rating = ratingAve.intValue();
-                        } else { user.rating = null; }
+                        } else { user.rating = 0; }
                     }
                     list_users.add(user);
                 }
@@ -329,15 +333,21 @@ public class search_Users extends Fragment implements UserListener {
                     binding.recyclerUsers.setAdapter(usersAdapter);
                     binding.recyclerUsers.setHasFixedSize(true);
                 } else{
-                    Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.layoutNoResults.setVisibility(View.VISIBLE);
+                    binding.txtNoResult.setText(R.string.noUsers);
                 }
             }else{
-                Toast.makeText(getContext(), "Error getting list of users", Toast.LENGTH_SHORT).show();
+                binding.progressBar.setVisibility(View.GONE);
+                binding.layoutNoResults.setVisibility(View.VISIBLE);
+                binding.txtNoResult.setText(R.string.noUsers);
             }
         });
     }
 
     private void getProposals() {
+        Log.i("list_users","getProposals");
+        binding.layoutNoResults.setVisibility(View.GONE);
         binding.recyclerUsers.setVisibility(View.INVISIBLE);
         binding.progressBar.setVisibility(View.VISIBLE);
         String fUser = Account_Details.User_Details.getUID();
@@ -346,6 +356,7 @@ public class search_Users extends Fragment implements UserListener {
         Log.d("recyclerProposals", "list unique UIDs");
         fStore.collection("Users").document(fUser).collection("proposals").get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
+                Log.i("list_users","fStore proposals");
                 for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
 
                     Long status = queryDocumentSnapshot.getLong("status");
@@ -378,137 +389,173 @@ public class search_Users extends Fragment implements UserListener {
                     }
                 }
                 Log.d("recyclerProposals", "list_uid size" + list_uid.size());
-                fStore.collection("Users").get().addOnCompleteListener(task1 -> {
-                    if (task1.isSuccessful() && task1.getResult() != null) {
-                        List<User> list_users = new ArrayList<>();
-                        for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
+                if(list_uid.size()>0) {
+                    fStore.collection("Users").get().addOnCompleteListener(task1 -> {
+                        Log.i("list_users", "fStore proposals task1");
+                        if (task1.isSuccessful() && task1.getResult() != null) {
+                            List<User> list_users = new ArrayList<>();
+                            for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
 
-                            if (!list_uid.contains(queryDocumentSnapshot.getId())) {
-                                continue;
-                            }
+                                if (!list_uid.contains(queryDocumentSnapshot.getId())) {
+                                    continue;
+                                }
 
-                            if (searchKey != null) {
-                                Log.i("searchKey not null", searchKey);
-                                if (!searchKey.trim().isEmpty()) {
-                                    if (searchMethod.equals(getResources().getString(R.string.Mentor))) {
-                                        if (!queryDocumentSnapshot.getString("fullName").toLowerCase(Locale.ROOT).contains(searchKey.toLowerCase(Locale.ROOT))) {
-                                            continue;
+                                if (searchKey != null) {
+                                    Log.i("searchKey not null", searchKey);
+                                    if (!searchKey.trim().isEmpty()) {
+                                        if (searchMethod.equals(getResources().getString(R.string.Mentor))) {
+                                            if (!queryDocumentSnapshot.getString("fullName").toLowerCase(Locale.ROOT).contains(searchKey.toLowerCase(Locale.ROOT))) {
+                                                continue;
+                                            }
+                                        } else if (searchMethod.equals(getResources().getString(R.string.Subject))) {
+                                            ArrayList<String> subject = (ArrayList<String>) queryDocumentSnapshot.get("subjects");
+                                            for (int i = 0; i < subject.size(); i++) {
+                                                String toLowerCase = subject.get(i).toLowerCase(Locale.ROOT);
+                                                subject.set(i, toLowerCase);
+                                            }
+                                            if (!subject.contains(searchKey.toLowerCase(Locale.ROOT))) {
+                                                continue;
+                                            }
                                         }
+                                    } else {
+                                        Log.i("searchKey", "empty");
+                                    }
+                                } else {
+                                    Log.i("searchKey", "null");
+                                }
+
+
+                                User user = new User();
+                                user.uid = queryDocumentSnapshot.getId();
+                                user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
+                                user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
+                                user.fullName = queryDocumentSnapshot.getString("fullName");
+                                user.pictureStr = queryDocumentSnapshot.getString("picture");
+                                user.email = queryDocumentSnapshot.getString("email");
+                                user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
+
+                                if (user.isMentor) {
+                                    Map<String, Long> fees = (Map<String, Long>) queryDocumentSnapshot.get("subjectRates");
+                                    List<Map.Entry<String, Long>> list = new LinkedList<>(fees.entrySet());
+
+                                    if (searchKey.isEmpty() || !searchMethod.equals(getResources().getString(R.string.Subject))) {
+                                        list.sort(Map.Entry.comparingByValue());
+                                        for (int i = 0; i < list.size(); i++) {
+                                            if (list.get(i).getValue() > 0L) {
+                                                user.minFee = list.get(i).getValue();
+                                                break;
+                                            }
+                                        }
+                                        Collections.reverse(list);
+                                        user.maxFee = list.get(0).getValue();
                                     } else if (searchMethod.equals(getResources().getString(R.string.Subject))) {
-                                        ArrayList<String> subject = (ArrayList<String>) queryDocumentSnapshot.get("subjects");
-                                        for (int i = 0; i < subject.size(); i++) {
-                                            String toLowerCase = subject.get(i).toLowerCase(Locale.ROOT);
-                                            subject.set(i, toLowerCase);
+                                        Map<String, Long> toLowerMap = new HashMap<>();
+                                        for (int i = 0; i < list.size(); i++) {
+                                            toLowerMap.put(list.get(i).getKey().toLowerCase(Locale.ROOT), list.get(i).getValue());
                                         }
-                                        if (!subject.contains(searchKey.toLowerCase(Locale.ROOT))) {
-                                            continue;
-                                        }
+                                        Log.i("toLowerMap", toLowerMap.toString());
+                                        user.minFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
+                                        user.maxFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
                                     }
-                                } else {
-                                    Log.i("searchKey", "empty");
                                 }
-                            } else {
-                                Log.i("searchKey", "null");
-                            }
 
-
-                            User user = new User();
-                            user.uid = queryDocumentSnapshot.getId();
-                            user.isMentor = queryDocumentSnapshot.getBoolean("isMentor");
-                            user.authLvl = Objects.requireNonNull(queryDocumentSnapshot.getLong("authLevel")).intValue();
-                            user.fullName = queryDocumentSnapshot.getString("fullName");
-                            user.pictureStr = queryDocumentSnapshot.getString("picture");
-                            user.email = queryDocumentSnapshot.getString("email");
-                            user.isAccepting = queryDocumentSnapshot.getBoolean("isAccepting");
-
-                            if(user.isMentor) {
-                                Map<String, Long> fees = (Map<String, Long>) queryDocumentSnapshot.get("subjectRates");
-                                List<Map.Entry<String, Long>> list = new LinkedList<>(fees.entrySet());
-
-                                if (searchKey.isEmpty() || !searchMethod.equals(getResources().getString(R.string.Subject))) {
-                                    list.sort(Map.Entry.comparingByValue());
-                                    for (int i = 0; i < list.size(); i++) {
-                                        if (list.get(i).getValue() > 0L) {
-                                            user.minFee = list.get(i).getValue();
-                                            break;
-                                        }
+                                if (queryDocumentSnapshot.getString("picString") != null) {
+                                    String picString = queryDocumentSnapshot.getString("picString");
+                                    if (picString != null && !picString.isEmpty() && !picString.equals("null")) {
+                                        user.pictureStr = queryDocumentSnapshot.getString("picString");
                                     }
-                                    Collections.reverse(list);
-                                    user.maxFee = list.get(0).getValue();
-                                } else if (searchMethod.equals(getResources().getString(R.string.Subject))) {
-                                    Map<String, Long> toLowerMap = new HashMap<>();
-                                    for (int i = 0; i < list.size(); i++) {
-                                        toLowerMap.put(list.get(i).getKey().toLowerCase(Locale.ROOT), list.get(i).getValue());
+                                }
+
+                                if (user.isMentor) {
+                                    Long ratingAve = queryDocumentSnapshot.getLong("ratingAve");
+                                    if (ratingAve != null) {
+                                        user.rating = ratingAve.intValue();
+                                    } else {
+                                        user.rating = null;
                                     }
-                                    Log.i("toLowerMap", toLowerMap.toString());
-                                    user.minFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
-                                    user.maxFee = toLowerMap.get(searchKey.toLowerCase(Locale.ROOT));
                                 }
-                            }
 
-                            if (queryDocumentSnapshot.getString("picString") != null) {
-                                String picString = queryDocumentSnapshot.getString("picString");
-                                if (picString != null && !picString.isEmpty() && !picString.equals("null")) {
-                                    user.pictureStr = queryDocumentSnapshot.getString("picString");
-                                }
-                            }
-
-                            if (user.isMentor) {
-                                Long ratingAve = queryDocumentSnapshot.getLong("ratingAve");
-                                if (ratingAve != null) {
-                                    user.rating = ratingAve.intValue();
-                                } else {
-                                    user.rating = null;
-                                }
-                            }
-
-                            fStore.collection("Users").document(user.uid).collection("proposals").get().addOnCompleteListener(task2 -> {
-                                if (task2.isSuccessful()) {
-                                    if (task2.getResult().size() > 0) {
-                                        user.numRatingSent = 0;
-                                        user.numRatingReceived = 0;
-                                        for (QueryDocumentSnapshot qDocSnap : task2.getResult()) {
-                                            if(user.isMentor) {
-                                                if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requestorUID"))) {
-                                                    user.numRatingSent += 1;
+                                fStore.collection("Users").document(user.uid).collection("proposals").get().addOnCompleteListener(task2 -> {
+                                    if (task2.isSuccessful()) {
+                                        if (task2.getResult().size() > 0) {
+                                            Log.i("list_users", "fStore proposals task2");
+                                            user.numRatingSent = 0;
+                                            user.numRatingReceived = 0;
+                                            for (QueryDocumentSnapshot qDocSnap : task2.getResult()) {
+                                                if (user.isMentor) {
+                                                    if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requestorUID"))) {
+                                                        user.numRatingSent += 1;
+                                                    }
+                                                } else {
+                                                    if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requesteeUID"))) {
+                                                        user.numRatingReceived += 1;
+                                                    }
                                                 }
+                                            }
+
+                                            list_users.add(user);
+
+                                            if (!searchSort.isEmpty()) {
+                                                if (searchSort.equals(getResources().getString(R.string.ratingAscend))) {
+                                                    list_users.sort(Comparator.comparing(u -> u.rating));
+                                                } else if (searchSort.equals(getResources().getString(R.string.ratingDescend))) {
+                                                    list_users.sort(Comparator.comparing(u -> u.rating));
+                                                    Collections.reverse(list_users);
+                                                } else if (searchSort.equals(getResources().getString(R.string.feeAscend))) {
+                                                    list_users.sort(Comparator.comparing(u -> u.minFee));
+                                                } else if (searchSort.equals(getResources().getString(R.string.feeDescend))) {
+                                                    list_users.sort(Comparator.comparing(u -> u.maxFee));
+                                                    Collections.reverse(list_users);
+                                                }
+                                            }
+                                            Log.i("list_users", String.valueOf(list_users.size()));
+                                            if (list_users.size() > 0) {
+                                                binding.progressBar.setVisibility(View.GONE);
+                                                GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+                                                binding.recyclerUsers.setLayoutManager(mGridLayoutManager);
+                                                binding.recyclerUsers.setVisibility(View.VISIBLE);
+                                                UsersProposalsAdapter adapter = new UsersProposalsAdapter(list_users, this);
+                                                binding.recyclerUsers.setAdapter(adapter);
+                                                binding.recyclerUsers.setHasFixedSize(true);
                                             } else {
-                                                if (Account_Details.User_Details.getUID().equals(qDocSnap.getString("requesteeUID"))) {
-                                                    user.numRatingReceived += 1;
-                                                }
+                                                Log.i("list_users", "no results");
+                                                binding.progressBar.setVisibility(View.GONE);
+                                                binding.layoutNoResults.setVisibility(View.VISIBLE);
+                                                binding.txtNoResult.setText(R.string.noProposals);
                                             }
-                                        }
-
-                                        list_users.add(user);
-
-                                        if (!searchSort.isEmpty()) {
-                                            if (searchSort.equals(getResources().getString(R.string.ratingAscend))) {
-                                                list_users.sort(Comparator.comparing(u -> u.rating));
-                                            } else if (searchSort.equals(getResources().getString(R.string.ratingDescend))) {
-                                                list_users.sort(Comparator.comparing(u -> u.rating));
-                                                Collections.reverse(list_users);
-                                            } else if (searchSort.equals(getResources().getString(R.string.feeAscend))) {
-                                                list_users.sort(Comparator.comparing(u -> u.minFee));
-                                            } else if (searchSort.equals(getResources().getString(R.string.feeDescend))) {
-                                                list_users.sort(Comparator.comparing(u -> u.maxFee));
-                                                Collections.reverse(list_users);
-                                            }
-                                        }
-                                        if (list_users.size() > 0) {
+                                        } else {
+                                            Log.i("list_users", "task2 no results");
                                             binding.progressBar.setVisibility(View.GONE);
-                                            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
-                                            binding.recyclerUsers.setLayoutManager(mGridLayoutManager);
-                                            binding.recyclerUsers.setVisibility(View.VISIBLE);
-                                            UsersProposalsAdapter adapter = new UsersProposalsAdapter(list_users, this);
-                                            binding.recyclerUsers.setAdapter(adapter);
-                                            binding.recyclerUsers.setHasFixedSize(true);
+                                            binding.layoutNoResults.setVisibility(View.VISIBLE);
+                                            binding.txtNoResult.setText(R.string.noProposals);
                                         }
+                                    } else {
+                                        Log.i("list_users", "task2 unsuccessful");
+                                        binding.progressBar.setVisibility(View.GONE);
+                                        binding.layoutNoResults.setVisibility(View.VISIBLE);
+                                        binding.txtNoResult.setText(R.string.noProposals);
                                     }
-                                }
-                            });
+                                });
+                            }
+                        } else {
+                            Log.i("list_users", "task1 failed");
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.layoutNoResults.setVisibility(View.VISIBLE);
+                            binding.txtNoResult.setText(R.string.noProposals);
                         }
-                    }
-                });
+                    });
+                } else {
+                    Log.i("list_users", "task failed");
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.layoutNoResults.setVisibility(View.VISIBLE);
+                    binding.txtNoResult.setText(R.string.noProposals);
+                }
+            }
+            else {
+                Log.i("list_users", "task failed");
+                binding.progressBar.setVisibility(View.GONE);
+                binding.layoutNoResults.setVisibility(View.VISIBLE);
+                binding.txtNoResult.setText(R.string.noProposals);
             }
         });
     }

@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             binding.txtFullName.setText(user.fullName);
             binding.txtFullName.setEllipsize(TextUtils.TruncateAt.END);
             binding.txtFullName.setPadding(0,0,20,0);
+            Log.i("pictureStr", user.pictureStr);
             if(user.pictureStr.trim().isEmpty()){
                 binding.imgUserPic.setImageResource(R.drawable.ic_baseline_person_24);
                 binding.imgUserPic.setColorFilter(Color.argb(255, 100, 100, 100));

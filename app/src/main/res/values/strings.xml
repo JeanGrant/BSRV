@@ -129,4 +129,7 @@
     <string name="feeDescend">↓ Fee</string>
     <string name="aboutPrompt">About</string>
     <string name="noRatings">No Rating Yet</string>
+    <string name="noUsers">No Users Found</string>
+    <string name="noProposals">No Proposals Found</string>
+    <string name="noSchedules">No Schedules Found</string>
 </resources>
