@@ -6,19 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/imgBTN_back"
+            android:layout_width="@dimen/smallSQBTN_size"
+            android:layout_height="@dimen/smallSQBTN_size"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/smallSQBTN_margin"
+            android:layout_marginTop="@dimen/smallSQBTN_margin"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:padding="@dimen/smallSQBTN_padding"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
         <RelativeLayout
             android:id="@+id/layout_mainBody"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/imgBTN_back"
             android:padding="@dimen/_20sdp">
+
                 <TextView
                     android:id="@+id/uidPrompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:fontFamily="@font/podkova"
                     android:text="@string/requestUID"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtRequestUID"
                     android:layout_width="wrap_content"
@@ -28,12 +44,14 @@
                     android:layout_toEndOf="@id/uidPrompt"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/uidPrompt"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/statusPrompt"
                     android:layout_width="wrap_content"
@@ -43,6 +61,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/statusPrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txt_reqStatus"
                     android:layout_width="wrap_content"
@@ -52,12 +71,14 @@
                     android:layout_toEndOf="@id/statusPrompt"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/statusPrompt"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/subjectPrompt"
                     android:layout_width="wrap_content"
@@ -67,6 +88,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/SubjectPrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtSubject"
                     android:layout_width="wrap_content"
@@ -76,12 +98,14 @@
                     android:layout_toEndOf="@id/subjectPrompt"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/subjectPrompt"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/datePrompt"
                     android:layout_width="wrap_content"
@@ -91,6 +115,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/datePrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
@@ -100,12 +125,14 @@
                     android:layout_toEndOf="@id/datePrompt"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/datePrompt"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/timePrompt"
                     android:layout_width="wrap_content"
@@ -115,6 +142,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/timePrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtTime"
                     android:layout_width="wrap_content"
@@ -124,12 +152,14 @@
                     android:layout_toEndOf="@id/timePrompt"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/timePrompt"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/descPrompt"
                     android:layout_width="wrap_content"
@@ -139,6 +169,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/descPrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtDesc"
                     android:layout_width="match_parent"
@@ -147,12 +178,14 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/mako"
                     android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_below="@id/txtDesc"
                     android:background="#30000000"
                     android:contentDescription="@null" />
+
                 <TextView
                     android:id="@+id/meetLinkPrompt"
                     android:layout_width="wrap_content"
@@ -162,6 +195,7 @@
                     android:fontFamily="@font/podkova"
                     android:text="@string/meetLinkPrompt"
                     android:textSize="@dimen/_11ssp" />
+
                 <TextView
                     android:id="@+id/txtMeetLink"
                     android:layout_width="match_parent"
@@ -169,7 +203,8 @@
                     android:layout_below="@id/meetLinkPrompt"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/mako"
-                    android:textSize="@dimen/_10ssp"/>
+                    android:textSize="@dimen/_10ssp" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"

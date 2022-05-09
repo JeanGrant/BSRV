@@ -35,7 +35,7 @@
     <string name="AuthLVL_0">Email Verification Required</string>
     <string name="AuthLVL_1">Mentorship Application to be Approved</string>
     <string name="AuthLVL_2">Verified</string>
-    <string name="logout">logout</string>
+    <string name="logout">Logout</string>
     <string name="profile">profile</string>
     <string name="home">home</string>
     <string name="relationships">relationships</string>
@@ -91,7 +91,7 @@
     <string name="paymentProcedure">View Payment Procedure</string>
     <string name="meetLink">Update Google Meet Link</string>
     <string name="confirmPayment">Confirm Payment</string>
-    <string name="paymentProcedureTXT">Here are a few reminders when conducting your payment:\n\n1. Identify the subject in this particular proposal.\n2. Identify the corresponding subject rate in this particular mentor.\n3. Kindly send your payment through our GCash Account Number: xxxxxxx\n4. Kindly wait a maximum of three (3) business days for our team to confirm your payment.\n\nShould you have problems/concerns, kindly email us through: xxxx@xxxxx</string>
+    <string name="paymentProcedureTXT">Here are a few reminders when conducting your payment:\n\n1. Identify the subject in this particular proposal.\n2. Identify the corresponding subject rate in this particular mentor.\n3. Kindly send your payment through our GCash Account Number: 09210712616\n4. Kindly wait a maximum of three (3) business days for our team to confirm your payment.\n\nShould you have problems/concerns, kindly email us through: BSRV_Studify22@gmail.com</string>
     <string name="meetings">Meetings</string>
     <string name="meetLinkPrompt">Meeting Link</string>
     <string name="confirmMeet">Confirm Meeting</string>
@@ -108,14 +108,14 @@
     <string name="favorite">Favorites</string>
     <string name="history">History</string>
     <string name="Following">Following</string>
-    <string name="refundProcedure">We are sorry that you feel the need to require a refund on this class. Let us help you finalize this refund process by following these steps:\n1. Kindly email us at: xxxxxxxxxxxx\n2. Kindly indicate why a refund is required and include a proof\n3. Proofs include a photo showing that your mentor was unable to attend your class.</string>
+    <string name="refundProcedure">We are sorry that you feel the need to require a refund on this class. Let us help you finalize this refund process by following these steps:\n1. Kindly email us at: BSRV_Studify22@gmail.com\n2. Kindly indicate why a refund is required and include a proof\n3. Proofs include a photo showing that your mentor was unable to attend your class.</string>
     <string name="ProductDescPrompt">Product Description</string>
     <string name="PromoVidPrompt">Promotional Video</string>
     <string name="AboutUsPrompt">About Us</string>
     <string name="FAQsPrompt">Frequently Asked Questions</string>
     <string name="WriteFeedback">Write a Feedback</string>
     <string name="WriteFeedbackPrompt">Greetings! Would you mind sharing your thoughts/suggestions about our performance and services?</string>
-    <string name="editProfile">edit profile</string>
+    <string name="editProfile">Edit Profile</string>
     <string name="searchHint">enter a username or a subject</string>
     <string name="Subject">Subject</string>
     <string name="searchPrompt">Search by:</string>
@@ -132,4 +132,7 @@
     <string name="noUsers">No Users Found</string>
     <string name="noProposals">No Proposals Found</string>
     <string name="noSchedules">No Schedules Found</string>
+    <string name="ProductDesc">\t\tStudify is an online tutoring application that aims to bring the students\' realtistic versatillity. It provides the opportunity to unlock the power of personalized learning experience to achieve learning objectives faster and easier. The Studify application will allow improvement, competency, and confidence in various learning fields through real conversations with reliable and intelligent tutors from different part of the country. For such, this application will benefit our fellow students and tutors out there with extensive knowledge and commitment to promote success.\n\n<b>START, SCHEDULE, and LEARN - in Studify!</b></string>
+    <string name="AboutUs">\t\tStudify is a startup application created to assist students in achieving quality education in just a few clicks. The idea of creating an online tutor application came from a group of students who experienced the pandemic, online classes, and being a pioneer batch of K-12 and new curriculum in college. Due to the several changes that they faced as well as the concerns of their peers, the team decided to propose this solution as means to narrow the knowledge gap. Being the pioneer in several changes, they are fully aware of the struggles of their co-students. Hence, the team is aims to help the students achieve quality education using digital means. Furthermore, the team behind Studify also want to provide an additional source of income to fresh graduates or professionals by means of allowing them to become the tutor.\n\n\t\tWith these, we can assure you that Studify is committed to Bringing Students\' Realistic Versatility.</string>
+    <string name="FAQ"><b>1. Where and what modes of communication platform can the student and mentor meet?</b>\n\n\t\t<i>The available modes of communication to be offered will be through the use of Google Meet and Zoom to offer a safer mode of communication</i>\n\n<b>2. How can we easily find our favored mentors for future offers?</b>\n\n\t\t<i>Our user interface offers key features that will alow students to select any mentors as one of their favorites, making it easier to find them in the future, ratings to their performances are also included to allow students to identify the best mentor for their studies</i>\n\n<b>3. What modes of payment systems are available?</b>\n\n\t\t<i>The mode of payment currently available is through Gcash.</i></string>
 </resources>

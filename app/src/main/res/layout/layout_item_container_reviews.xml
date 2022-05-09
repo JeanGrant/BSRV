@@ -49,7 +49,6 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/mako"
                 android:maxWidth="@dimen/_130sdp"
-                android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp" />
 

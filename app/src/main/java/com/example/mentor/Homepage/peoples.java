@@ -57,7 +57,7 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
 
         binding.btnProposals.setOnClickListener(view -> {
             binding.fabSearch.setVisibility(View.GONE);
-            getSchedMeets();
+            updateSchedMeets();
         });
         binding.btnHistory.setOnClickListener(view -> getHistory());
         binding.btnFollowing.setOnClickListener(view -> getFollowing());
@@ -155,7 +155,6 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
             }
         });
 
-        getSchedMeets();
         updateSchedMeets();
 
         return viewLayout;

@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.mentor.Homepage.peoples;
 import com.example.mentor.databinding.FragmentScheduleMeetingBinding;
 import com.example.mentor.misc.Account_Details;
+import com.example.mentor.utilities.SwitchLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,6 +38,10 @@ public class schedule_meeting extends Fragment {
         View viewLayout = binding.getRoot();
 
         getDetails();
+
+        binding.imgBTNBack.setOnClickListener(view -> {
+            SwitchLayout.fragmentStarter(requireActivity().getSupportFragmentManager(), new peoples(), "peoples");
+        });
 
         binding.btnMeetLink.setOnClickListener(view -> {
             if(binding.btnMeetLink.getText().toString().equals(getResources().getString(R.string.meetLink))){

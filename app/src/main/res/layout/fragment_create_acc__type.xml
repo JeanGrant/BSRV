@@ -9,263 +9,298 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_UserPic"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_40sdp"
-            app:cardElevation="@dimen/_2sdp"
-            app:cardUseCompatPadding="true"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
+
             <com.google.android.material.card.MaterialCardView
-                app:cardCornerRadius="@dimen/_40sdp"
-                android:layout_margin="@dimen/_3sdp"
+                android:id="@+id/card_UserPic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_55sdp"
-                app:cardBackgroundColor="@color/white">
-                <ImageView
-                    android:id="@+id/img_UserPic"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_baseline_person_24"
-                    android:background="@color/black"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@null"/>
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/_40sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:cardUseCompatPadding="true">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_innerUserPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:padding="@dimen/_55sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_40sdp">
+
+                    <ImageView
+                        android:id="@+id/img_UserPic"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/black"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_baseline_person_24" />
+                </com.google.android.material.card.MaterialCardView>
             </com.google.android.material.card.MaterialCardView>
-        </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignEnd="@id/card_UserPic"
+                android:layout_alignBottom="@id/card_UserPic"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardElevation="@dimen/_20sdp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/txt_mainPrompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_30sdp"
+            android:fontFamily="@font/subtitle_font"
             android:text="@string/createAccType"
             android:textSize="@dimen/subtitle_txtsize"
-            android:fontFamily="@font/subtitle_font"
-            android:visibility="visible"/>
+            android:visibility="gone" />
+
         <LinearLayout
             android:id="@+id/layout_accType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:visibility="visible">
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <com.google.android.material.card.MaterialCardView
-                android:clickable="true"
                 android:id="@+id/card_Student"
                 android:layout_width="@dimen/SQBTN_size"
                 android:layout_height="@dimen/SQBTN_size"
-                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                app:cardCornerRadius="@dimen/SQBTN_roundness"
                 app:cardElevation="@dimen/SQBTN_elevation"
-                app:cardCornerRadius="@dimen/SQBTN_roundness">
+                app:cardUseCompatPadding="true">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="@dimen/SQBTN_imgsize_v1"
                         android:layout_height="@dimen/SQBTN_imgsize_v1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/btn_Student"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_bsrv_03"
-                        android:layout_centerHorizontal="true"/>
+                        app:layout_constraintBottom_toTopOf="@id/btn_Student"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:id="@+id/btn_Student"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/SQBTN_txtfont"
                         android:text="@string/Student"
                         android:textAllCaps="false"
                         android:textColor="@color/SQBTN_txtcolor"
-                        android:textSize="@dimen/SQBTN_txtsize"/>
+                        android:textSize="@dimen/SQBTN_txtsize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
-                android:clickable="true"
                 android:id="@+id/card_Mentor"
                 android:layout_width="@dimen/SQBTN_size"
                 android:layout_height="@dimen/SQBTN_size"
                 android:layout_marginStart="@dimen/_10sdp"
-                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                app:cardCornerRadius="@dimen/SQBTN_roundness"
                 app:cardElevation="@dimen/SQBTN_elevation"
-                app:cardCornerRadius="@dimen/SQBTN_roundness">
+                app:cardUseCompatPadding="true">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="@dimen/SQBTN_imgsize_v2"
                         android:layout_height="@dimen/SQBTN_imgsize_v2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/btn_Mentor"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:src="@drawable/ic_bsrv_05"
-                        android:layout_centerHorizontal="true"/>
+                        app:layout_constraintBottom_toTopOf="@id/btn_Mentor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:id="@+id/btn_Mentor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="20dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/SQBTN_txtfont"
                         android:text="@string/Mentor"
                         android:textAllCaps="false"
                         android:textColor="@color/SQBTN_txtcolor"
-                        android:textSize="@dimen/SQBTN_txtsize"/>
+                        android:textSize="@dimen/SQBTN_txtsize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+
         <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/longINP_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="vertical"
-                android:gravity="center">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="@dimen/longINP_width"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/longINP_font"
+                android:hint="@string/FullName"
+                android:textColor="@color/longINP_txtcolor"
+                android:textColorHint="@color/longINP_textColorHint"
+                app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                app:hintTextColor="@color/longINP_hintTextColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inpTXT_Fullname"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/longINP_font"
-                    android:textColor="@color/longINP_txtcolor"
-                    android:textColorHint="@color/longINP_textColorHint"
-                    app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
-                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
-                    app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
-                    android:hint="@string/FullName"
-                    app:hintTextColor="@color/longINP_hintTextColor">
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inpTXT_Fullname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:paddingStart="@dimen/_20sdp"
-                        android:paddingEnd="@dimen/_10sdp" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/longINP_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/longINP_font"
+                android:hint="@string/fbUser_Prompt"
+                android:textColor="@color/longINP_txtcolor"
+                android:textColorHint="@color/longINP_textColorHint"
+                app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                app:hintTextColor="@color/longINP_hintTextColor">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="@dimen/longINP_width"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inpTXT_FBUser"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/longINP_font"
-                    android:textColor="@color/longINP_txtcolor"
-                    android:textColorHint="@color/longINP_textColorHint"
-                    app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
-                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
-                    app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
-                    android:hint="@string/fbUser_Prompt"
-                    app:hintTextColor="@color/longINP_hintTextColor">
+                    android:inputType="textPersonName"
+                    android:maxLength="250"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inpTXT_FBUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLength="250"
-                        android:paddingStart="@dimen/_20sdp"
-                        android:paddingEnd="@dimen/_10sdp" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/longINP_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/longINP_font"
+                android:hint="@string/lInUser_Prompt"
+                android:textColor="@color/longINP_txtcolor"
+                android:textColorHint="@color/longINP_textColorHint"
+                app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                app:hintTextColor="@color/longINP_hintTextColor">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="@dimen/longINP_width"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inpTXT_LInUser"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/longINP_font"
-                    android:textColor="@color/longINP_txtcolor"
-                    android:textColorHint="@color/longINP_textColorHint"
-                    app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
-                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
-                    app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
-                    android:hint="@string/lInUser_Prompt"
-                    app:hintTextColor="@color/longINP_hintTextColor">
+                    android:inputType="textPersonName"
+                    android:maxLength="250"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inpTXT_LInUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLength="250"
-                        android:paddingStart="@dimen/_20sdp"
-                        android:paddingEnd="@dimen/_10sdp" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/longINP_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/longINP_font"
+                android:hint="@string/bioEssay_Prompt"
+                android:textColor="@color/longINP_txtcolor"
+                android:textColorHint="@color/longINP_textColorHint"
+                app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
+                app:hintTextColor="@color/longINP_hintTextColor">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="@dimen/longINP_width"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inpTXT_Bio"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/longINP_font"
-                    android:textColor="@color/longINP_txtcolor"
-                    android:textColorHint="@color/longINP_textColorHint"
-                    app:boxBackgroundColor="@color/longINP_boxBackgroundColor"
-                    app:boxBackgroundMode="outline"
-                    app:boxCornerRadiusBottomEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusBottomStart="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopEnd="@dimen/longINP_boxCornerRadius"
-                    app:boxCornerRadiusTopStart="@dimen/longINP_boxCornerRadius"
-                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
-                    app:boxStrokeWidth="@dimen/longINP_boxStrokeWidth"
-                    android:hint="@string/bioEssay_Prompt"
-                    app:hintTextColor="@color/longINP_hintTextColor">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inpTXT_Bio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"
-                        android:maxLength="250"
-                        android:maxLines="3"
-                        android:paddingStart="@dimen/_20sdp"
-                        android:paddingEnd="@dimen/_10sdp"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:inputType="textMultiLine"
+                    android:maxLength="250"
+                    android:maxLines="3"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_10sdp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-                <Button
-                    android:id="@+id/btnProceed"
-                    android:layout_width="@dimen/longBTN_width"
-                    android:layout_height="@dimen/longBTN_height"
-                    android:layout_marginTop="@dimen/_50sdp"
-                    android:background="@drawable/longBTN_style_v2"
-                    android:text="@string/Proceed"
-                    android:textColor="@color/longBTN_txtcolor_v2"
-                    android:fontFamily="@font/longBTN_font"/>
-            </LinearLayout>
+            <Button
+                android:id="@+id/btnProceed"
+                android:layout_width="@dimen/longBTN_width"
+                android:layout_height="@dimen/longBTN_height"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:background="@drawable/longBTN_style_v2"
+                android:fontFamily="@font/longBTN_font"
+                android:text="@string/Proceed"
+                android:textColor="@color/longBTN_txtcolor_v2" />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

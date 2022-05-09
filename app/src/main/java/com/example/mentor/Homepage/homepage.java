@@ -48,7 +48,7 @@ public class homepage extends AppCompatActivity {
         });
 
         binding.cardConnections.setOnClickListener(view -> {
-            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new peoples(), "connections");
+            SwitchLayout.fragmentStarter(getSupportFragmentManager(), new peoples(), "peoples");
             binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
             binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
             binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));
@@ -97,6 +97,12 @@ public class homepage extends AppCompatActivity {
                     SwitchLayout.fragmentStarter(getSupportFragmentManager(), new search_Users(), "search_Users");
                     binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_filled, null));
                     binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_outline, null));
+                    binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));;
+                    break;
+                case "schedule_meeting":
+                    SwitchLayout.fragmentStarter(getSupportFragmentManager(), new peoples(), "peoples");
+                    binding.imgBTNHome.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_home_outline, null));
+                    binding.imgBTNConnections.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_contacts_filled, null));
                     binding.imgBTNProfile.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawables_user_outline, null));;
                     break;
                 default:
