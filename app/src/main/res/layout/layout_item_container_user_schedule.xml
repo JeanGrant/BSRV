@@ -8,47 +8,58 @@
     android:id="@+id/layout_mainContainer"
     app:cardCornerRadius="@dimen/_10sdp"
     app:cardElevation="@dimen/_1sdp"
-    android:layout_marginTop="@dimen/_8sdp"
-    android:layout_marginHorizontal="@dimen/_8sdp">
-    <LinearLayout
+    android:layout_marginBottom="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/blue">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingVertical="@dimen/_10sdp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_100sdp">
-            <ImageView
-                android:id="@+id/img_UserPic"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/profile"
-                android:src="@drawable/ic_baseline_person_add_24" />
-        </com.google.android.material.card.MaterialCardView>
+        android:paddingTop="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_20sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp">
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_width="match_parent"
+            android:id="@+id/layout_user"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentTop="true">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_100sdp">
+                <ImageView
+                    android:id="@+id/img_UserPic"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/profile"
+                    android:src="@drawable/ic_baseline_person_add_24" />
+            </com.google.android.material.card.MaterialCardView>
             <TextView
+                android:layout_marginStart="@dimen/_10sdp"
                 android:id="@+id/txt_fullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
                 style="@style/autoscroll"
                 android:text="@string/lorem"
-                android:fontFamily="@font/mako"/>
+                android:fontFamily="@font/baloo"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_below="@id/layout_user">
             <TextView
                 android:id="@+id/txt_Subject"
                 android:layout_width="wrap_content"
@@ -56,11 +67,13 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_17ssp"
                 style="@style/autoscroll"
                 android:text="@string/lorem"
-                android:fontFamily="@font/mako"/>
+                android:fontFamily="@font/mako"
+                android:textAlignment="textStart"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/txt_Date"
                 android:layout_width="wrap_content"
@@ -68,25 +81,25 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp"
                 style="@style/autoscroll"
                 android:text="@string/lorem"
-                android:fontFamily="@font/mako"/>
+                android:fontFamily="@font/mako"
+                android:textAlignment="textStart"/>
             <TextView
-                android:id="@+id/txt_reqUID"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/txt_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="1"
                 android:text="@string/lorem"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-
-
-
-                android:fontFamily="@font/podkova"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/podkova"
+                android:textAlignment="textStart"
+                android:textStyle="italic"/>
 
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

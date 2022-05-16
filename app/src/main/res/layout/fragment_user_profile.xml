@@ -19,9 +19,11 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:visibility="visible"/>
 
         <RelativeLayout
+            android:visibility="invisible"
             android:id="@+id/layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -189,8 +191,8 @@
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
+            android:visibility="invisible"
             android:id="@+id/card_Secondary"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-20dp"

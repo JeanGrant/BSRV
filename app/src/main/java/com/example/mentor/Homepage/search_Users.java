@@ -1,12 +1,13 @@
 package com.example.mentor.Homepage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -89,6 +90,9 @@ public class search_Users extends Fragment implements UserListener {
                 searchEngine();
                 binding.layoutSearch.setLayoutParams(new RelativeLayout.LayoutParams(layoutSearch.width, 0));
                 binding.layoutSearch.setVisibility(View.GONE);
+
+                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0);
             }
         });
 
@@ -471,7 +475,7 @@ public class search_Users extends Fragment implements UserListener {
                                     if (ratingAve != null) {
                                         user.rating = ratingAve.intValue();
                                     } else {
-                                        user.rating = null;
+                                        user.rating = 0;
                                     }
                                 }
 

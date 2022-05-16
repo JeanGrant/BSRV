@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/layout_userPic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -22,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/_40sdp"
-                app:cardElevation="@dimen/_2sdp"
+                app:cardElevation="1dp"
                 app:cardUseCompatPadding="true">
 
                 <com.google.android.material.card.MaterialCardView
@@ -55,7 +56,7 @@
                 android:layout_marginBottom="@dimen/_15sdp"
                 app:cardBackgroundColor="@color/blue"
                 app:cardCornerRadius="@dimen/_100sdp"
-                app:cardElevation="@dimen/_20sdp">
+                app:cardElevation="1dp">
 
                 <ImageView
                     android:layout_width="match_parent"

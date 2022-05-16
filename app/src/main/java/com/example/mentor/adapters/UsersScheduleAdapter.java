@@ -59,7 +59,9 @@ public class UsersScheduleAdapter extends RecyclerView.Adapter<UsersScheduleAdap
             binding = itemBinding;
         }
         void setUserData(Proposal proposal){
-            binding.txtReqUID.setText(proposal.uid);
+            binding.layoutMainContainer.setCardBackgroundColor(proposal.hexColor);
+
+            binding.txtDescription.setText(proposal.description);
             binding.txtFullName.setText(proposal.fullName);
             if(proposal.picString != null) {
                 if (proposal.picString.trim().isEmpty()) {

@@ -1,16 +1,20 @@
 package com.example.mentor.Homepage;
 
+import static androidx.core.content.res.ResourcesCompat.getColor;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mentor.R;
 import com.example.mentor.adapters.UsersAdapter;
@@ -76,6 +80,9 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
                 searchEngine();
                 binding.layoutSearch.setLayoutParams(new RelativeLayout.LayoutParams(layoutSearch.width, 0));
                 binding.layoutSearch.setVisibility(View.GONE);
+
+                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0);
             }
         });
 
@@ -185,14 +192,6 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
     }
 
     private void getSchedMeets() {
-        binding.layoutNoResults.setVisibility(View.GONE);
-        binding.recyclerUsers.setVisibility(View.INVISIBLE);
-        binding.btnProposals.setBackgroundColor(getResources().getColor(R.color.blue,null));
-        binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.white));
-        binding.btnHistory.setBackgroundColor(getResources().getColor(R.color.transparent, null));
-        binding.btnHistory.setTextColor(this.requireContext().getColor(R.color.blue));
-        binding.btnFollowing.setBackgroundColor(getResources().getColor(R.color.transparent, null));
-        binding.btnFollowing.setTextColor(this.requireContext().getColor(R.color.blue));
         fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("proposals").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 if(task.getResult().size() > 0) {
@@ -220,7 +219,33 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
                                 proposal.fullName = qDocSnap.getString("requestorName");
                                 proposal.uid = qDocSnap.getId();
                                 proposal.subject = qDocSnap.getString("subject");
+                                switch (proposal.subject){
+                                    case ("Adobe Ps"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AdobePsblue, null);break;
+                                    case ("Animation"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AdobeAeViolet, null);break;
+                                    case ("Arts"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ArtsPurple, null);break;
+                                    case ("AutoCAD"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AutoCADRed, null);break;
+                                    case ("Engineering"):
+                                        proposal.hexColor = getColor(getResources(), R.color.EngineeringOrange, null);break;
+                                    case ("Languages"):
+                                        proposal.hexColor = getColor(getResources(), R.color.LanguageGreen, null);break;
+                                    case ("Law"):
+                                        proposal.hexColor = getColor(getResources(), R.color.LawBlue, null);break;
+                                    case ("MS Office"):
+                                        proposal.hexColor = getColor(getResources(), R.color.MSOfficeOrange, null);break;
+                                    case ("Mathematics"):
+                                        proposal.hexColor = getColor(getResources(), R.color.MathYellow, null);break;
+                                    case ("Programming"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ProgrammingCyan, null);break;
+                                    case ("Sciences"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ScienceGreen, null);break;
+                                    default: break; }
                                 proposal.date = qDocSnap.getString("date");
+                                proposal.description = qDocSnap.getString("description");
+
                                 list_proposal.add(proposal);
                             }else if(Account_Details.User_Details.getUID().equals(qDocSnap.getString("requestorUID"))) {
                                 proposal.picString = qDocSnap.getString("requesteePic");
@@ -228,15 +253,40 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
                                 proposal.fullName = qDocSnap.getString("requesteeName");
                                 proposal.uid = qDocSnap.getId();
                                 proposal.subject = qDocSnap.getString("subject");
+                                switch (proposal.subject){
+                                    case ("Adobe Ps"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AdobePsblue, null);break;
+                                    case ("Animation"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AdobeAeViolet, null);break;
+                                    case ("Arts"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ArtsPurple, null);break;
+                                    case ("AutoCAD"):
+                                        proposal.hexColor = getColor(getResources(), R.color.AutoCADRed, null);break;
+                                    case ("Engineering"):
+                                        proposal.hexColor = getColor(getResources(), R.color.EngineeringOrange, null);break;
+                                    case ("Languages"):
+                                        proposal.hexColor = getColor(getResources(), R.color.LanguageGreen, null);break;
+                                    case ("Law"):
+                                        proposal.hexColor = getColor(getResources(), R.color.LawBlue, null);break;
+                                    case ("MS Office"):
+                                        proposal.hexColor = getColor(getResources(), R.color.MSOfficeOrange, null);break;
+                                    case ("Mathematics"):
+                                        proposal.hexColor = getColor(getResources(), R.color.MathYellow, null);break;
+                                    case ("Programming"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ProgrammingCyan, null);break;
+                                    case ("Sciences"):
+                                        proposal.hexColor = getColor(getResources(), R.color.ScienceGreen, null);break;
+                                    default: break; }
                                 proposal.date = qDocSnap.getString("date");
+                                proposal.description = qDocSnap.getString("description");
                                 list_proposal.add(proposal);
                             }
                         }
                     }
                     if(list_proposal.size()>0){
                         binding.progressBar.setVisibility(View.GONE);
-                        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(),2);
-                        binding.recyclerUsers.setLayoutManager(mGridLayoutManager);
+                        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+                        binding.recyclerUsers.setLayoutManager(mLinearLayoutManager);
                         UsersScheduleAdapter usersAdapter = new UsersScheduleAdapter(list_proposal, this);
                         binding.recyclerUsers.setAdapter(usersAdapter);
                         binding.recyclerUsers.setHasFixedSize(true);
@@ -359,7 +409,7 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
                                         Long ratingAve = qDocSnap.getLong("ratingAve");
                                         if(ratingAve != null) {
                                             user.rating = ratingAve.intValue();
-                                        }
+                                        }else {user.rating = 0;}
                                     }
                                     list_users.add(user);
                                 }
@@ -509,7 +559,7 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
                                         Long ratingAve = qDocSnap.getLong("ratingAve");
                                         if(ratingAve != null) {
                                             user.rating = ratingAve.intValue();
-                                        }
+                                        }else {user.rating = 0;}
                                     }
                                     if(qDocSnap.getString("picString") != null) {
                                         String picString = qDocSnap.getString("picString");
@@ -619,6 +669,14 @@ public class peoples extends Fragment implements UserListener, ProposalListener 
     }
 
     private void updateSchedMeets() {
+        binding.layoutNoResults.setVisibility(View.GONE);
+        binding.recyclerUsers.setVisibility(View.INVISIBLE);
+        binding.btnProposals.setBackgroundColor(getResources().getColor(R.color.blue,null));
+        binding.btnProposals.setTextColor(this.requireContext().getColor(R.color.white));
+        binding.btnHistory.setBackgroundColor(getResources().getColor(R.color.transparent, null));
+        binding.btnHistory.setTextColor(this.requireContext().getColor(R.color.blue));
+        binding.btnFollowing.setBackgroundColor(getResources().getColor(R.color.transparent, null));
+        binding.btnFollowing.setTextColor(this.requireContext().getColor(R.color.blue));
         fStore.collection("Users").document(Account_Details.User_Details.getUID()).collection("proposals").get().addOnCompleteListener(task -> {
            if(task.isSuccessful()){
                if(task.getResult().size()>0){

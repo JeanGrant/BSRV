@@ -109,11 +109,11 @@ public class createAcc_Type extends Fragment {
 
         if(currActivity != null) {
             if (currActivity.equals("com.example.mentor.Homepage.homepage")) {
-                binding.cardUserPic.setVisibility(View.VISIBLE);
+                binding.layoutUserPic.setVisibility(View.VISIBLE);
                 binding.layoutAccType.setVisibility(View.GONE);
                 binding.txtMainPrompt.setVisibility(View.GONE);
             }else if(currActivity.equals("com.example.mentor.Login_Signup.Main_Activity")){
-                binding.cardUserPic.setVisibility(View.GONE);
+                binding.layoutUserPic.setVisibility(View.GONE);
                 binding.layoutAccType.setVisibility(View.VISIBLE);
                 binding.txtMainPrompt.setVisibility(View.VISIBLE);
             }else {Log.i("getActivity", "currActivity not Equal");}

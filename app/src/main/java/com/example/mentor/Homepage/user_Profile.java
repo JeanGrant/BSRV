@@ -73,9 +73,12 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
         FirebaseAuth.getInstance().getCurrentUser().reload();
 
         binding.progressBar.setVisibility(View.VISIBLE);
-        binding.layoutHeader.setVisibility(View.GONE);
-        binding.txtBio.setVisibility(View.GONE);
-        binding.cardSecondary.setVisibility(View.GONE);
+        binding.recyclerReviews.setVisibility(View.GONE);
+        binding.recyclerSubjects.setVisibility(View.GONE);
+        binding.recyclerCalendar.setVisibility(View.GONE);
+        binding.layoutHeader.setVisibility(View.INVISIBLE);
+        binding.txtBio.setVisibility(View.INVISIBLE);
+        binding.cardSecondary.setVisibility(View.INVISIBLE);
 
         FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         String fUserUID = "";
@@ -253,7 +256,6 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
             list_subjrate.add(subjRates);
         }
         if(list_subjrate.size()>0){
-//            binding.progressBar.setVisibility(View.GONE);
             LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
             binding.recyclerSubjects.setLayoutManager(mLinearLayoutManager);
             binding.recyclerSubjects.setVisibility(View.VISIBLE);
@@ -305,6 +307,9 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                        binding.recyclerReviews.setHasFixedSize(true);
 
                        binding.progressBar.setVisibility(View.GONE);
+                       binding.recyclerReviews.setVisibility(View.VISIBLE);
+                       binding.recyclerSubjects.setVisibility(View.VISIBLE);
+                       binding.recyclerCalendar.setVisibility(View.VISIBLE);
                        binding.layoutHeader.setVisibility(View.VISIBLE);
                        binding.txtBio.setVisibility(View.VISIBLE);
                        binding.cardSecondary.setVisibility(View.VISIBLE);
@@ -318,6 +323,9 @@ public class user_Profile extends Fragment implements CalendarAdapter.OnItemList
                        binding.recyclerReviews.setVisibility(View.GONE);
 
                        binding.progressBar.setVisibility(View.GONE);
+                       binding.recyclerReviews.setVisibility(View.VISIBLE);
+                       binding.recyclerSubjects.setVisibility(View.VISIBLE);
+                       binding.recyclerCalendar.setVisibility(View.VISIBLE);
                        binding.layoutHeader.setVisibility(View.VISIBLE);
                        binding.txtBio.setVisibility(View.VISIBLE);
                        binding.cardSecondary.setVisibility(View.VISIBLE);
